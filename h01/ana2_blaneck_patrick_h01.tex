@@ -1,0 +1,165 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\newcommand{\dx}{~\mathrm{d}x} % dx
+\newcommand{\du}{~\mathrm{d}u} % du
+\newcommand{\dv}{~\mathrm{d}v} % dv
+\newcommand{\dw}{~\mathrm{d}w} % dw
+\newcommand{\dt}{~\mathrm{d}t} % dt
+\newcommand{\dn}{~\mathrm{d}n} % dn
+\newcommand{\dudx}{~\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{~\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{~\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{~\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{~\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[r] #1 \end{pmatrix*}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 01}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 01}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 05. April 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie die 1. Ableitungen von
+    \begin{parts}
+        \part $f(x) = \sin(\cos(x))$
+        \begin{solution}
+
+        \end{solution}
+        \part $g(x) = e^{x^3-\sin^2(x)}$
+        \begin{solution}
+
+        \end{solution}
+        \part $h(x) = 3x^2 + 4x + (3-x^2)^4$
+        \begin{solution}
+
+        \end{solution}
+        \part $k(x) = \frac{1}{\tan{\arcsin(x)}}$
+        \begin{solution}
+
+        \end{solution}
+        \part $l(x) = e^{3\ln(x^2)}$
+        \begin{solution}
+
+        \end{solution}
+        \part $m(x) = e^{x\cdot \sin^2(5\sqrt{x} + 17)} \cdot e^{x\cdot \cos^2(5\sqrt{x} + 17)}$
+        \begin{solution}
+
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie die Normen $\norm{\cdot}_1$, $\norm{\cdot}_2$ und $\norm{\cdot}_\infty$ für die folgenden Vektoren:
+    \begin{parts}
+        \part $\vektor{0\\2\\5\\1}, \vektor{9\\0\\6\\0}$
+        \begin{solution}
+
+        \end{solution}
+
+        \part $\vektor{2\\3\\4}, \vektor{5\\0\\0}, \vektor{10\\2\\0}$
+        \begin{solution}
+
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie die partiellen Ableitungen erster Ordnung der folgenden Funktionen:
+    \begin{parts}
+        \part
+        $f(x, y) = \arctan(\frac{x}{y})$
+        \begin{solution}
+
+        \end{solution}
+
+        \part
+        $f(x,y) = \tan{x^2 + y^2}$
+        \begin{solution}
+
+        \end{solution}
+
+        \part
+        $f(x,y) = \sqrt{9-x^2-y^2}$
+        \begin{solution}
+
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie die partiellen Ableitungen erster Ordnung der folgenden Funktionen:
+    \begin{parts}
+        \part
+        $f(x, y) =2x^2-3xy-4y^2$
+        \begin{solution}
+
+        \end{solution}
+
+        \part
+        $f(x,y) = \frac{x^2}{y} + \frac{y^2}{x}, x \neq 0, y \neq 0$
+        \begin{solution}
+
+        \end{solution}
+
+        \part
+        $f(x,y) = \sin(2x + 3y)$
+        \begin{solution}
+
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Lassen sich folgende Funktionen im Nullpunkt stetig ergänzen und, wenn ja, wie?
+    \begin{parts}
+        \part
+        $f(x,y) = \frac{xy^2}{x^2 + y^8}$
+        \begin{solution}
+
+        \end{solution}
+
+        \part
+        $f(x,y) = \frac{x^3 + x^2 - y^4 + y^2}{x^2 + y^2}$
+        \begin{solution}
+
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}
