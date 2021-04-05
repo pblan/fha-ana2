@@ -15,6 +15,11 @@
 \newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
 \newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
 
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
 \newcommand{\sgn}{\text{sgn}} % Signum-Funktion
@@ -40,6 +45,19 @@
 \newcommand{\vektor}[1]{\begin{pmatrix*}[r] #1 \end{pmatrix*}}
 \renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
 
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+
 \renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
 
 
@@ -60,27 +78,78 @@
     \begin{parts}
         \part $f(x) = \sin(\cos(x))$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \dfdx & = \frac{\mathrm{d}}{\dx}\sin(\cos(x)) \\
+                          & = -\sin(x) \cdot \cos(\cos(x))
+                \end{aligned}
+            $$\qed
         \end{solution}
         \part $g(x) = e^{x^3-\sin^2(x)}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\mathrm{d} g}{\dx} & = \frac{\mathrm{d}}{\dx}  e^{x^3-\sin^2(x)}                \\
+                                             & = (3x^2 - \cos(x) \cdot 2\sin(x)) \cdot  e^{x^3-\sin^2(x)}
+                \end{aligned}
+            $$\qed
         \end{solution}
+
         \part $h(x) = 3x^2 + 4x + (3-x^2)^4$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\mathrm{d} h}{\dx} & = \frac{\mathrm{d}}{\dx}  (3x^2 + 4x + (3-x^2)^4) \\
+                                             & = 6x + 4 - 2x \cdot 4(3-x^2)^3                    \\
+                                             & = - 8x(3-x^2)^3 + 6x + 4
+                \end{aligned}
+            $$
+            \qed
         \end{solution}
-        \part $k(x) = \frac{1}{\tan{\arcsin(x)}}$
+
+        \newpage
+        \part $k(x) = \frac{1}{\tan(\arcsin(x))}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\mathrm{d} k}{\dx} & = \ddx \frac{1}{\tan(\arcsin(x))}                                                                                                                      \\
+                                             & = \ddx \frac{\cos(\arcsin(x)}{\sin(\arcsin(x))}                                                                                                        \\
+                                             & =\footnote{$\cos(x) = \pm\sqrt{1-\sin^2(x)} \implies \cos(\arcsin(x)) = \pm\sqrt{1-\sin^2(\arcsin(x))} = \pm\sqrt{1-x^2}$} \ddx \frac{\sqrt{1-x^2}}{x} \\
+                                             & = \frac{-2x \cdot \frac{1}{2\sqrt{1-x^2}} \cdot x - \sqrt{1-x^2}}{x^2}                                                                                 \\
+                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \sqrt{1-x^2} \cdot \frac{\sqrt{1-x^2}}{\sqrt{1-x^2}}}{x^2}                                                 \\
+                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \frac{1-x^2}{\sqrt{1-x^2}}}{x^2}                                                                           \\
+                                             & = \frac{-x^2 - (1-x^2)}{x^2\sqrt{1-x^2}}                                                                                                               \\
+                                             & = -\frac{1}{x^2\sqrt{1-x^2}}
+                \end{aligned}
+            $$
+            \qed
         \end{solution}
+
         \part $l(x) = e^{3\ln(x^2)}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\mathrm{d} l}{\dx} & = \ddx e^{3\ln(x^2)}               \\
+                                             & = \ddx \left(e^{\ln(x^2)}\right)^3 \\
+                                             & = \ddx \left(x^2\right)^3          \\
+                                             & = \ddx x^6                         \\
+                                             & = \ddx 6x^5
+                \end{aligned}
+            $$\qed
         \end{solution}
+
+        \newpage
         \part $m(x) = e^{x\cdot \sin^2(5\sqrt{x} + 17)} \cdot e^{x\cdot \cos^2(5\sqrt{x} + 17)}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\mathrm{d} m}{\dx} & = \ddx e^{x\cdot \sin^2(5\sqrt{x} + 17)} \cdot e^{x\cdot \cos^2(5\sqrt{x} + 17)} \\
+                                             & = \ddx e^{x\cdot \sin^2(5\sqrt{x} + 17) + x\cdot \cos^2(5\sqrt{x} + 17)}         \\
+                                             & = \ddx e^{x( \sin^2(5\sqrt{x} + 17) + \cos^2(5\sqrt{x} + 17))}                   \\
+                                             & = \ddx e^{x}                                                                     \\
+                                             & = e^{x}
+                \end{aligned}
+            $$
         \end{solution}
     \end{parts}
 
@@ -90,12 +159,24 @@
     \begin{parts}
         \part $\vektor{0\\2\\5\\1}, \vektor{9\\0\\6\\0}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                     & \norm{\vektor{0 \\2\\5\\1}}_1 && = \abs{0} + \abs{2} + \abs{5} + \abs{1} = 8  \qquad && \norm{\vektor{9 \\0\\6\\0}}_1 && = \abs{9} + \abs{0} + \abs{6} + \abs{0} = 15\\
+                     & \norm{\vektor{0 \\2\\5\\1}}_2 && = \sqrt{0^2 + 2^2 + 5^2 + 1^2} = \sqrt{30}  \qquad && \norm{\vektor{9 \\0\\6\\0}}_2 && = \sqrt{9^2 + 0^2 + 6^2 + 0^2} = 3\sqrt{13}&&  \\
+                     & \norm{\vektor{0 \\2\\5\\1}}_\infty && = \max \{\abs{0}, \abs{2}, \abs{5}, \abs{1}\} = 5  \qquad && \norm{\vektor{9 \\0\\6\\0}}_\infty && = \max \{\abs{9}, \abs{0}, \abs{6}, \abs{0}\} = 9
+                \end{aligned}
+            $$
         \end{solution}
 
         \part $\vektor{2\\3\\4}, \vektor{5\\0\\0}, \vektor{10\\2\\0}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                     & \norm{\vektor{2 \\3\\4}}_1 && =  9  \qquad && \norm{\vektor{5\\0\\0}}_1 && = 5  \qquad && \norm{\vektor{10\\2\\0}}_1 && = 12\\
+                     & \norm{\vektor{2 \\3\\4}}_2 && = \sqrt{29}  \qquad && \norm{\vektor{5\\0\\0}}_2 && = 5 \qquad && \norm{\vektor{10\\2\\0}}_2 && = 2\sqrt{26}  \\
+                     & \norm{\vektor{2 \\3\\4}}_\infty && = 4  \qquad && \norm{\vektor{5\\0\\0}}_\infty && = 5 \qquad && \norm{\vektor{10\\2\\0}}_\infty && = 10
+                \end{aligned}
+            $$
         \end{solution}
     \end{parts}
 
@@ -106,19 +187,40 @@
         \part
         $f(x, y) = \arctan(\frac{x}{y})$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \arctan\left(\frac{x}{y}\right)
+                    = \frac{1}{y} \cdot        \frac{1}{\left(\frac{x}{y}\right)^2 + 1}   = \frac{1}{y\left(\frac{x^2 + y^2}{y^2}\right)} = \frac{y}{x^2 + y^2} \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial y} \arctan\left(\frac{x}{y}\right)
+                    = -\frac{x}{y^2} \cdot  \frac{1}{\left(\frac{x}{y}\right)^2 + 1} = -\frac{x}{y^2\left(\frac{x^2 + y^2}{y^2}\right)} = -\frac{x}{x^2 + y^2}
+                \end{aligned}
+            $$\qed
         \end{solution}
 
         \part
-        $f(x,y) = \tan{x^2 + y^2}$
+        $f(x,y) = \tan(x^2 + y^2)$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \tan(x^2 + y^2)
+                    =  \frac{2x}{\cos^2(x^2 + y^2)}                                               \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial y} \tan(x^2 + y^2)
+                    = \frac{2y}{\cos^2(x^2 + y^2)}
+                \end{aligned}
+            $$\qed
         \end{solution}
 
         \part
         $f(x,y) = \sqrt{9-x^2-y^2}$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \sqrt{9-x^2-y^2}
+                    =  -\frac{2x}{2\sqrt{9-x^2-y^2}} = -\frac{x}{\sqrt{9-x^2-y^2}}                 \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial y} \sqrt{9-x^2-y^2}
+                    =  -\frac{2y}{2\sqrt{9-x^2-y^2}} = -\frac{y}{\sqrt{9-x^2-y^2}}
+                \end{aligned}
+            $$\qed
         \end{solution}
     \end{parts}
 
@@ -129,19 +231,40 @@
         \part
         $f(x, y) =2x^2-3xy-4y^2$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} 2x^2-3xy-4y^2
+                    = 4x - 3y                                                                   \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial x} 2x^2-3xy-4y^2
+                    = -8y - 3x
+                \end{aligned}
+            $$\qed
         \end{solution}
 
         \part
         $f(x,y) = \frac{x^2}{y} + \frac{y^2}{x}, x \neq 0, y \neq 0$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x}\frac{x^2}{y} + \frac{y^2}{x}
+                    = \frac{2x}{y} - \frac{y^2}{x^2}                                                            \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial x} \frac{x^2}{y} + \frac{y^2}{x}
+                    = \frac{2y}{x} - \frac{x^2}{y^2}
+                \end{aligned}
+            $$\qed
         \end{solution}
 
         \part
         $f(x,y) = \sin(2x + 3y)$
         \begin{solution}
-
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \sin(2x + 3y)
+                    = 2\cos(2x+3y)                                                              \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial x} \sin(2x + 3y)
+                    = 3\cos(2x+3y)
+                \end{aligned}
+            $$\qed
         \end{solution}
     \end{parts}
 
@@ -152,13 +275,35 @@
         \part
         $f(x,y) = \frac{xy^2}{x^2 + y^8}$
         \begin{solution}
+            $f$ ist genau dann \emph{stetig ergänzbar} im Nullpunkt, wenn $\lim_{(x,y) \to (0,0)} f(x,y)$ existiert.
+            $$
+                \begin{aligned}
+                    \lim_{(x,y) \to (0,0)} f(x,y) & = \lim_{(x,y) \to (0,0)} \frac{xy^2}{x^2 + y^8}                                                           \\                                                                        \\
+                                                  & =  \lim_{r \to 0} \frac{r\cos(\varphi)r^2\sin^2(\varphi)}{r\cos^2(\varphi) + r\sin^8(\varphi)}            \\
+                                                  & =  \lim_{r \to 0} \frac{r^3\cos(\varphi)\sin^2(\varphi)}{r\left(\cos^2(\varphi) + \sin^8(\varphi)\right)} \\
+                                                  & =  \lim_{r \to 0} \frac{r^2\cos(\varphi)\sin^2(\varphi)}{\cos^2(\varphi) + \sin^8(\varphi)}               \\
+                                                  & =  \frac{0}{1 + 0} = 0
+                \end{aligned}
+            $$
 
+            Damit ist $f$ im Nullpunkt stetig ergänzbar mit $f(0, 0) = 0$.\qed
         \end{solution}
 
         \part
         $f(x,y) = \frac{x^3 + x^2 - y^4 + y^2}{x^2 + y^2}$
         \begin{solution}
+            $f$ ist genau dann \emph{stetig ergänzbar} im Nullpunkt, wenn $\lim_{(x,y) \to (0,0)} f(x,y)$ existiert.
+            $$
+                \begin{aligned}
+                    \lim_{(x,y) \to (0,0)} f(x,y) & = \lim_{(x,y) \to (0,0)} \frac{x^3 + x^2 - y^4 + y^2}{x^2 + y^2}                                                                                    \\                                                                        \\
+                                                  & =  \lim_{r \to 0} \frac{r^3\cos^3(\varphi) + r^2\cos^2(\varphi) - r^4\sin^4(\varphi) + r^2\sin^2(\varphi)}{r^2\cos^2(\varphi) + r^2\sin^2(\varphi)} \\
+                                                  & =  \lim_{r \to 0} \frac{r\cos^3(\varphi) + \cos^2(\varphi) - r^2\sin^4(\varphi) + \sin^2(\varphi)}{\cos^2(\varphi) + \sin^2(\varphi)}               \\
+                                                  & =  \lim_{r \to 0} r\cos^3(\varphi) + \cos^2(\varphi) - r^2\sin^4(\varphi) + \sin^2(\varphi)                                                         \\
+                                                  & =  0 + 1 - 0 + 0 = 1
+                \end{aligned}
+            $$
 
+            Damit ist $f$ im Nullpunkt stetig ergänzbar mit $f(0, 0) = 1$.\qed
         \end{solution}
     \end{parts}
 \end{questions}
