@@ -112,13 +112,13 @@
         \begin{solution}
             $$
                 \begin{aligned}
-                    \frac{\mathrm{d} k}{\dx} & = \ddx \frac{1}{\tan(\arcsin(x))}                                                                                                                      \\
-                                             & = \ddx \frac{\cos(\arcsin(x)}{\sin(\arcsin(x))}                                                                                                        \\
-                                             & =\footnote{$\cos(x) = \pm\sqrt{1-\sin^2(x)} \implies \cos(\arcsin(x)) = \pm\sqrt{1-\sin^2(\arcsin(x))} = \pm\sqrt{1-x^2}$} \ddx \frac{\sqrt{1-x^2}}{x} \\
-                                             & = \frac{-2x \cdot \frac{1}{2\sqrt{1-x^2}} \cdot x - \sqrt{1-x^2}}{x^2}                                                                                 \\
-                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \sqrt{1-x^2} \cdot \frac{\sqrt{1-x^2}}{\sqrt{1-x^2}}}{x^2}                                                 \\
-                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \frac{1-x^2}{\sqrt{1-x^2}}}{x^2}                                                                           \\
-                                             & = \frac{-x^2 - (1-x^2)}{x^2\sqrt{1-x^2}}                                                                                                               \\
+                    \frac{\mathrm{d} k}{\dx} & = \ddx \frac{1}{\tan(\arcsin(x))}                                                                                                             \\
+                                             & = \ddx \frac{\cos(\arcsin(x)}{\sin(\arcsin(x))}                                                                                               \\
+                                             & =\footnote{$\cos(x) = \sqrt{1-\sin^2(x)} \implies \cos(\arcsin(x)) = \sqrt{1-\sin^2(\arcsin(x))} = \sqrt{1-x^2}$} \ddx \frac{\sqrt{1-x^2}}{x} \\
+                                             & = \frac{-2x \cdot \frac{1}{2\sqrt{1-x^2}} \cdot x - \sqrt{1-x^2}}{x^2}                                                                        \\
+                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \sqrt{1-x^2} \cdot \frac{\sqrt{1-x^2}}{\sqrt{1-x^2}}}{x^2}                                        \\
+                                             & = \frac{-x^2 \cdot \frac{1}{\sqrt{1-x^2}} - \frac{1-x^2}{\sqrt{1-x^2}}}{x^2}                                                                  \\
+                                             & = \frac{-x^2 - (1-x^2)}{x^2\sqrt{1-x^2}}                                                                                                      \\
                                              & = -\frac{1}{x^2\sqrt{1-x^2}}
                 \end{aligned}
             $$
@@ -185,14 +185,14 @@
     Berechnen Sie die partiellen Ableitungen erster Ordnung der folgenden Funktionen:
     \begin{parts}
         \part
-        $f(x, y) = \arctan(\frac{x}{y})$
+        $f(x, y) = \arctan(\frac{y}{x})$
         \begin{solution}
             $$
                 \begin{aligned}
-                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \arctan\left(\frac{x}{y}\right)
-                    = \frac{1}{y} \cdot        \frac{1}{\left(\frac{x}{y}\right)^2 + 1}   = \frac{1}{y\left(\frac{x^2 + y^2}{y^2}\right)} = \frac{y}{x^2 + y^2} \\
-                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial y} \arctan\left(\frac{x}{y}\right)
-                    = -\frac{x}{y^2} \cdot  \frac{1}{\left(\frac{x}{y}\right)^2 + 1} = -\frac{x}{y^2\left(\frac{x^2 + y^2}{y^2}\right)} = -\frac{x}{x^2 + y^2}
+                    \frac{\partial f}{\partial x} & = \frac{\partial}{\partial x} \arctan\left(\frac{y}{x}\right)
+                    = -\frac{y}{x^2} \cdot  \frac{1}{\left(\frac{y}{x}\right)^2 + 1} = -\frac{y}{x^2\left(\frac{x^2 + y^2}{x^2}\right)} = -\frac{y}{x^2 + y^2} \\
+                    \frac{\partial f}{\partial y} & = \frac{\partial}{\partial y} \arctan\left(\frac{y}{x}\right)
+                    = \frac{1}{x} \cdot        \frac{1}{\left(\frac{y}{x}\right)^2 + 1}   = \frac{1}{x\left(\frac{x^2 + y^2}{x^2}\right)} = \frac{x}{x^2 + y^2}
                 \end{aligned}
             $$\qed
         \end{solution}
@@ -275,18 +275,12 @@
         \part
         $f(x,y) = \frac{xy^2}{x^2 + y^8}$
         \begin{solution}
-            $f$ ist genau dann \emph{stetig ergänzbar} im Nullpunkt, wenn $\lim_{(x,y) \to (0,0)} f(x,y)$ existiert.
+            Sei die Kurve $x = y^4$ gegeben.
+            Dann gilt:
             $$
-                \begin{aligned}
-                    \lim_{(x,y) \to (0,0)} f(x,y) & = \lim_{(x,y) \to (0,0)} \frac{xy^2}{x^2 + y^8}                                                           \\                                                                        \\
-                                                  & =  \lim_{r \to 0} \frac{r\cos(\varphi)r^2\sin^2(\varphi)}{r\cos^2(\varphi) + r\sin^8(\varphi)}            \\
-                                                  & =  \lim_{r \to 0} \frac{r^3\cos(\varphi)\sin^2(\varphi)}{r\left(\cos^2(\varphi) + \sin^8(\varphi)\right)} \\
-                                                  & =  \lim_{r \to 0} \frac{r^2\cos(\varphi)\sin^2(\varphi)}{\cos^2(\varphi) + \sin^8(\varphi)}               \\
-                                                  & =  \frac{0}{1 + 0} = 0
-                \end{aligned}
+                \lim_{y\to 0} f(y) = \lim_{y\to 0} \frac{y^4y^2}{y^8+y^8} = \lim_{y\to 0} \frac{1}{2y^2} = \infty
             $$
-
-            Damit ist $f$ im Nullpunkt stetig ergänzbar mit $f(0, 0) = 0$.\qed
+            Damit ist $f$ im Nullpunkt nicht stetig.\qed
         \end{solution}
 
         \part
