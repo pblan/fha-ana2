@@ -1,0 +1,373 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\newcommand{\dx}{~\mathrm{d}x} % dx
+\newcommand{\du}{~\mathrm{d}u} % du
+\newcommand{\dv}{~\mathrm{d}v} % dv
+\newcommand{\dw}{~\mathrm{d}w} % dw
+\newcommand{\dt}{~\mathrm{d}t} % dt
+\newcommand{\dn}{~\mathrm{d}n} % dn
+\newcommand{\dudx}{~\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{~\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{~\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{~\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{~\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 01}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 01}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 05. April 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie die Gradienten der folgenden Funktionen
+
+    \begin{parts}
+        \part
+        $f(x, y) = xe^{x^2+y^2}$ an der Stelle $(1, 1)$.
+        \begin{solution}
+            Zuerst berechnen wie die partiellen Ableitungen $f_x$ und $f_y$:
+            $$
+                \begin{aligned}
+                    f_x & = e^{x^2+y^2} + 2x^2e^{x^2+y^2} = e^{x^2+y^2}(1 + 2x^2) \\
+                    f_y & = 2xye^{x^2+y^2}
+                \end{aligned}
+            $$
+
+            Damit erhalten wir dann den Gradienten $\nabla f$ an der Stelle $(1, 1)$ mit:
+            $$
+                \nabla f(1, 1) = \vektor{f_x(1, 1) \\ f_y(1, 1)}
+                = \vektor{3e^2                                               \\ 2e^2}
+            $$\qed
+        \end{solution}
+
+        \part
+        $f(x, y, z) = x^3 + y^2 + z$ an der Stelle $(1, 2, 3)$.
+        \begin{solution}
+            Zuerst berechnen wie die partiellen Ableitungen $f_x$, $f_y$ und $f_z$:
+            $$
+                \begin{aligned}
+                    f_x & = 3x^2 \\
+                    f_y & = 2y   \\
+                    f_z & = 1
+                \end{aligned}
+            $$
+
+            Damit erhalten wir dann den Gradienten $\nabla f$ an der Stelle $(1, 2, 3)$ mit:
+            $$
+                \nabla f(1, 2, 3) = \vektor{f_x(1, 2, 3) \\ f_y(1, 2, 3) \\ f_z(1, 2, 3)}
+                = \vektor{3 \\ 4 \\ 1}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+
+    \question
+    Gegeben sei die Funktion
+    $$
+        f(x, y) = (x^2 + y^2 -2)^2
+    $$
+    Geben Sie die Tangentialebene in den folgenden Punkten $(x_0, y_0)$ an:
+    \begin{parts}
+        \part
+        $(1,0)$
+        \begin{solution}
+            Zuerst berechnen wie die partiellen Ableitungen $f_x$ und $f_y$:
+            $$
+                \begin{aligned}
+                    f_x & = 4x(x^2 + y^2 -2) \\
+                    f_y & = 4y(x^2 + y^2 -2)
+                \end{aligned}
+            $$
+            $$
+                z_0 = f(x_0, y_0) = f(1, 0) = 1
+            $$
+            Damit ergibt sich dann die Tangentialebene von $f$ am Punkt $(1, 0)$ mit:
+            $$
+                \begin{aligned}
+                    E     & = \vektor{x_0 \\ y_0 \\ z_0} + \lambda \vektor{1 \\ 0 \\ f_x(x_0, y_0)} + \mu \vektor{0 \\ 1 \\ f_y(x_0, y_0)} \\
+                    \quad & = \vektor{1   \\ 0 \\ 1} + \lambda \vektor{1 \\ 0 \\ -4} + \mu \vektor{0 \\ 1 \\ 0} \quad \lambda, \mu \in \R
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        $(0,2)$
+        \begin{solution}
+            Wir haben die partiellen Ableitungen bereits in Aufgabenteil (a) berechnet.
+            $$
+                z_0 = f(x_0, y_0) = f(0, 2) = 4
+            $$
+            Damit ergibt sich dann die Tangentialebene von $f$ am Punkt $(0, 2)$ mit:
+            $$
+                \begin{aligned}
+                    E     & = \vektor{x_0 \\ y_0 \\ z_0} + \lambda \vektor{1 \\ 0 \\ f_x(x_0, y_0)} + \mu \vektor{0 \\ 1 \\ f_y(x_0, y_0)} \\
+                    \quad & = \vektor{0   \\ 2 \\ 4} + \lambda \vektor{1 \\ 0 \\ 0} + \mu \vektor{0 \\ 1 \\ 16}  \quad \lambda, \mu \in \R
+                \end{aligned}
+            $$\qed
+
+        \end{solution}
+    \end{parts}
+
+    \newpage
+
+    \question
+    Berechnen Sie die Richtungsableitung der Funktion
+    $$
+        f(x, y) = x^2y - y^3x + 1
+    $$
+    im Punkt
+    $$
+        (x_0, y_0) = (1, 2)
+    $$
+    in Richtung des Vektors
+    $$
+        \vec{w} = \vektor{3 \\ 2}
+    $$
+    \begin{solution}
+        Die Richtungsableitung von $f$ im Punkt $(x_0, y_0)$ in Richtung $\vec{v}$ ($\norm{\vec{v}} = 1$) ist gegeben mit
+        $$
+            \begin{aligned}
+                D_{\vec{v}}(f) & = \scalarprod{\nabla f(x_0, y_0), \vec{v}}
+            \end{aligned}
+        $$
+
+        Zuerst berechnen wir die partiellen Ableitungen $f_x$ und $f_y$:
+        $$
+            \begin{aligned}
+                f_x = 2xy - y^3   & \implies f_x(x_0, y_0) = f_x(1, 2) = -4  \\
+                f_x = x^2 - 3y^2x & \implies f_y(x_0, y_0) = f_y(1, 2) = -11
+            \end{aligned}
+        $$
+
+        Sei nun $\vec{v} = \frac{\vec{w}}{\norm{\vec{w}}}$:
+        $$
+            \vec{v} = \frac{\vec{w}}{\norm{\vec{w}}} = \frac{1}{\sqrt{13}} \vektor{3  \\ 2}
+        $$
+        Damit können wir nun die Richtungsableitung wie folgt bilden:
+        $$
+            \begin{aligned}
+                D_{\vec{v}}(f) & = \scalarprod{\nabla f(x_0, y_0), \vec{v}}    \\
+                               & = \scalarprod{\vektor{-4                      \\ -11},  \frac{1}{\sqrt{13}} \vektor{3  \\ 2}} \\
+                               & =  \frac{1}{\sqrt{13}} \scalarprod{\vektor{-4 \\ -11}, \vektor{3  \\ 2}} \\
+                               & =  \frac{-12 -22}{\sqrt{13}}                  \\
+                               & =  -\frac{34}{\sqrt{13}}
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+
+    \question
+    Eine Funktion $f$ habe in Richtung des Vektors $\vec{v}_1 = \frac{1}{5}\vektor{3 \\ 4}$ eine Steigung von $D_{\vec{v}_1}(f) = 20$ und in Richtung des Vektors $\vec{v}_2 = \frac{1}{2}\vektor{\sqrt{2} \\ \sqrt{2}}$ eine Steigung von $D_{\vec{v}_2}(f) = 15\sqrt{2}$.
+
+    \begin{parts}
+        \part
+        Wie lautet der Gradient dieser Funktion?
+        \begin{solution}
+            Es sind folgende Gleichungen gegeben:
+            $$
+                \begin{aligned}
+                                 & D_{\vec{v}_1}(f)  = \scalarprod{\nabla f(x_0, y_0), \vec{v}_1}           \\
+                    \equiv \quad & 20                = \scalarprod{\nabla f(x_0, y_0), \frac{1}{5}\vektor{3 \\ 4}} \\
+                    \equiv \quad & 20                = \frac{1}{5}\scalarprod{\nabla f(x_0, y_0), \vektor{3 \\ 4}} \\
+                    \equiv \quad & 100               = \scalarprod{\nabla f(x_0, y_0), \vektor{3            \\ 4}} \\
+                    \equiv \quad & 100               = 3f_x(x_0, y_0) + 4f_y(x_0, y_0) \qquad (1)
+                \end{aligned}
+            $$
+            und
+            $$
+                \begin{aligned}
+                                 & D_{\vec{v}_2}(f) = \scalarprod{\nabla f(x_0, y_0), \vec{v}_2}                   \\
+                    \equiv \quad & 15\sqrt{2}        = \scalarprod{\nabla f(x_0, y_0), \frac{1}{2}\vektor{\sqrt{2} \\ \sqrt{2}}} \\
+                    \equiv \quad & 15\sqrt{2}        = \frac{1}{2}\scalarprod{\nabla f(x_0, y_0), \vektor{\sqrt{2} \\ \sqrt{2}}} \\
+                    \equiv \quad & 30\sqrt{2}        = \scalarprod{\nabla f(x_0, y_0), \vektor{\sqrt{2}            \\ \sqrt{2}}} \\
+                    \equiv \quad & 30\sqrt{2}        = \sqrt{2}f_x(x_0, y_0) + \sqrt{2}f_y(x_0, y_0)               \\
+                    \equiv \quad & 30               = f_x(x_0, y_0) + f_y(x_0, y_0)                                \\
+                    \equiv \quad & 90               = 3f_x(x_0, y_0) + 3f_y(x_0, y_0) \qquad (2)
+                \end{aligned}
+            $$
+            Aus $(1)-(2)$ folgt:
+            $$
+                \begin{aligned}
+                                 & 100 - 90  = 3f_x(x_0, y_0) + 4f_y(x_0, y_0) - (3f_x(x_0, y_0) + 3f_y(x_0, y_0)) \\
+                    \equiv \quad & 10        = f_y(x_0, y_0)
+                \end{aligned}
+            $$
+
+            Einsetzen in $(2)$ liefert dann:
+            $$
+                \begin{aligned}
+                                 & 90  = 3f_x(x_0, y_0) + 3f_y(x_0, y_0) \\
+                    \equiv \quad & 90  = 3f_x(x_0, y_0) + 30             \\
+                    \equiv \quad & 20  = f_x(x_0, y_0)
+                \end{aligned}
+            $$
+
+            Damit gilt für den Gradienten $\nabla f$
+            $$
+                \nabla f(x_0, y_0) = \vektor{f_x(x_0, y_0) \\ f_y(x_0, y_0)} = \vektor{20 \\ 10}
+            $$\qed
+        \end{solution}
+
+        \newpage
+
+        \part
+        Welches ist die größtmögliche Steigung, die die Funktion in diesem unbekannten Punkt annehmen kann?
+        \begin{solution}
+            D maximale Steigung einer Funktion $f$ an einer Stelle $(x_0, y_0)$ ist gegeben mit
+            $$
+                \norm{\nabla f(x_0, y_0)} = \norm{\vektor{f_x(x_0, y_0) \\ f_y(x_0, y_0)}}
+            $$
+
+            Für unser Beispiel gilt damit
+            $$
+                \norm{\nabla f(x_0, y_0)} = \norm{\vektor{f_x(x_0, y_0) \\ f_y(x_0, y_0)}} = \norm{\vektor{20 \\ 10}} = 10\sqrt{5}
+            $$\qed
+        \end{solution}
+
+        \part
+        Welchen Winkel hat der Vektor $\vec{v}_1$ zum Gradienten?
+        \begin{solution}
+            $$
+                \cos \varphi = \frac{\scalarprod{\vec{v}_1, \nabla f(x_0, y_0)}}{\norm{\vec{v}_1} \norm{\nabla f(x_0, y_0)}} = \frac{D_{\vec{v}_1}(f)}{\norm{\vec{v}_1}\norm{\nabla f(x_0, y_0)}} = \frac{D_{\vec{v}_1}(f)}{\norm{\nabla f(x_0, y_0)}} = \frac{20}{10\sqrt{5}} = \frac{2}{\sqrt{5}}
+            $$
+
+            Damit gilt $\varphi = \arccos \frac{2}{\sqrt{5}} \approx 0.4636$.\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+
+    \question
+    Sei $f : \R^2 \to \R$ mit $f(x, y) = (x^2 - y^3)^{\frac{1}{2}}$ und $(x_0, y_0) = (\sqrt{2}, 1)$.
+    Bestimmen Sie
+    \begin{parts}
+        \part
+        den Gradienten von $f$.
+        \begin{solution}
+            Wir berechnen zuerst die partiellen Ableitungen $f_x$ und $f_y$:
+            $$
+                \begin{aligned}
+                    f_x & = \frac{x}{\sqrt{x^2-y^3}}      \\
+                    f_y & = -\frac{3y^2}{2\sqrt{x^2-y^3}} \\
+                \end{aligned}
+            $$
+
+            Der Gradient $\nabla f(x_0, y_0)$ ist dann gegeben mit
+            $$
+                \nabla f(x_0, y_0) = \vektor{f_x(x_0, y_0) \\ f_y(x_0, y_0)} = \vektor{\frac{x_0}{\sqrt{x_0^2-y_0^3}} \\ -\frac{3y_0^2}{2\sqrt{x_0^2-y_0^3}} }
+            $$\qed
+        \end{solution}
+
+        \part
+        die Gleichung der Tangentialebene an der Stelle $(x_0, y_0)$.
+        \begin{solution}
+            $$
+                z_0 = f(x_0, y_0) = 1
+            $$
+
+            Damit ergibt sich dann die Tangentialebene von $f$ am Punkt $(\sqrt{2}, 1)$ mit:
+            $$
+                \begin{aligned}
+                    E     & = \vektor{x_0      \\ y_0 \\ z_0} + \lambda \vektor{1 \\ 0 \\ f_x(x_0, y_0)} + \mu \vektor{0 \\ 1 \\ f_y(x_0, y_0)} \\
+                    \quad & = \vektor{\sqrt{2} \\ 1 \\ 1} + \lambda \vektor{1 \\ 0 \\ \sqrt{2}} + \mu \vektor{0 \\ 1 \\ -\frac{3}{2}} \quad \lambda, \mu \in \R
+                \end{aligned}
+            $$\qed
+
+        \end{solution}
+
+        \part
+        die Richtungsableitung an der Stelle $(x_0, y_0)$ in die Richtung $\vec{v} = \vektor{\frac{\sqrt{3}}{2} \\ \frac{1}{2}}$.
+        \begin{solution}
+            Die Richtungsableitung von $f$ im Punkt $(x_0, y_0)$ in Richtung $\vec{v}$ ($\norm{\vec{v}} = 1$) ist gegeben mit
+            $$
+                \begin{aligned}
+                    D_{\vec{v}}(f) & = \scalarprod{\nabla f(x_0, y_0), \vec{v}}                                        \\
+                                   & = \scalarprod{\vektor{\sqrt{2}                                                    \\ -\frac{3}{2}}, \vektor{\frac{\sqrt{3}}{2} \\ \frac{1}{2}}} \\
+                                   & = \sqrt{2} \cdot \frac{\sqrt{3}}{2} + \left(-\frac{3}{2}\right) \cdot \frac{1}{2} \\
+                                   & =  \sqrt{\frac{3}{2}}-\frac{3}{4}
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        die Richtung, in der die Steigung im Punkt $(x_0, y_0)$ am größten ist und den Wert der größten Steigung.
+        \begin{solution}
+            Die Richtung, in der die Steigung am größten ist, entspricht dem Gradienten von $f$ an der Stelle $(x_0, y_0)$:
+            $$
+                \nabla f(x_0, y_0) = \vektor{f_x(x_0, y_0) \\ f_y(x_0, y_0)} = \vektor{f_x(\sqrt{2}, 1) \\ f_y(\sqrt{2}, 1)} = \vektor{\sqrt{2} \\ -\frac{3}{2}}
+            $$
+
+            Der Wert der Steigung ist dann
+            $$
+                \norm{\nabla f(x_0, y_0)} = \frac{\sqrt{17}}{2}
+            $$\qed
+        \end{solution}
+
+        \part
+        die Richtung, in der die Steigung im Punkt $(x_0, y_0)$ gleich Null ist.
+        \begin{solution}
+            Die Richtung, in der die Steigung im Punkt $(x_0, y_0)$ gleich Null ist, entspricht einem Vektor $\vec{w} \in \R^2$ mit $\vec{w} \perp \nabla f(x_0, y_0)$.
+
+            Wir können ohne weiteren Beweis $\vec{w} = \vektor{\frac{3}{2} \\ \sqrt{2}}$ wählen.\qed
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}
