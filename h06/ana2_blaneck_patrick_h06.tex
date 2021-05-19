@@ -1,0 +1,353 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 06}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 06}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 09. Mai 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie das Volumen der Funktion $f(x, y) = x+y$ über die Fläche
+    $$
+        A = \{(x, y) \in \R^2 \mid 1 \leq x^2 + 4y^2, x^2 + y^2 \leq 1, x \geq 0, y\geq 0\}
+    $$
+    Skizzieren Sie zunächst die Fläche.
+    \begin{solution}
+        \begin{center}
+            \begin{tikzpicture}[scale=1]
+                \begin{axis}[
+                        width=15cm,
+                        xmin=-1.5,xmax=1.5,
+                        xtick distance=1,
+                        xlabel = $x$,
+                        ymin=-1.5,ymax=1.5,
+                        ytick distance=1,
+                        ylabel = $y$,
+                        axis equal,
+                        grid=both,
+                        axis lines = middle,
+                        disabledatascaling
+                    ]
+                    %\draw [name path=A] (axis cs:0,-2) arc[start angle=-90, end angle=90, radius={transformdirectionx(2)}];
+                    %\draw [name path=B] (axis cs:0,-3) arc[start angle=-90, end angle=90, radius={transformdirectionx(3)}];
+
+                    \draw [name path=A1] (axis cs:1,0) arc[start angle=0, end angle=180, radius={transformdirectionx(1)}];
+                    \draw [name path=A2] (axis cs:-1,0) arc[start angle=180, end angle=360, radius={transformdirectionx(1)}];
+                    %\draw [name path=B] (axis cs:0,0) circle [x radius=1, y radius=1/4];
+
+                    \draw [name path=B1] (axis cs:1,0) arc(0:180:1 and 1/2);
+                    \draw [name path=B2] (axis cs:-1,0) arc(180:360:1 and 1/2);
+
+                    \tikzfillbetween[of=A1 and B1, soft clip={domain=0:1}]{red, opacity=0.75};
+                    %\tikzfillbetween[of=A2 and B2]{red, opacity=0.5};
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+
+        Wir sehen, dass die Ellipsengleichung die untere und die Kreisgleichung die obere Schranke bilden.
+        Damit formen wir unser Integrationsgebiet wie folgt um:
+        $$
+            A = \left\{(x, y) \in \R^2 \mid 0 \leq x \leq 1, \frac{\sqrt{1-x^2}}{2} \leq y \leq \sqrt{1-x^2} \right\}
+        $$
+        Dann können wir wie folgt die Fläche berechnen:
+        $$
+            \begin{aligned}
+                \int\int_A (x+y) \d x \d y & = \int^1_0\int^{\sqrt{1-x^2}}_{\frac{\sqrt{1-x^2}}{2}} (x+y) \d y \d x                                                                                                       \\
+                                           & = \int^1_0 \left[xy + \frac{y^2}{2}\right]^{\sqrt{1-x^2}}_{\frac{\sqrt{1-x^2}}{2}}  \d x                                                                                     \\
+                                           & = \int^1_0 \left(x\sqrt{1-x^2} + \frac{1-x^2}{2} - \left( \frac{x\sqrt{1-x^2}}{2} - \frac{1-x^2}{8}\right)\right)  \d x                                                      \\
+                                           & = \int^1_0 \left(\frac{x\sqrt{1-x^2}}{2} + \frac{3(1-x^2)}{8}\right)  \d x                                                                                                   \\
+                                           & = \frac{1}{2}\int^1_0 x\sqrt{1-x^2} \d x + \frac{3}{8} \int^1_0 (1-x^2) \d x                                                                                                 \\
+                                           & \overset{\footnote{$u = 1-x^2 \implies \frac{\d u}{\d x} = -2x \iff \d x = -\frac{\d u}{2x}$}}{=} -\frac{1}{4}\int^1_{x=0} \sqrt{u} \d u + \frac{3}{8} \int^1_0 (1-x^2) \d x \\
+                                           & = -\frac{1}{4} \left[ \frac{2\sqrt{1-x^2}}{3} \right]^1_{0} + \frac{3}{8} \int^1_0 (1-x^2) \d x                                                                              \\
+                                           & = \frac{1}{6} + \frac{3}{8} \int^1_0 (1-x^2) \d x                                                                                                                            \\
+                                           & = \frac{1}{6} + \frac{3}{8} \left[ x-\frac{x^3}{3} \right]^1_0                                                                                                               \\
+                                           & = \frac{1}{6} + \frac{3}{8} \left( 1-\frac{1}{3} \right)                                                                                                                     \\
+                                           & = \frac{1}{6} + \frac{3}{8} \cdot \frac{2}{3}                                                                                                                                \\
+                                           & = \frac{1}{6} + \frac{1}{4}                                                                                                                                                  \\
+                                           & = \frac{5}{12}                                                                                                                                                               \\
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie das folgende Integral
+    $$
+        \int_A x\cdot y \d A
+    $$
+    über dem Integrationsgebiet $A$ gegeben durch die Ungleichungen
+    $$
+        -2 \leq y \leq 2, \quad x \geq 0, \quad x^2 + y^2 \leq 4
+    $$
+    \begin{parts}
+        \part
+        in kartesischen Koordinaten,
+        \begin{solution}
+            Es gilt:
+            $$
+                \begin{aligned}
+                    \int_A x\cdot y \d A & = \int_{-2}^2 \int^{\sqrt{4-y^2}}_0 x\cdot y \d x \d y             \\
+                                         & = \int_{-2}^2 y \left[ \frac{x^2}{2} \right]^{\sqrt{4-y^2}}_0 \d y \\
+                                         & = \int_{-2}^2 \frac{y(4-y^2)}{2} \d y                              \\
+                                         & = \frac{1}{2}\int_{-2}^2 (4y-y^3) \d y                             \\
+                                         & = \frac{1}{2}\int_{-2}^2 (4y-y^3) \d y                             \\
+                                         & = \frac{1}{2}\left[2y^2-\frac{y^4}{4}\right]_{0}^2                 \\
+                                         & = 0
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        in Polarkoordinaten.
+        \begin{solution}
+            Es gilt:
+            $$
+                \begin{aligned}
+                    \int_A x\cdot y \d A & = \int^\frac{\pi}{2}_{-\frac{\pi}{2}} \int^2_0 r^3\cos\phi\sin\phi \d r \d \phi                                                                                             \\
+                                         & = \int^\frac{\pi}{2}_{-\frac{\pi}{2}} \cos\phi\sin\phi \int^2_0 r^3 \d r \d \phi                                                                                            \\
+                                         & = \int^\frac{\pi}{2}_{-\frac{\pi}{2}} \cos\phi\sin\phi \left[\frac{r^4}{4}\right]^2_0 \d \phi                                                                               \\
+                                         & = 4\int^\frac{\pi}{2}_{-\frac{\pi}{2}} \cos\phi\sin\phi \d \phi                                                                                                             \\
+                                         & \overset{\footnote{$u = \cos\phi \implies \frac{\d u}{\d \phi} = -\sin\phi \iff \d \phi = -\frac{\d u}{\sin \phi}$}}{=} -4\int^\frac{\pi}{2}_{\phi = -\frac{\pi}{2}} u \d u \\
+                                         & = -4 \left[ \frac{\cos^2\phi}{2} \right]^\frac{\pi}{2}_{-\frac{\pi}{2}}                                                                                                     \\
+                                         & = 0
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    In einer Bakterienkultur sind zu Beginn einer Beobachtung 6000 Bakterien vorhanden.
+
+    Dabei ist bekannt, dass sich bei diesen Bakterien die Anzahl in 5 Stunden verdreifacht.
+
+    \begin{parts}
+        \part
+        Begründen Sie, dass dieses Wachstum durch die Funktionsgleichung:
+        $$
+            N(t) = 6.000 \cdot 1.24573^t
+        $$
+        beschrieben werden kann.
+        \begin{solution}
+            Wir erkennen, dass es sich um ungebremstes Wachstum handelt mit:
+            \begin{itemize}
+                \item $N(t) = N(0) \cdot e^{kt}$,
+                \item $N(0) = 6000$,
+                \item $N(5) = 3 \cdot 6000 = 18000$.
+            \end{itemize}
+
+            Damit können wir den Wachstumsfaktor $k$ berechnen mit:
+            $$
+                \begin{aligned}
+                    (N(t) = 6000 \cdot e^{kt}) \land (N(5) = 18000) \implies 6000 \cdot e^{5k} = 18000 \iff e^{5k} = 3 \iff k = \frac{\ln(3)}{5}
+                \end{aligned}
+            $$
+            Damit gilt:
+            $$
+                N(t) = N(0) \cdot e^{\frac{\ln(3)}{5}t} \approx 6000 \cdot 1.24573^t
+            $$\qed
+        \end{solution}
+
+        \part
+        Berechnen Sie die Anzahl der Bakterien 3 Stunden nach Beobachtungsbeginn.
+        \begin{solution}
+            $$
+                N(3) = 6000 \cdot 1.24573^3 = 11599.066023123102 \approx 11599
+            $$\qed
+        \end{solution}
+
+        \part
+        Nach wie viel Stunden hat sich die Anzahl der Bakterien verzehnfacht?
+        \begin{solution}
+            $$
+                \begin{aligned}
+                                 & 10 \cdot N(0) &  & = N(t')                                                   \\
+                    \equiv \quad & 60000         &  & = 6000 \cdot e^{\frac{\ln(3)}{5}t'}                       \\
+                    \equiv \quad & 10            &  & = e^{\frac{\ln(3)}{5}t'}                                  \\
+                    \equiv \quad & \ln(10)       &  & = \frac{\ln(3)}{5}t'                                      \\
+                    \equiv \quad & t'            &  & = \frac{5\ln(10)}{\ln(3)}          \approx 10.479516\dots
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Die relative Gewichtszunahme einer Fischzucht betrage pro Woche 5\%.
+    Anfangs sei insgesamt 1t Fisch im Fischteich.
+    Der Fischer beabsichtigt, wöchentlich 55kg Fisch zu entnehmen.
+    \begin{parts}
+        \part
+        Entscheiden Sie, ob damit eine Überfischung gegeben ist.
+        \begin{solution}
+            Um herauszufinden, ob hier um eine Überfischung gegeben ist, berechnen wir:
+            $$
+                \frac{a}{k} = \frac{55}{0.05} = 1100 \geq 1000 = y_0 \implies \text{exponentielle Abnahme}.
+            $$
+            Damit wissen wir, dass eine Überfischung gegeben ist.\qed
+        \end{solution}
+
+        \part
+        Wann kommt die Produktion ggfls. zum Erliegen?
+        \begin{solution}
+            Wir erkennen\footnote{Wir entscheiden uns hier für \emph{diskretes} Wachstum, da wir des Kontexts wegen von \emph{Wochen} als diskrete Zeiteinheit ausgehen.}, dass es sich um (parasitengesteuertes) Wachstum mit \emph{Störung ersten Grades} handelt mit:
+            \begin{itemize}
+                \item $y_n = (y_0 - \frac{a}{k}) \cdot (1 + k \cdot \varDelta t)^n + \frac{a}{k}$,
+                \item $y_0 = 1000$,
+                \item $a = 55$,
+                \item $\varDelta t = 1 \text{ Woche}$.
+            \end{itemize}
+
+            Damit gilt:
+            $$
+                \begin{aligned}
+                                   & y_n              &  & = \left(y_0 - \frac{a}{k}\right) \cdot (1 + k \cdot \varDelta t)^n + \frac{a}{k} \\
+                    \implies \quad & 0                &  & = (1000 - 1100) \cdot 1.05^n + 1100                                              \\
+                    \equiv \quad   & 0                &  & = -100 \cdot 1.05^n + 1100                                                       \\
+                    \equiv \quad   & 100 \cdot 1.05^n &  & = 1100                                                                           \\
+                    \equiv \quad   & 1.05^n           &  & = 11                                                                             \\
+                    \equiv \quad   & n                &  & = \log_{1.05}(11) \approx 49.1471\dots                                           \\
+                \end{aligned}
+            $$
+
+            Damit wissen wir, dass in der 50. Woche die Fischpopulation zum Erliegen kommt.\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    In einem Zoo bricht unter einer Affenart eine Krankheit aus, für die nur sie anfällig ist.
+    Als dem Personal die Krankheit auffällt, sind bereits 4 Affen der 204 Affen infiziert, nach 4 Wochen sind bereits 24 Affen erkrankt.
+
+    \begin{parts}
+        \part
+        Ermittle anhand der gegebenen Werte eine Funktionsgleichung, mit der sich die Ausbreitung der Krankheit unter den Affen beschreiben lässt.
+        \begin{solution}
+            Wir erkennen, dass es sich um (logistisches) Wachstum mit \emph{Störung zweiter Ordnung} handelt mit:
+            \begin{itemize}
+                \item $y(t) = \frac{R}{\frac{R-y_0}{y_0}\cdot e^{-kRt} + 1}$,
+                \item $y(0) = 4$,
+                \item $R = 204$,
+                \item $y(4) = 24$.
+            \end{itemize}
+            Damit können wir den Wachstumsfaktor $k$ berechnen mit:
+            $$
+                \left(y(t) = \frac{204}{\frac{204-4}{4}\cdot e^{-k\cdot 204 \cdot t} + 1}\right) \land (y(4) = 24)
+            $$
+            $$
+                \implies 24 = \frac{204}{50e^{-816k}+1} \iff \ldots \iff e^{-816k} = \frac{3}{20} \iff k = \frac{\ln(\frac{20}{3})}{816} \approx 0.0023249019
+            $$
+
+            Damit gilt:
+            $$
+                y(t) = \frac{204}{50 e^{-\frac{\ln(\frac{20}{3})}{4}t} + 1}
+            $$\qed
+        \end{solution}
+
+        \part
+        Wann wird die Hälfte der Affen erkrankt sein?
+        \begin{solution}
+            $$
+                \begin{aligned}
+                                   & y(t)                                     &  & = \frac{204}{50 e^{-\frac{\ln(\frac{20}{3})}{4}t} + 1}                          \\
+                    \implies \quad & 102                                      &  & = \frac{204}{50 e^{-\frac{\ln(\frac{20}{3})}{4}t} + 1}                          \\
+                    \equiv \quad   & 50 e^{-\frac{\ln(\frac{20}{3})}{4}t} + 1 &  & = 2                                                                             \\
+                    \equiv \quad   & e^{-\frac{\ln(\frac{20}{3})}{4}t}        &  & = \frac{1}{50}                                                                  \\
+                    \equiv \quad   & -\frac{\ln(\frac{20}{3})}{4}t            &  & = \ln\left(\frac{1}{50}\right)                                                  \\
+                    \equiv \quad   & t                                        &  & = \frac{4\ln\left(\frac{1}{50}\right)}{-\ln\left(\frac{20}{3}\right)}           \\
+                    \equiv \quad   & t                                        &  & = \frac{4\ln\left(50\right)}{\ln\left(\frac{20}{3}\right)} \approx 8.2483407198
+                \end{aligned}
+            $$
+
+            Damit wissen wir, dass in der 9. Woche die Hälfte der Affen erkrankt sind.\qed
+        \end{solution}
+
+        \part
+        Nach 3 Monaten\footnote{Seien 3 Monate = 12 Wochen} glaubt ein Arzt, ein Gegenmittel gefunden zu haben.
+        Aus Vorsicht injiziert er es zunächst nur 10\% der noch gesunden Affen.
+        Wie vielen Affen wird das Medikament verabreicht?
+        \begin{solution}
+            $$
+                \begin{aligned}
+                    y(12) = \quad & \frac{204}{50 e^{-\frac{\ln(\frac{20}{3})}{4} \cdot 12} + 1} \\
+                    = \quad       & \frac{204}{50 e^{-3\ln(\frac{20}{3})} + 1}                   \\
+                    = \quad       & \frac{204}{50 \left(e^{\ln(\frac{20}{3})}\right)^{-3} + 1}   \\
+                    = \quad       & \frac{204}{50 \left(\frac{3}{20}\right)^{3} + 1}             \\
+                    = \quad       & \frac{204}{\frac{27}{160} + 1}                               \\
+                    = \quad       & \frac{204}{\frac{187}{160}}                                  \\
+                    = \quad       & \frac{1920}{11} \approx 174,55
+                \end{aligned}
+            $$
+            Damit wissen wir, dass 175 Affen erkrankt sind $\implies$ es gibt 29 gesunde Affen $\implies$ 3 Affen bekommend as Medikament verabreicht.\qed
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}

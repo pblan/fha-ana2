@@ -1,0 +1,359 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\newcommand{\df}{\mathrm{d}f} % dx
+\newcommand{\dx}{\mathrm{d}x} % dx
+\newcommand{\du}{\mathrm{d}u} % du
+\newcommand{\dv}{\mathrm{d}v} % dv
+\newcommand{\dw}{\mathrm{d}w} % dw
+\newcommand{\dt}{\mathrm{d}t} % dt
+\newcommand{\dn}{\mathrm{d}n} % dn
+\newcommand{\dy}{\mathrm{d}y} % dy
+\newcommand{\dz}{\mathrm{d}z} % dz
+\newcommand{\dudx}{\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 04}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 04}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 25. April 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Bestimmen Sie die Kandidaten für relative Extrema der Funktionen
+    $$
+        f(x, y) = \frac{1}{x} + \frac{1}{y} - \frac{1}{x+y+1}
+    $$
+    \begin{solution}
+        Für die relativen Extrema muss gelten:
+        $$
+            \nabla f(x, y) = \vektor{f_x(x, y) \\ f_y(x, y)} = \vektor{\frac{1}{(x+y+1)^2} - \frac{1}{x^2}  \\ \frac{1}{(x+y+1)^2}-\frac{1}{y^2} } = \vec{0}
+        $$
+        $$
+            \begin{aligned}
+                               & \nabla f(x, y)                              &  & = \vektor{0 \\ 0} \\
+                \iff \quad     & \vektor{\frac{1}{(x+y+1)^2} - \frac{1}{x^2}                  \\ \frac{1}{(x+y+1)^2}-\frac{1}{y^2} } && = \vektor{0 \\ 0} \\
+                \implies \quad & \vektor{\frac{1}{(x+y+1)^2}                                  \\ \frac{1}{(x+y+1)^2} } && = \vektor{\frac{1}{x^2}  \\ \frac{1}{y^2}}
+            \end{aligned}
+        $$
+
+        Offensichtlich gilt aus den beiden Gleichungen für $x, y \neq 0$:
+        $$
+            \frac{1}{x^2} = \frac{1}{y^2} \implies x = \pm y
+        $$
+
+        Einsetzen von $x = y$ in Gleichung \Rnum{1} ergibt:
+        $$
+            \frac{1}{(y+y+1)^2} = \frac{1}{y^2} \iff \frac{1}{4y^2 + 4y + 1} = \frac{1}{y^2} \implies 4y^2 + 4y + 1 = y^2 \iff y^2 + \frac{4}{3}y + \frac{1}{3}
+        $$
+        Einsetzen in die $pq$-Formel ergibt:
+        $$
+            y_{1, 2} = -\frac{2}{3} \pm \sqrt{\frac{4}{9} - \frac{1}{3}} = -\frac{2}{3} \pm \frac{1}{3} \implies y \in \left\{ -1, -\frac{1}{3} \right\}
+        $$
+        Damit ergeben sich die Kandidaten $(x_1, y_1) = (-1, -1)$ und $(x_2, y_2) = (-\frac{1}{3}, -\frac{1}{3})$.
+
+        Einsetzen von $x = -y$ in Gleichung \Rnum{2} ergibt:
+        $$
+            \frac{1}{(-y+y+1)^2} = \frac{1}{(-y)^2} \iff 1 = \frac{1}{y^2} \iff y^2 = 1 \implies y \in \{ -1, 1 \}
+        $$
+        Damit ergeben sich die Kandidaten $(x_3, y_3) = (1, -1)$ und $(x_4, y_4) = (-1, 1)$.
+    \end{solution}
+
+    \newpage
+
+    \question
+    Gegeben sei die Funktion
+    $$
+        f(x, y) = 4x^2 -3xy
+    $$
+    Bestimmen Sie alle Punkte, die auf der Kreislinie (Nebenbedingung)
+    $$
+        x^2 + y^2 = 1
+    $$
+    liegen und untersuchen Sie die Funktion auf Extrema.
+    \begin{solution}
+        Die Nebenbedingung ist gegeben mit:
+        $$
+            g(x) = x^2 + y^2 -1 = 0
+        $$
+
+        Wir bilden die Lagrange-Funktion mit
+        $$
+            L(x, y, \lambda) = f(x, y) + \lambda \cdot g(x, y) = 4x^2 -3xy + \lambda (x^2 + y^2 -1) = 4x^2 -3xy + \lambda x^2 + \lambda y^2 - \lambda
+        $$
+
+        und bilden dann den Gradienten von $L$ mit
+        $$
+            \nabla L(x, y, \lambda) = \vektor{L_x(x, y, \lambda) \\ L_y(x, y, \lambda) \\ L_\lambda(x, y, \lambda)} = \vektor{8x -3y + 2\lambda x \\ -3x + 2\lambda y \\ x^2 + y^2 - 1}= \vektor{2x(\lambda + 4) -3y \\ -3x + 2\lambda y \\ x^2 + y^2 - 1}.
+        $$
+
+        Zum Ermitteln der Kandidaten setzen wir $\nabla L = \vec{0}$:
+        $$
+            \begin{aligned}
+                               & \nabla L(x, y, \lambda)     &  & = \vec{0} \\
+                \iff \quad     & \vektor{2x(\lambda + 4) -3y                \\ -3x + 2\lambda y \\ x^2 + y^2 - 1} && = \vektor{0 \\ 0 \\ 0} \\
+                \implies \quad & \vektor{2x(\lambda + 4)                    \\ -3x + 2\lambda y \\ x^2 + y^2 - 1} && = \vektor{3y \\ 0 \\ 0} \\
+                \implies \quad & \vektor{x                                  \\ -3x + 2\lambda y \\ x^2 + y^2 - 1} && = \vektor{\frac{3y}{2(\lambda + 4)} \\ 0 \\ 0} \\
+            \end{aligned}
+        $$
+
+        Einsetzen von $x = \frac{3y}{2(\lambda + 4)}$ in Gleichung \Rnum{2} ergibt ($y \neq 0$, $\lambda \neq -4$):
+        $$
+            -\frac{9y}{2(\lambda + 4)} + 2\lambda y = 0 \iff 2\lambda y = \frac{9y}{2(\lambda + 4)} \iff 2\lambda = \frac{9}{2(\lambda  + 4)} \iff \lambda^2 + 4\lambda -\frac{9}{4} = 0
+        $$
+
+        Einsetzen in die $pq$-Formel liefert:
+        $$
+            \lambda_{1, 2} = -2 \pm \sqrt{4 + \frac{9}{4}} = -2 \pm \frac{5}{2} \implies \lambda \in \left\{-\frac{9}{2}, \frac{1}{2}\right\}
+        $$
+        \newpage
+        \textbf{Fall 1:}\\
+        Einsetzen von $\lambda = -\frac{9}{2}$ in Gleichung \Rnum{1} ergibt:
+        $$
+            2x \left(-\frac{9}{2} + 4\right) - 3y = 0 \iff -x -3y = 0 \iff x = -3y
+        $$
+
+        Einsetzen von $x = -3y$ in Gleichung \Rnum{3}:
+        $$
+            (-3y)^2 + y^2 - 1 = 0 \iff y^2 = \frac{1}{10} \implies y \in \left\{ -\frac{1}{\sqrt{10}}, \frac{1}{\sqrt{10}} \right\}
+        $$
+
+        Damit erhalten wir die Kandidatentupel
+        $$
+            (x_1, y_1, \lambda_1) = \left(\frac{3}{\sqrt{10}}, -\frac{1}{\sqrt{10}}, -\frac{9}{2}\right), \quad (x_2, y_2, \lambda_2) = \left(-\frac{3}{\sqrt{10}}, \frac{1}{\sqrt{10}}, -\frac{9}{2}\right)
+        $$
+
+        \textbf{Fall 2:}\\
+        Einsetzen von $\lambda = \frac{1}{2}$ in Gleichung \Rnum{1} ergibt:
+        $$
+            2x \left(\frac{1}{2} + 4\right) - 3y = 0 \iff 9x -3y = 0 \iff x = \frac{y}{3}
+        $$
+
+        Einsetzen von $x = \frac{y}{3}$ in Gleichung \Rnum{3}:
+        $$
+            \left(\frac{y}{3}\right)^2 + y^2 - 1 = 0 \iff y^2 = \frac{9}{10} \implies y \in \left\{ -\frac{3}{\sqrt{10}}, \frac{3}{\sqrt{10}} \right\}
+        $$
+
+        Damit erhalten wir die Kandidatentupel
+        $$
+            (x_3, y_3, \lambda_3) = \left(-\frac{1}{\sqrt{10}}, -\frac{3}{\sqrt{10}}, \frac{1}{2}\right), \quad (x_4, y_4, \lambda_4) = \left(\frac{1}{\sqrt{10}}, \frac{3}{\sqrt{10}}, \frac{1}{2}\right)
+        $$
+
+        Wir bilden nun die Hesse-Matrix mit
+        $$
+            H = \vektor{L_{xx} & L_{xy} & g_x \\ L_{xy} & L_{yy} & g_y \\ g_x & g_y & 0} = \vektor{2(\lambda + 4) & -3 & 2x \\ -3 & 2\lambda & 2y \\ 2x & 2y & 0}
+        $$
+
+        Es gilt
+        $$
+            \det H = -8(\lambda x^2 + 3xy + (\lambda+4)y^2)
+        $$
+
+        Einsetzen der Tupel ergibt:
+        $$
+            \begin{aligned}
+                 & (x_1, y_1, \lambda_1) = \left(\frac{3}{\sqrt{10}}, -\frac{1}{\sqrt{10}}, -\frac{9}{2}\right) &  & \implies \det H = 40  &  & > 0 \implies \text{Maximum} \\
+                 & (x_2, y_2, \lambda_2) = \left(-\frac{3}{\sqrt{10}}, \frac{1}{\sqrt{10}}, -\frac{9}{2}\right) &  & \implies \det H = 40  &  & > 0 \implies \text{Maximum} \\
+                 & (x_3, y_3, \lambda_3) = \left(-\frac{1}{\sqrt{10}}, -\frac{3}{\sqrt{10}}, \frac{1}{2}\right) &  & \implies \det H = -40 &  & < 0 \implies \text{Minimum} \\
+                 & (x_4, y_4, \lambda_4) = \left(\frac{1}{\sqrt{10}}, \frac{3}{\sqrt{10}}, \frac{1}{2}\right)   &  & \implies \det H = -40 &  & < 0 \implies \text{Minimum}
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+
+    \question
+    Gegeben sei die Kurve $\vec{X}(t) = \vektor{t \\ t^2 \\ t^3}$.
+    Berechnen Sie die Arbeit im Vektorfeld
+    $$
+        \vec{F}(x, y, z) = \vektor{x+yz \\ y + xz \\ z + xy}
+    $$
+    entlang der Kurve.
+    \begin{solution}
+        Die Arbeit von Zeitpunkt $t=a$ bis Zeitpunkt $t=b$ ist gegeben mit
+        $$
+            W = \int^b_a \vec{F} (\vec{X}(t)) \cdot \vec{X}'(t) \dt
+        $$
+        Wir berechnen:
+        $$
+            \begin{aligned}
+                W =\quad & \int^b_a \vec{F} (\vec{X}(t)) \cdot \vec{X}'(t) \dt                                                                    \\
+                =\quad   & \int^b_a \vektor{t + t^5                                                                                               \\ t^2 + t^4 \\ 2t^3} \cdot \vektor{1 \\ 2t \\ 3t^2} \dt \\
+                =\quad   & \int^b_a \left( t + t^5 + 2t(t^4 + t^2) + 3t^2 \cdot 2t^3\right)  \dt                                                  \\
+                =\quad   & \int^b_a \left(9t^5 + 2t^3 + t\right) \dt                                                                              \\
+                =\quad   & \left[ \frac{3t^6}{2} + \frac{t^4}{2} + \frac{t^2}{2} \right]^b_a     = \frac{3(b^6 - a^6) + b^4 + b^2 - a^4 - a^2}{2}
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben ist das Vektorfeld
+    $$
+        \vec{v} = \vektor{z^3 + \alpha xy \\ x^2 \\ \beta xz^2}
+    $$
+    \begin{parts}
+        \part
+        Bestimmen Sie die reellen Konstanten $\alpha$ und $\beta$ so, dass $\vec{v}$ ein Gradientenfeld ist.
+        \begin{solution}
+            Es gilt, dass
+            $$
+                \curl (\vec{v}) = \vec{0} \implies \exists V : \R^3 \to \R : \nabla V = \vec{v}
+            $$
+
+            Wir berechnen:
+            $$
+                \begin{aligned}
+                                 & \curl(\vec{v})                                                                   &  & = \vec{0} \\
+                    \equiv \quad & \vec{\nabla} \times \vec{v}                                                      &  & = \vec{0} \\
+                    \equiv \quad & \vektor{\frac{\partial}{\partial x}                                                             \\ \frac{\partial}{\partial y} \\ \frac{\partial}{\partial z}} \times \vektor{z^3 + \alpha xy \\ x^2 \\ \beta xz^2} &&= \vektor{0\\0\\0} \\
+                    \equiv \quad & \vektor{\frac{\partial}{\partial y} \beta xz^2 - \frac{\partial}{\partial z} x^2                \\ \frac{\partial}{\partial z} (z^3 + \alpha xy) - \frac{\partial}{\partial x} \beta xz^2 \\ \frac{\partial}{\partial x} x^2 - \frac{\partial}{\partial y} (z^3+\alpha x y)} &&= \vektor{0\\0\\0} \\
+                    \equiv \quad & \vektor{0                                                                                       \\ 3z^2 - \beta z^2 \\ 2x - \alpha x} &&= \vektor{0\\0\\0} \\
+                \end{aligned}
+            $$
+            Wir sehen direkt, dass $(\alpha, \beta) = (2,3)$.\qed
+        \end{solution}
+
+        \part
+        Berechnen Sie für diesen Fall die zugehörige Potentialfunktion.
+        \begin{solution}
+            Es gilt mit $(\alpha, \beta) = (2,3)$:
+            $$
+                V(x, y, z) = \int f_1(x,y,z) \dx = \int (z^3 + 2 xy) \dx = z^3x + x^2y  + C(y, z)
+            $$
+            $$
+                V_y = x^2 + C_y'(y, z)= f_2(x, y, z) \implies C_y'(y, z) = 0
+            $$
+            $$
+                V_z = 3z^2x + C_z'(y, z)= f_3(x, y, z) \implies C_z'(y, z) = 0
+            $$
+            Damit wissen wir insgesamt, dass mit $c\in \R$ gilt:
+            $$
+                V(x, y, z) = xz^3 + x^2y + c
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+
+    \question
+    Gegeben sei das Vektorfeld
+    $$
+        \vec{F}_a(x, y) = \vektor{e^{x+y} + \alpha xy \\ e^{x+y} +x^2}
+    $$
+    mit einem freien Parameter $\alpha \in \R$.
+    \begin{parts}
+        \part
+        Bestimmen Sie den Parameter $\alpha$ derart, dass $\vec{F}_a$ ein Potential besitzt.
+        Bestimmen Sie dieses Potential.
+        \begin{solution}
+            Es muss gelten:
+            $$
+                \begin{aligned}
+                                 & \frac{\partial f_1}{\partial y} & = \frac{\partial f_1}{\partial x} \\
+                    \equiv \quad & e^{x+y} + \alpha x              & = e^{x+y} + 2x
+                \end{aligned}
+            $$
+            Damit wissen wir, dass $\alpha = 2$ gilt.
+
+            Für die Potentielfunktion gilt:
+            $$
+                V(x, y) = \int f_1(x, y) \dx = e^{x+y} + x^2y + C(y)
+            $$
+            $$
+                V_y = e^{x+y} + x^2 + C'(y) = f_2(x, y) \implies C'(y) = 0
+            $$
+
+            Damit wissen wir insgesamt, dass für $c \in \R$ gilt:
+            $$
+                V(x, y) = e^{x+y}+ x^2y + c
+            $$\qed
+        \end{solution}
+
+        \part
+        Berechnen Sie für $\alpha = 0$ und $\vec{X}(t) = \vektor{t^2 & t^3}^T$, $t \in \interval{0;1}$ die zu leistende Arbeit.
+
+
+        \emph{Hinweis:} Klammern Sie in (b) bei der Integration den Faktor $e^{t^2 + t^3}$ aus.
+        \begin{solution}
+            Die Arbeit von Zeitpunkt $t = 0$ bis Zeitpunkt $t = 1$ ist gegeben mit
+            $$
+                W = \int^1_0 \vec{F}(\vec{X}(t)) \cdot \vec{X}'(t) \dt
+            $$
+
+            Wir berechnen:
+            $$
+                \begin{aligned}
+                    W =\quad & \int^1_0 \vec{F}(\vec{X}(t)) \cdot \vec{X}'(t) \dt                                                                \\
+                    =\quad   & \int^1_0 \vektor{e^{t^2 + t^3}                                                                                    \\ e^{t^2+t^3} + t^4} \cdot \vektor{2t \\ 3t^2} \dt \\
+                    =\quad   & \int^1_0 \left(2te^{t^2 + t^3} + 3t^2\left(e^{t^2 + t^3} + t^4\right)\right) \dt                                  \\
+                    =\quad   & \int^1_0 \left(2te^{t^2 + t^3} + 3t^2e^{t^2 + t^3} + 3t^6\right) \dt                                              \\
+                    =\quad   & \int^1_0 \left( 2t + 3t^2 \right)e^{t^2 + t^3}  \dt + 3\int^1_0 t^6 \dt                                           \\
+                    =\quad   & \left[ e^{t^2 + t^3} \right]^1_0 + 3 \left[ \frac{t^7}{7} \right]^1_0 = e^2 - 1 + \frac{3}{7} = e^2 - \frac{4}{7}
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}

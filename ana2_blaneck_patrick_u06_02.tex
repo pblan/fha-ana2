@@ -1,0 +1,132 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 06}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 05}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 02. Mai 2021}
+
+\begin{document}
+\begin{questions}
+    \setcounter{question}{1}
+    \question
+    Berechnen Sie folgendes Integral unter Verwendung der Polarkoordinaten
+    $$
+        \int_A \left(3\sqrt{x^2 + y^2} + 4\right)x \d A
+    $$
+    für den halben Kreisring $A$, dessen Mittelpunkt im Ursprung des kartesischen Koordinatensystems liegt, den inneren Radius $2$ und den äußeren Radius $3$ besitzt, und durch $x\geq 0$ bestimmt ist.
+    \begin{solution}
+        \begin{center}
+            \begin{tikzpicture}[scale=1]
+                \begin{axis}[
+                        width=15cm,
+                        xmin=0,xmax=3,
+                        xtick distance=1,
+                        xlabel = $x$,
+                        ymin=-3.5,ymax=3.5,
+                        ytick distance=1,
+                        ylabel = $y$,
+                        axis equal,
+                        grid=both,
+                        axis lines = middle,
+                        disabledatascaling
+                    ]
+                    \draw [name path=A] (axis cs:0,-2) arc[start angle=-90, end angle=90, radius={transformdirectionx(2)}];
+                    \draw [name path=B] (axis cs:0,-3) arc[start angle=-90, end angle=90, radius={transformdirectionx(3)}];
+                    \tikzfillbetween[of=A and B]{blue, opacity=0.2};
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+
+        Wir erkennen den Integrationsbereich:
+        $$
+            A = \left\{(r, \phi) \mid (2 \leq r \leq 3 ) \land \left(-\frac{\pi}{2} \leq \phi \leq \frac{\pi}{2}\right)\right\}
+        $$
+
+        Umwandeln des gegebenen Integrals in Polarkoordinaten ergibt:
+        $$
+            \int_A \left(3\sqrt{x^2 + y^2} + 4\right)x \d A = \int_A \left(3\sqrt{r^2} + 4\right)r\cos\phi \cdot r \d A = \int_A \left( 3r^3+4r^2 \right)\cos\phi \d A
+        $$
+
+        Einsetzen der Integralgrenzen:
+        $$
+            \begin{aligned}
+                \int_A \left( 3r^3+4r^2 \right)\cos\phi \d A & = \int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \int^3_2 \left( 3r^3+4r^2 \right)\cos\phi \d r\d \phi                                                    \\
+                                                             & = \int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \cos\phi \int^3_2 \left( 3r^3+4r^2 \right) \d r\d \phi                                                   \\
+                                                             & = \int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \cos\phi \left[ \frac{3r^4}{4}+\frac{4r^3}{3} \right]^3_2 \d \phi                                        \\
+                                                             & = \int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \cos\phi \left( \frac{243}{4} + \frac{108}{3} - \left(\frac{48}{4} + \frac{32}{3}\right) \right) \d \phi \\
+                                                             & = \int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \cos\phi \cdot \frac{889}{12} \d \phi                                                                    \\
+                                                             & = \frac{889}{12}\int^{\frac{\pi}{2}}_{-\frac{\pi}{2}} \cos\phi \d \phi                                                                           \\
+                                                             & = \frac{889}{12} \left[\sin \phi\right]^{\frac{\pi}{2}}_{-\frac{\pi}{2}}                                                                         \\
+                                                             & = \frac{889}{12} \left(1 + 1\right)                                                                                                              \\
+                                                             & = \frac{889}{6}
+            \end{aligned}
+        $$\qed
+
+    \end{solution}
+\end{questions}
+\end{document}

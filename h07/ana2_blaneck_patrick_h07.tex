@@ -1,0 +1,364 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 07}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 07}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 16. Mai 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie die allgemeine Lösung der Differentialgleichungen
+    \begin{parts}
+        \part
+        $y' + (1+x)\cdot y = 0$
+        \begin{solution}
+            Umwandeln in explizite Darstellung:
+            $$
+                y' + (1+x)\cdot y = 0 \quad \equiv \quad y' = \underbrace{-y}_{g(y)}\cdot \underbrace{(1+x)}_{f(x)}
+            $$
+            Damit gilt:
+            $$
+                \begin{aligned}
+                                 & y'                     &  & = -y \cdot (1+x)                        \\
+                    \equiv \quad & \frac{\d y}{\d x}      &  & = -y \cdot (1+x)                        \\
+                    \equiv \quad & -\frac{1}{y} \d y      &  & = (1+x) \d x                            \\
+                    \equiv \quad & \int -\frac{1}{y} \d y &  & = \int (1+x) \d                         \\
+                    \equiv \quad & - \ln\abs{y} - c_2     &  & = x + \frac{x^2}{2} + c_1               \\
+                    \equiv \quad & \abs{y}                &  & = e^{-(x + \frac{x^2}{2} + c_1 + c_2)}  \\
+                    \equiv \quad & y                      &  & = e^{-(c_1 + c_2)}e^{-\frac{x}{2}(x+2)} \\
+                    \equiv \quad & y                      &  & = ce^{-\frac{x}{2}(x+2)}                \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y' = 2x\cdot y$
+        \begin{solution}
+            $$
+                \begin{aligned}
+                                 & y'                   &  & = 2x\cdot y            \\
+                    \equiv \quad & \frac{\d y}{\d x}    &  & = 2x\cdot y            \\
+                    \equiv \quad & \frac{1}{y}\d y      &  & = 2x \d x              \\
+                    \equiv \quad & \int \frac{1}{y}\d y &  & = \int 2x \d x         \\
+                    \equiv \quad & \ln\abs{y}  + c_2    &  & = x^2 + c_1            \\
+                    \equiv \quad & \abs{y}              &  & = e^{x^2 + c_1 - c_2}  \\
+                    \equiv \quad & y                    &  & = e^{c_1 - c_2}e^{x^2} \\
+                    \equiv \quad & y                    &  & = ce^{x^2}
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        $x \cdot y' = 4y, \quad x > 0$
+        \begin{solution}
+            Umwandeln in explizite Darstellung:
+            $$
+                x \cdot y' = 4y \quad \equiv \quad y'= 4y \cdot \frac{1}{x}
+            $$
+            Damit gilt:
+            $$
+                \begin{aligned}
+                                 & y'                                       &  & = 4y \cdot \frac{1}{x}                     \\
+                    \equiv \quad & \frac{\d y}{\d x}                        &  & = 4y \cdot \frac{1}{x}                     \\
+                    \equiv \quad & \frac{1}{4y} \d y                        &  & = \frac{1}{x} \d x                         \\
+                    \equiv \quad & \frac{1}{4} \int \frac{1}{y} \d y        &  & =\int \frac{1}{x} \d x                     \\
+                    \equiv \quad & \frac{1}{4} \cdot \ln(y) + \frac{c_2}{4} &  & =\ln(x) + c_1                              \\
+                    \equiv \quad & \ln y                                    &  & = 4(\ln(x) + c_1) - c_2                    \\
+                    \equiv \quad & y                                        &  & = e^{4(\ln(x) + c_1) - c_2}                \\
+                    \equiv \quad & y                                        &  & = e^{- c_2}\left(e^{\ln(x) + c_1}\right)^4 \\
+                    \equiv \quad & y                                        &  & = e^{- c_2}\left(xe^{c_1}\right)^4         \\
+                    \equiv \quad & y                                        &  & = e^{- c_2}e^{4c_1}x^4                     \\
+                    \equiv \quad & y                                        &  & = cx^4                                     \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Lösen Sie die folgenden Anfangswertprobleme
+    \begin{parts}
+        \part
+        $y' = xe^{-y}, \quad y(0) = 3$
+        \begin{solution}
+            Berechnen der allgemeinen Lösung:
+            $$
+                \begin{aligned}
+                                 & y'                &  & = xe^{-y}                                   \\
+                    \equiv \quad & \frac{\d y}{\d x} &  & = xe^{-y}                                   \\
+                    \equiv \quad & e^y \d y          &  & = x \d x                                    \\
+                    \equiv \quad & \int e^y \d y     &  & = \int x \d x                               \\
+                    \equiv \quad & e^y + c_2         &  & = \frac{x^2}{2} + c_1                       \\
+                    \equiv \quad & e^y               &  & = \frac{x^2}{2} + c_1 - c_2                 \\
+                    \equiv \quad & y                 &  & = \ln\left(\frac{x^2}{2} + c_1 - c_2\right) \\
+                    \equiv \quad & y                 &  & = \ln\left(\frac{x^2}{2} + c\right)
+                \end{aligned}
+            $$
+
+            Einsetzen des Anfangswertes:
+            $$
+                y(0) = 3 \iff 3 = \ln\left(\frac{0}{2} + c\right) = \ln c \iff c = e^3
+            $$
+            Damit gilt:
+            $$
+                y = \ln\left(\frac{x^2}{2} + e^3\right)
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part $y' = -\frac{x}{y}, \quad y(1) = 3$
+        \begin{solution}
+            Berechnen der allgmeinen Lösung:
+            $$
+                \begin{aligned}
+                                 & y'                   &  & = -\frac{x}{y}            \\
+                    \equiv \quad & \frac{\d y}{\d x}    &  & = -\frac{x}{y}            \\
+                    \equiv \quad & -y \d y              &  & = x \d x                  \\
+                    \equiv \quad & \int -y \d y         &  & = \int x \d x             \\
+                    \equiv \quad & -\frac{y^2}{2} + c_2 &  & = \frac{x^2}{2} + c_1     \\
+                    \equiv \quad & y^2                  &  & = -x^2 + c_1 - c_2        \\
+                    \equiv \quad & y                    &  & = \sqrt{-x^2 + c_1 - c_2} \\
+                    \equiv \quad & y                    &  & = \sqrt{c-x^2}
+                \end{aligned}
+            $$
+
+            Einsetzen des Anfangswertes:
+            $$
+                y(1) = 3 \iff 3 = \sqrt{c - 1} \implies 9 = c-1 \iff c = 10
+            $$
+            Damit gilt:
+            $$
+                y = \sqrt{10-x^2}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Lösen Sie folgende Differentialgleichungen mit Hilfe einer geeigneten Substitution ($x \neq 0$)
+    \begin{parts}
+        \part
+        $y' = \frac{1}{\sin\left(\frac{y}{x}\right)} + \frac{y}{x}$
+        \begin{solution}
+            Sei $u = \frac{y}{x}$ ($\implies u' = \frac{xy' - y}{x^2} \iff y' = u + xu'$). Dann gilt:
+            $$
+                \begin{aligned}
+                                 & y'                  &  & = \frac{1}{\sin\left(\frac{y}{x}\right)} + \frac{y}{x} \\
+                    \equiv \quad & u + xu'             &  & = \frac{1}{\sin u} + u                                 \\
+                    \equiv \quad & xu'                 &  & = \frac{1}{\sin u}                                     \\
+                    \equiv \quad & \frac{x \d u}{\d x} &  & = \frac{1}{\sin u}                                     \\
+                    \equiv \quad & \sin u \d u         &  & = \frac{1}{x} \d x                                     \\
+                    \equiv \quad & \int \sin u \d u    &  & = \int \frac{1}{x} \d x                                \\
+                    \equiv \quad & -\cos (u) + c_2     &  & = \ln\abs{x} + c_1                                     \\
+                    \equiv \quad & \cos (u)            &  & = -\ln\abs{x} - c_1 + c_2                              \\
+                    \equiv \quad & u                   &  & = \arccos(-\ln\abs{x} - c_1 + c_2)                     \\
+                    \equiv \quad & \frac{y}{x}         &  & = \arccos(-\ln\abs{x} - c_1 + c_2)                     \\
+                    \equiv \quad & y                   &  & = x\arccos(c - \ln\abs{x})                             \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $xy' = y + 4x$
+        \begin{solution}
+            Umwandeln in explizite Darstellung:
+            $$
+                xy' = y + 4x \quad \equiv \quad y' = \frac{y}{x} + 4
+            $$
+            Sei $u = \frac{y}{x}$ ($\implies u' = \frac{xy' - y}{x^2} \iff y' = u + xu'$). Dann gilt:
+            $$
+                \begin{aligned}
+                                 & y'                  &  & = \frac{y}{x} + 4             \\
+                    \equiv \quad & u + xu'             &  & = u + 4                       \\
+                    \equiv \quad & xu'                 &  & = 4                           \\
+                    \equiv \quad & \frac{x \d u}{\d x} &  & = 4                           \\
+                    \equiv \quad & 1 \d u              &  & = \frac{4}{x} \d x            \\
+                    \equiv \quad & \int 1 \d u         &  & = 4\int \frac{1}{x} \d x      \\
+                    \equiv \quad & u + c_2             &  & = 4\ln\abs{x} + 4c_1          \\
+                    \equiv \quad & u                   &  & = 4\ln\abs{x} + 4c_1 - c_2    \\
+                    \equiv \quad & \frac{y}{x}         &  & = 4\ln\abs{x} + 4c_1 - c_2    \\
+                    \equiv \quad & y                   &  & = x(4\ln\abs{x} + 4c_1 - c_2) \\
+                    \equiv \quad & y                   &  & = 4x\ln\abs{x} + cx           \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie die allgemeine Lösung der Differentialgleichung
+    $$
+        (x-2) \cdot y' = y + 2(x-2)^3
+    $$
+    \begin{solution}
+        Umwandeln in allgemeine Darstellung:
+        $$
+            (x-2) \cdot y' = y + 2(x-2)^3 \quad \equiv \quad y' = \frac{y}{x-2} + 2(x-2)^2 \quad \equiv \quad y' - \frac{1}{x-2}\cdot y = 2(x-2)^2
+        $$
+        Lösen der homogenen Gleichung:
+        $$
+            \begin{aligned}
+                             & y'_h - \frac{1}{x-2}\cdot y_h &  & = 0                         \\
+                \equiv \quad & y'_h                          &  & = \frac{1}{x-2}\cdot y_h    \\
+                \equiv \quad & \frac{1}{y_h} \d y_h          &  & = \frac{1}{x-2}\d x         \\
+                \equiv \quad & \int \frac{1}{y_h} \d y_h     &  & = \int \frac{1}{x-2}\d x    \\
+                \equiv \quad & \ln(y_h) + c_2                &  & = \ln (x-2) + c_1           \\
+                \equiv \quad & (y_h)                         &  & = e^{\ln (x-2) + c_1 - c_2} \\
+                \equiv \quad & y_h                           &  & = c(x-2)                    \\
+            \end{aligned}
+        $$
+
+        Lösen der Störfunktion:
+        $$
+            \begin{aligned}
+                               & y  &  & = c(x) \cdot (x-2)  \\
+                \implies \quad & y' &  & = c'(x)(x-2) + c(x)
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                             & y' - \frac{1}{x-2}\cdot y                                                                  &  & = 2(x-2)^2                   \\
+                \equiv \quad & \underbrace{c'(x)(x-2) + c(x)}_{y'} - \frac{1}{x-2}\cdot \underbrace{c(x) \cdot (x-2)}_{y} &  & = 2(x-2)^2                   \\
+                \equiv \quad & c'(x)(x-2)                                                                                 &  & = 2(x-2)^2                   \\
+                \equiv \quad & c'(x)                                                                                      &  & = 2(x-2)                     \\
+                \equiv \quad & \int 1 \d c                                                                                &  & = 2\int x\d x - 4\int 1 \d x \\
+                \equiv \quad & c(x)                                                                                       &  & = x^2 - 4x + c_1
+            \end{aligned}
+        $$
+
+        Damit erhalten wir insgesamt:
+        $$
+            y = (x^2 - 4x + c)(x-2) = c(x-2) + (x-4)(x-2)x
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Lösen Sie das Anfangswertproblem (gebremstes Wachstum - Parasiten-Modell)
+    $$
+        y' = ky - a, \quad y(0) = y_0
+    $$
+    mit Variation der Konstanten.
+    \begin{solution}
+        Umwandeln in allgemeine Darstellung:
+        $$
+            y' = ky - a \quad \equiv \quad y' - ky = - a
+        $$
+
+        Lösen der homogenen Gleichung:
+        $$
+            \begin{aligned}
+                             & y'_h - ky_h               &  & = 0                  \\
+                \equiv \quad & y'_h                      &  & = ky_h               \\
+                \equiv \quad & \frac{1}{y_h} \d y_h      &  & = k \d x             \\
+                \equiv \quad & \int \frac{1}{y_h} \d y_h &  & = k\int 1 \d x       \\
+                \equiv \quad & \ln\abs{y_h} + c_2        &  & = kx + c_1           \\
+                \equiv \quad & \ln\abs{y_h}              &  & = kx + c_1 - c_2     \\
+                \equiv \quad & \abs{y_h}                 &  & = e^{kx + c_1 - c_2} \\
+                \equiv \quad & y_h                       &  & = ce^{kx}
+            \end{aligned}
+        $$
+
+        Lösen der Störfunktion:
+        $$
+            \begin{aligned}
+                               & y  &  & = c(x)e^{kx}                \\
+                \implies \quad & y' &  & = c'(x)e^{kx} + kc(x)e^{kx}
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                             & y' - ky                                                                           &  & = - a                       \\
+                \equiv \quad & \underbrace{c'(x) e^{kx} + kc(x)e^{kx}}_{y'} - k\underbrace{c(x) \cdot e^{kx} }_y &  & = - a                       \\
+                \equiv \quad & c'(x)e^{kx}                                                                       &  & = - a                       \\
+                \equiv \quad & 1 \d c                                                                            &  & = -\frac{a}{e^{kx}} \d x    \\
+                \equiv \quad & \int  1 \d c                                                                      &  & = -a \int e^{-kx} \d x      \\
+                \equiv \quad & c(x) + c_2                                                                        &  & = \frac{ae^{-kx}}{k} - ac_1 \\
+                \equiv \quad & c(x)                                                                              &  & = \frac{ae^{-kx}}{k} + c_3
+            \end{aligned}
+        $$
+        Damit erhalten wir insgesamt:
+        $$
+            y = \left(\frac{ae^{-kx}}{k} + c\right) \cdot e^{kx} = \frac{a}{k} + ce^{kx}
+        $$
+        Einsetzen des Anfangswertes:
+        $$
+            y(0) = y_0 \implies y_0 = \frac{a}{k} + c \iff c = y_0 - \frac{a}{k}
+        $$
+        Damit gilt:
+        $$
+            y = \frac{a}{k} + \left(y_0 - \frac{a}{k}\right)e^{kx}
+        $$\qed
+    \end{solution}
+\end{questions}
+\end{document}

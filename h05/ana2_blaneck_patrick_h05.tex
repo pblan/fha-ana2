@@ -1,0 +1,268 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 05}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 05}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 02. Mai 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie das folgende Volumen über dem Gebiet $G$.
+    Die angegebenen Gleichungen in $G$ stellen die Ränder des Integrationsgebiets dar.
+    \begin{parts}
+        \part
+        $\int \int_G x\cdot y^2 \d x \d y$ mit $G = \{(x, y)\ \mid y^2 = 2x, x=2\}$
+        \begin{solution}
+            Wir haben also den Integrationsbereich $A$ gegeben mit
+            $$
+                A = \{ (x,y) \mid 0 \leq  x \leq 2, -\sqrt{2x} \leq y \leq \sqrt{2x} \}
+            $$
+
+            Dann gilt:
+            $$
+                \begin{aligned}
+                    \int \int_A x\cdot y^2 \d x \d y & = \int^2_0 \left( \int^{\sqrt{2x}}_{-\sqrt{2x}} x\cdot y^2 \d y \right)\d x                         \\
+                                                     & = \int^2_0 \left(\left[ \frac{xy^3}{3} \right]^{\sqrt{2x}}_{-\sqrt{2x}}\right)\d x                  \\
+                                                     & = \int^2_0 \left(\frac{x\sqrt{2x}^3}{3} - \frac{-x\sqrt{2x}^3}{3}\right)\d x                        \\
+                                                     & = \int^2_0 \frac{4\sqrt{2}x^{\nicefrac{5}{2}}}{3}\d x = \frac{2}{3}\int^2_0 x^{\nicefrac{5}{2}}\d x \\
+                                                     & = \frac{4\sqrt{2}}{3}\left[ \frac{2x^{\nicefrac{7}{2}}}{7} \right]^2_0                              \\
+                                                     & = \frac{4\sqrt{2}}{3} \cdot \frac{2\cdot 2^{\nicefrac{7}{2}}}{7}                                    \\
+                                                     & = \frac{128}{21}
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $\int \int_G x\cdot e^{x+y} \d x \d y$ mit $G = \{(x, y)\ \mid x=0, y=0, 2x+y = 1\}$
+        \begin{solution}
+            Wir haben also den Integrationsbereich $A$ gegeben mit
+            $$
+                A = \{ (x,y) \mid 0 \leq  x \leq \frac{1}{2}, 0 \leq y \leq 1-2x \}
+            $$
+            Dann gilt:
+            $$
+                \begin{aligned}
+                    \int \int_G x\cdot e^{x+y} \d x \d y & = \int^\frac{1}{2}_0 \int^{1-2x}_0 x\cdot e^{x+y} \d y \d x                                                                                                                 \\
+                                                         & = \int^\frac{1}{2}_0 \left( \left[ x\cdot e^{x+y} \right]^{1-2x}_0 \right) \d x                                                                                             \\
+                                                         & = \int^\frac{1}{2}_0 \left( x\cdot e^{1-x} - x\cdot e^{x}  \right) \d x                                                                                                     \\
+                                                         & = \int^\frac{1}{2}_0  x\cdot e^{1-x} \d x - \int^\frac{1}{2}_0 x\cdot e^{x} \d x                                                                                            \\
+                                                         & = e\int^\frac{1}{2}_0  x\cdot e^{-x} \d x - \int^\frac{1}{2}_0 x\cdot e^{x} \d x                                                                                            \\
+                                                         & = e\left(\left[-xe^{-x} \right]^\frac{1}{2}_0 - \int^\frac{1}{2}_0 -e^{-x} \d x  \right)  - \left( \left[xe^x \right]^\frac{1}{2}_0  - \int^\frac{1}{2}_0 e^x \d x  \right) \\
+                                                         & = e\left(-\frac{1}{2\sqrt{e}} - \left[e^{-x}\right]^\frac{1}{2}_0  \right)- \left(\frac{\sqrt{e}}{2} - \left[ e^x \right]^\frac{1}{2}_0  \right)                            \\
+                                                         & = e\left(-\frac{1}{2\sqrt{e}} - \left(\frac{1}{\sqrt{e}} - 1\right)   \right) - \left(\frac{\sqrt{e}}{2} - \left( \sqrt{e} - 1 \right)   \right)                            \\
+                                                         & = e\left(-\frac{1}{2\sqrt{e}} - \frac{1}{\sqrt{e}} + 1   \right) - 1 + \frac{\sqrt{e}}{2}                                                                                   \\
+                                                         & = e\left(1 -\frac{3}{2\sqrt{e}} \right) - 1 + \frac{\sqrt{e}}{2}                                                                                                            \\
+                                                         & = e -\frac{3e}{2\sqrt{e}} - 1 + \frac{\sqrt{e}}{2}                                                                                                                          \\
+                                                         & = e -\frac{3e}{2\sqrt{e}} - 1 + \frac{e}{2\sqrt{e}}                                                                                                                         \\
+                                                         & = e -\sqrt{e} - 1                                                                                                                                                           \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Gegeben seien folgende zwei Funktionen:
+    $$
+        f(x) = x + 1 \quad \text{und} \quad g(x) = 1-x^2
+    $$
+    Berechnen Sie den Schwerpunkt der Fläche, die durch die Funktionen begrenzt wird.
+    \begin{solution}
+        Es ist die Flächenmaßzahl der Grundfläche gegeben mit:
+        $$
+            F = \int_A 1 \mathrm{d} A = \int^0_{-1}  \int^{1-x^2}_{x+1} 1 \d y \d x = \int^0_{-1} [y]^{1-x^2}_{x+1} \d x = -\int^0_{-1} \left( x^2 + x \right) \d x = -\left[ \frac{x^3}{3} + \frac{x^2}{2} \right]^0_{-1} = \frac{1}{6}
+        $$
+
+        Dann ist der Schwerpunkt der Fläche mit den Schwerpunktskoordinaten $(x_s, y_s)$ gegeben durch:
+        $$
+            \begin{aligned}
+                x_s & = \frac{1}{F} \int_A x\d A = 3 \int^0_{-1}  \int^{1-x^2}_{x+1} x \d y \d x \\
+                    & = 6 \int^0_{-1} x \int^{1-x^2}_{x+1} 1 \d y \d x                           \\
+                    & = 6 \int^0_{-1} -x\left( x^2 + x \right)\d x                               \\
+                    & = -6 \int^0_{-1} x^3 + x^2\d x                                             \\
+                    & = -6 \left[\frac{x^4}{4} + \frac{x^3}{3}\right]^0_{-1}                     \\
+                    & = -6 \left(\frac{1}{3} - \frac{1}{4}\right)                                \\
+                    & = -\frac{1}{2}
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                y_s & = \frac{1}{F} \int_A y\d A = 6 \int^0_{-1}  \int^{1-x^2}_{x+1} y \d y \d x \\
+                    & = 6 \int^0_{-1} \left[\frac{y^2}{2}\right]^{1-x^2}_{x+1} \d x              \\
+                    & = 3 \int^0_{-1} \left( (1-x^2)^2 - (x+1)^2\right) \d x                     \\
+                    & = 3 \int^0_{-1} \left( x^4-3x^2-2x \right) \d x                            \\
+                    & = 3 \left[ \frac{x^5}{5} - x^3 -  x^2 \right]^0_{-1}                       \\
+                    & = 3 \left(\frac{1}{5} + 1 - 1\right)                                       \\
+                    & = \frac{3}{5}
+            \end{aligned}
+        $$
+
+        Damit befindet sich der Schwerpunkt an den Koordinaten $(x_s, y_s) = (-\frac{1}{2}, \frac{3}{5})$.\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie die folgenden Integrale auf den angegebenen Gebieten
+    \begin{parts}
+        \part
+        $\int \int_A (x^2 + y^2) \d x \d y$ mit $A: 1 \leq x^2 + y^2 \leq 4$, $x,y\geq 0$
+        \begin{solution}
+            Sei $x = r\cos\phi$ und $y = r\sin\phi$. Dann gilt:
+            $$
+                \int \int_A (x^2 + y^2) \d x \d y = \int \int_A (r^2\cos^2\phi + r^2\sin^2\phi) r\d r \d \phi = \int\int_A r^3 \d r \d \phi
+            $$
+
+            Einsetzen des Integrationsgebiets ergibt:
+            $$
+                \int\int_A r^2 \d r \d \phi = \int_{0}^{\frac{\pi}{2}}\int_{1}^2 r^3 \d r \d \phi = \int^{\frac{\pi}{2}}_{0} \left[ \frac{r^4}{4} \right]^2_1 \d\phi = \int^{\frac{\pi}{2}}_0 \frac{15}{4}\d\phi = \left[\frac{15\phi}{4}\right]^{\frac{\pi}{2}}_0 = \frac{15\pi}{8}
+            $$\qed
+        \end{solution}
+
+        \part
+        $\int \int_A e^{-(x^2+y^2)}\cdot \frac{xy}{x^2 + y^2} \d x \d y$ mit $A: x^2 + y^2 \leq 4$, $x,y\geq 0$
+        \begin{solution}
+            Sei $x = r\cos\phi$ und $y = r\sin\phi$. Dann gilt:
+            $$
+                \int \int_A e^{-(x^2+y^2)}\frac{xy}{x^2 + y^2} \d x \d y = \int \int_A e^{-r^2}\frac{r^2\cos\phi\sin\phi}{r^2}r \d r \d \phi = \int \int_A re^{-r^2}\cos\phi\sin\phi \d r \d \phi
+            $$
+
+            Einsetzen des Integrationsgebiets ergibt:
+            $$
+                \begin{aligned}
+                           & \int \int_A re^{-r^2}\cos\phi\sin\phi \d r \d \phi                                                                                                                                        \\
+                    =\quad & \int_{0}^{\frac{\pi}{2}} \cos\phi\sin\phi \int^2_0 re^{-r^2} \d r \d \phi  \qquad \left(u = -r^2 \implies \frac{\d u}{\d r} = -2r \iff \d r = -\frac{\d u}{2r}\right)                     \\
+                    =\quad & -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \cos\phi\sin\phi \int^2_{r=0} e^{u} \d u \d \phi                                                                                                    \\
+                    =\quad & -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \cos\phi\sin\phi \left[e^u \right]^2_{r=0}  \d \phi                                                                                                 \\
+                    =\quad & -\frac{1}{2} \int_{0}^{\frac{\pi}{2}} \cos\phi\sin\phi \left(\frac{1}{e^4} - 1 \right)  \d \phi                                                                                           \\
+                    =\quad & -\frac{e^{-4} - 1}{2} \int_{0}^{\frac{\pi}{2}} \cos\phi\sin\phi  \d \phi    \qquad \left(u = \sin\phi \implies \frac{\d u}{\d \phi} = \cos\phi \iff \d\phi = \frac{\d u}{\cos\phi}\right) \\
+                    =\quad & \frac{1 - e^{-4}}{2} \int_{\phi = 0}^{\frac{\pi}{2}} u \d u                                                                                                                               \\
+                    =\quad & \frac{1 - e^{-4}}{2} \left[\frac{\sin^2\phi}{2}\right]_{\phi = 0}^{\frac{\pi}{2}}                                                                                                         \\
+                    =\quad & \frac{1 - e^{-4}}{2} \left(\frac{1}{2} - 0\right)                                                                                                                                         \\
+                    =\quad & \frac{1 - e^{-4}}{4}                                                                                                                                                                      \\
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie mittels Polarkoordinaten das uneigentliche mehrdimensionale Integral
+    $$
+        \int\int_{\R^2} e^{-(x^2+y^2)} \d x \d y = \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x^2 + y^2)} \d x \d y
+    $$
+    \begin{solution}
+        Sei $x = r\cos\phi$ und $y = r\sin\phi$. Dann gilt:
+        $$
+            \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x^2 + y^2)} \d x \d y = \int_{0}^{2\pi} \int_{0}^\infty re^{-r^2} \d r \d \phi
+        $$
+
+        Wir substituieren
+        $$
+            u = -r^2 \implies \frac{\d u}{\d r} = -2r \iff \d r = -\frac{\d u}{2r}.
+        $$
+        Dann gilt:
+        $$
+            \begin{aligned}
+                        & \int_{0}^{2\pi} \int_{0}^\infty re^{-r^2} \d r \d \phi               \\
+                = \quad & -\frac{1}{2}\int_{0}^{2\pi} \int_{0}^\infty e^{u} \d u \d \phi       \\
+                = \quad & -\frac{1}{2}\int_{0}^{2\pi} \left[e^u\right]_{0}^\infty \d \phi      \\
+                = \quad & -\frac{1}{2}\int_{0}^{2\pi} \left[e^{-r^2}\right]_{0}^\infty \d \phi \\
+                = \quad & -\frac{1}{2}\int_{0}^{2\pi} \left(0 - 1\right) \d \phi               \\
+                = \quad & \frac{1}{2}\int_{0}^{2\pi} 1 \d \phi                                 \\
+                = \quad & \frac{1}{2}\left[\phi\right]_{0}^{2\pi}                              \\
+                = \quad & \pi                                                                  \\
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie das Dreifachintegral
+    $$
+        \int^4_1 \int^3_1 \int^2_0 (x^2 - 2yz) \d z \d y \d x
+    $$
+    \begin{solution}
+        $$
+            \begin{aligned}
+                        & \int^4_1 \int^3_1 \int^2_0 (x^2 - 2yz) \d z \d y \d x            \\
+                = \quad & \int^4_1 \int^3_1 \left[x^2z - yz^2\right]^2_0 \d y \d x         \\
+                = \quad & \int^4_1 \int^3_1 \left(2x^2 - 4y \right) \d y \d x              \\
+                = \quad & \int^4_1 \left[2x^2y - 2y^2 \right]^3_1 \d x                     \\
+                = \quad & \int^4_1 \left(6x^2 - 18 - (2x^2 - 2) \right) \d x               \\
+                = \quad & \int^4_1 \left(4x^2 - 16 \right) \d x                            \\
+                = \quad & \left[\frac{4x^3}{3} - 16x \right]^4_1                           \\
+                = \quad & \left(\frac{256}{3} - 64 - \left(\frac{4}{3} - 16\right) \right) \\
+                = \quad & 36
+            \end{aligned}
+        $$\qed
+    \end{solution}
+\end{questions}
+\end{document}

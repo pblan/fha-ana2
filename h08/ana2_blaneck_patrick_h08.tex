@@ -1,0 +1,279 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 08}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 08}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 23. Mai 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Bestimmen Sie die allgemeine Lösung der jeweiligen Differentialgleichung.
+    \begin{parts}
+        \part
+        $y' - 4y = 14x + 2 - 12x^2$
+        \begin{solution}
+            Wir lösen zuerst die homogene Gleichung ($y'_h + ay_h= 0$):
+            $$
+                y_h'- 4y_h = 0 \implies y_h = ce^{-ax} = ce^{4x}
+            $$
+
+            Danach lösen wir die partikuläre Gleichung ($y_p = ax^2 + bx + c$):
+            $$
+                y_p = ax^2 + bx + c \implies y'_p = 2ax + b
+            $$
+
+            Wir setzen die partikuläre Gleichung entsprechend ein:
+            $$
+                \begin{aligned}
+                                 & y' - 4y                      &  & = 14x + 2 - 12x^2   \\
+                    \equiv \quad & 2ax + b - 4( ax^2 + bx + c)  &  & = - 12x^2 + 14x + 2 \\
+                    \equiv \quad & -4ax^2 + (2a-4b)x + (b - 4c) &  & = - 12x^2 + 14x + 2
+                \end{aligned}
+            $$
+            Damit sehen wir auch direkt:
+            $$
+                a = 3 \quad \land \quad b = -2 \quad \land \quad c = -1,
+            $$
+
+            und schließlich:
+            $$
+                y = y_h + y_p \implies y = ce^{4x} + 3x^2 - 2x - 1
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y' - 8y = -6e^{5x}$
+        \begin{solution}
+            Wir lösen zuerst die homogene Gleichung:
+            $$
+                y_h' - 8y_h' = 0 \implies y_h = ce^{8x}
+            $$
+
+            Danach lösen wir die partikuläre Gleichung ($y_p = c_0e^{5x}$):
+            $$
+                y_p = c_0e^{5x} \implies y_p' = 5ce^{5x}
+            $$
+
+            Wir setzen die partikuläre Gleichung entsprechend ein:
+            $$
+                \begin{aligned}
+                                 & y' - 8y                 &  & = -6e^{5x} \\
+                    \equiv \quad & 5c_0e^{5x} - 8c_0e^{5x} &  & = -6e^{5x} \\
+                    \equiv \quad & - 3c_0e^{5x}            &  & = -6e^{5x}
+                \end{aligned}
+            $$
+            Damit sehen wir auch direkt:
+            $$
+                c_0 = 2,
+            $$
+            und schließlich:
+            $$
+                y = y_h + y_p \implies y = ce^{8x} + 2e^{5x}
+            $$\qed
+        \end{solution}
+
+        \part
+        $y' + 2y = 8\sin(x) - \cos(x)$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                y_h' + 2y_h = 0 \implies y_h = ce^{-2x}
+            $$
+
+            Mit der partikulären Gleichung ($y_p = c_0\sin(x) + c_1\cos(x)$)
+            $$
+                y_p = c_0\sin(x) + c_1\cos(x) \implies y_p' = c_0\cos(x) - c_1\sin(x)
+            $$
+            gilt dann:
+            $$
+                \begin{aligned}
+                                   & y' + 2y                                              &  & = 8\sin(x) - \cos(x) \\
+                    \equiv \quad   & c_0\cos(x) - c_1\sin(x) + 2(c_0\sin(x) + c_1\cos(x)) &  & = 8\sin(x) - \cos(x) \\
+                    \equiv \quad   & (c_0 + 2c_1)\cos(x) + (2c_0 - c_1)\sin(x)            &  & = 8\sin(x) - \cos(x) \\
+                    \implies \quad & c_0 + 2c_1 = -1 \quad \land \quad 2c_0 - c_1 = 8                               \\
+                    \implies \quad & c_0 = 3 \quad \land \quad c_1 = -2
+                \end{aligned}
+            $$
+
+            Und schlussendlich:
+            $$
+                y = y_h + y_p \implies y = ce^{-2x} + 3\sin(x) - 2\cos(x)
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Berechnen Sie die allgemeine Lösung der linearen Differentialgleichungen
+    \begin{parts}
+        \part
+        $y'- 4y = 15e^x$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                y_h'- 4y_h = 0 \implies y_h = ce^{4x}
+            $$
+
+            Mit der partikulären Gleichung ($y_p = c_0e^{x}$)
+            $$
+                y_p = c_0e^x \implies y'_p = c_0e^x
+            $$
+            gilt dann:
+            $$
+                \begin{aligned}
+                                   & y'- 4y          &  & = 15e^x \\
+                    \equiv \quad   & c_0e^x- 4c_0e^x &  & = 15e^x \\
+                    \equiv \quad   & -3c_0e^x        &  & = 15e^x \\
+                    \implies \quad & c_0             &  & = -5
+                \end{aligned}
+            $$
+
+            Und schlussendlich:
+            $$
+                y = y_h + y_p \implies y = ce^{4x} -5e^x
+            $$\qed
+        \end{solution}
+
+        \part
+        $y'- y = 9e^x$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                y_h'- y_h = 0 \implies y_h = ce^{x}
+            $$
+
+            Mit der partikulären Gleichung ($y_p = c_0xe^{x}$)
+            $$
+                y_p = c_0xe^x \implies y'_p = c_0(e^x + xe^x)
+            $$
+            gilt dann:
+            $$
+                \begin{aligned}
+                                   & y'- y                     &  & = 9e^x \\
+                    \equiv \quad   & c_0(e^x + xe^x) - c_0xe^x &  & = 9e^x \\
+                    \equiv \quad   & c_0e^x(1 + x - x)         &  & = 9e^x \\
+                    \implies \quad & c_0                       &  & = 9
+                \end{aligned}
+            $$
+
+            Und schlussendlich:
+            $$
+                y = y_h + y_p \implies y = ce^x + 9e^xx
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Bestimmen Sie die allgemeine Lösung der folgenden DGL:
+    $$
+        x \cdot y'-2y = x^3 \cdot \sqrt{y}, \quad y(1) = 1
+    $$
+    \begin{solution}
+        Wir haben eine Bernoulli-DGL 1. Ordnung ($y'(x) + f(x) \cdot y(x) = g(x) \cdot y^\alpha$) gegeben mit:
+        $$
+            x \cdot y'-2y = x^3 \cdot \sqrt{y} \quad \overset{x\neq 0}{\iff} \quad  y' - \frac{2}{x} \cdot y = x^2 \cdot \sqrt{y}
+        $$
+        Wir substituieren
+        $$
+            \begin{aligned}
+                           & z = y^{1-\alpha} = \sqrt{y} &  & \implies z' = \frac{1}{2\sqrt{y}} \\
+                \iff \quad & y = z^2                     &  & \implies y' = 2zz'
+            \end{aligned}
+        $$
+        Daraus folgt:
+        $$
+            \begin{aligned}
+                             & y' - \frac{2}{x} \cdot y     &  & = x^2 \cdot \sqrt{y}                                         \\
+                \equiv \quad & 2zz' - \frac{2}{x} \cdot z^2 &  & = x^2 \cdot \sqrt{z^2}                                       \\
+                \equiv \quad & 2z' - \frac{2}{x} \cdot z    &  & = x^2                                                        \\
+                \equiv \quad & z' - \frac{1}{x} \cdot z     &  & = \frac{x^2}{2}                                              \\
+                \equiv \quad & 1 \ \frac{\d z}{\d x}        &  & = \frac{x^2}{2} + \frac{1}{x} \cdot z                        \\
+                \equiv \quad & 1 \ \d z                     &  & = \left(\frac{x^2}{2} + \frac{1}{x} \cdot z \right) \d x     \\
+                \equiv \quad & z + c_1                      &  & = \frac{1}{2} \int x^2 \d x +  \int \frac{1}{x} \cdot z \d x \\
+                \equiv \quad & z + c_1                      &  & = \frac{x^3}{6} + c_2 +  \frac{z'x - z}{x^2}                 \\
+                \equiv \quad & z                            &  & = \frac{x^3}{6}  +  \frac{z'x - z}{x^2} - c_1 + c_2          \\
+            \end{aligned}
+        $$
+    \end{solution}
+
+    \newpage
+    \question
+    Bestimmen Sie die Lösung der folgenden Differentialgleichung
+    $$
+        y' - 2y = (2\sin(x) + 5\cos(x)) \cdot e^{-3x}
+    $$
+    \begin{solution}
+
+    \end{solution}
+\end{questions}
+\end{document}
