@@ -1,0 +1,542 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\seq}{\overset{!}{=}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 10}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 10}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 06. Juni 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Bestimmen Sie die Lösung der Differentialgleichung 2. Ordnung
+    $$
+        y'' - 6y' + 9y = 2e^{5x}
+    $$
+    mit den Anfangswerten $y(0) = 0$ und $y'(0) = 1$.
+    \begin{solution}
+        Lösen der homogenen Gleichung:
+        $$
+            \begin{aligned}
+                               & y'' - 6y' + 9y = 0                         \\
+                \implies \quad & \alpha^2 -6 \alpha + 9 = 0                 \\
+                \implies \quad & \alpha = 3 \pm \sqrt{(-3)^2 - 9}           \\
+                \equiv \quad   & \alpha = 3                                 \\
+                \implies \quad & y_h = \lambda_1 e^{3x} + \lambda_2 xe^{3x}
+            \end{aligned}
+        $$
+
+        Berechnen der partikulären Lösung:
+        $$
+            \begin{aligned}
+                               & y_p = ce^{5x}      \\
+                \implies \quad & y'_p = 5ce^{5x}    \\
+                \implies \quad & y''_p  = 25ce^{5x} \\
+            \end{aligned}
+        $$
+
+        $$
+            \begin{aligned}
+                               & y''_p - 6y'_p + 9y_p = 2e^{5x}             \\
+                \equiv \quad   & 25ce^{5x} - 30ce^{5x} + 9ce^{5x} = 2e^{5x} \\
+                \equiv \quad   & 4ce^{5x} = 2e^{5x}                         \\
+                \implies \quad & c = \frac{1}{2}
+            \end{aligned}
+        $$
+
+        Damit gilt für die allgemeine Gleichung:
+        $$
+            y = y_h + y_p = \lambda_1 e^{3x} + \lambda_2 xe^{3x} + \frac{e^{5x}}{2} \quad \implies \quad y' = 3\lambda_1e^{3x} + 3\lambda_2xe^{3x} + \lambda_2 e^{3x} + \frac{5e^{5x}}{2}
+        $$
+
+        \newpage
+        Mit den Anfangswerten gilt dann:
+        $$
+            \begin{aligned}
+                             & y(0)                                                  &  & = 0             \\
+                \equiv \quad & \lambda_1 e^0 + \lambda_2 e^0 \cdot 0 + \frac{e^0}{2} &  & = 0             \\
+                \equiv \quad & \lambda_1                                             &  & = - \frac{1}{2}
+            \end{aligned}
+        $$
+        und
+
+        $$
+            \begin{aligned}
+                             & y'(0)                                                                         &  & = 1            \\
+                \equiv \quad & 3\lambda_1e^{0} + 3\lambda_2e^{0} \cdot 0 + \lambda_2e^{0} + \frac{5e^{0}}{2} &  & = 1            \\
+                \equiv \quad & 3 \lambda_1 + \lambda_2                                                       &  & = -\frac{3}{2} \\
+                \equiv \quad & \lambda_2                                                                     &  & = 0
+            \end{aligned}
+        $$
+
+        Damit gilt insgesamt:
+        $$
+            y = \frac{e^{3x}\left( e^{2x} - 1 \right)}{2}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Lösen Sie die folgenden Differentialgleichungen 2. Ordnung
+    \begin{parts}
+        \part
+        $y'' + 9y' = 12x + 18 + 54x^2$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' + 9y' = 0                         \\
+                    \implies \quad & \alpha^2 + 9 \alpha = 0               \\
+                    \implies \quad & \alpha = -\frac{9}{2} \pm \frac{9}{2} \\
+                    \equiv \quad   & \alpha \in \left\{ -9, 0 \right\}     \\
+                    \implies \quad & y_h = \lambda_1 e^{-9x} + \lambda_2
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = ax^3 + bx^2 + cx + d \\
+                    \implies \quad & y'_p = 3ax^2 + 2bx + c     \\
+                    \implies \quad & y''_p = 6ax + 2b
+                \end{aligned}
+            $$
+
+            $$
+                \begin{aligned}
+                                   & y''_p + 9y'_p                                                                    &  & = 12x + 18 + 54x^2 \\
+                    \equiv \quad   & 6ax + 2b + 9\cdot (3ax^2 + 2bx + c )                                             &  & = 12x + 18 + 54x^2 \\
+                    \equiv \quad   & 27ax^2 + (6a + 18b)x + (2b + 9c)                                                 &  & = 12x + 18 + 54x^2 \\
+                    \implies \quad & a = 2 \quad \land \quad b = 0 \quad \land \quad c = 2 \quad \land \quad d \in \R
+                \end{aligned}
+            $$
+
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = \lambda_1 e^{-9x} + \lambda_2 + 2x^3 + 2x + d = \lambda_1 e^{-9x} + \lambda_2 + 2x^3 + 2x
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y'' - 6y' + 18y = 27e^{3x}$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' - 6y' + 18y = 0                                                \\
+                    \implies \quad & \alpha^2 - 6\alpha + 18 = 0                                        \\
+                    \implies \quad & \alpha = 3 \pm \sqrt{3^2 - 18}                                     \\
+                    \equiv \quad   & \alpha = 3 \pm \sqrt{-9}                                           \\
+                    \equiv \quad   & \alpha = 3 \pm 3i                                                  \\
+                    \implies \quad & y_h = e^{3x} \left( \lambda_1 \cos(3x) + \lambda_2 \sin(3x)\right)
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = ce^{3x}     \\
+                    \implies \quad & y'_p = 3ce^{3x}   \\
+                    \implies \quad & y''_p  = 9ce^{3x}
+                \end{aligned}
+            $$
+
+            $$
+                \begin{aligned}
+                                   & y''_p - 6y'_p + 18y_p = 27e^{3x}            \\
+                    \implies \quad & 9ce^{3x} - 18ce^{3x} + 18ce^{3x} = 27e^{3x} \\
+                    \implies \quad & 9ce^{3x} = 27e^{3x}                         \\
+                    \implies \quad & c = 3
+                \end{aligned}
+            $$
+
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = e^{3x} \left( \lambda_1 \cos(3x) + \lambda_2 \sin(3x)\right) + 3e^{3x}
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y'' + 6y' + 25y = 183\sin(2x) + 21\cos(2x)$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' + 6y' + 25y = 0                                                 \\
+                    \implies \quad & \alpha^2 + 6\alpha + 25 = 0                                         \\
+                    \implies \quad & \alpha = -3 \pm \sqrt{(-3)^2 - 25}                                  \\
+                    \equiv \quad   & \alpha = -3 \pm \sqrt{-16}                                          \\
+                    \equiv \quad   & \alpha = -3 \pm 4i                                                  \\
+                    \implies \quad & y_h = e^{-3x} \left( \lambda_1 \cos(4x) + \lambda_2 \sin(4x)\right)
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = \alpha\sin(2x) + \beta\cos(2x)       \\
+                    \implies \quad & y'_p =  2\alpha\cos(2x) - 2\beta\sin(2x)   \\
+                    \implies \quad & y''_p  = -4\alpha\sin(2x) - 4\beta\cos(2x)
+                \end{aligned}
+            $$
+            $$
+                \begin{aligned}
+                                   & y'' + 6y' + 25y                                                  &  & = 183\sin(2x) + 21\cos(2x) \\
+                    \equiv \quad   & \ldots                                                           &  & = 183\sin(2x) + 21\cos(2x) \\
+                    \equiv \quad   & 3\cdot ((7\alpha - 4\beta)\sin(2x) + (4\alpha + 7\beta)\cos(2x)) &  & = 183\sin(2x) + 21\cos(2x) \\
+                    \equiv \quad   & (7\alpha - 4\beta)\sin(2x) + (4\alpha + 7\beta)\cos(2x)          &  & = 61\sin(2x) + 7\cos(2x)   \\
+                    \implies \quad & \alpha = 7 \quad \land \quad \beta = -3
+                \end{aligned}
+            $$
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = e^{-3x} \left( \lambda_1 \cos(4x) + \lambda_2 \sin(4x)\right) + 7\sin(2x) - 3\cos(2x)
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Lösen Sie die folgenden Differentialgleichungen 2. Ordnung
+    \begin{parts}
+        \part
+        $y'' - 6y' + 25y = 157 - 159x + 175x^2$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' - 6y' + 25y = 0                                                \\
+                    \implies \quad & \alpha^2 -6 \alpha + 25 = 0                                        \\
+                    \implies \quad & \alpha = 3 \pm \sqrt{(-3)^2 - 25}                                  \\
+                    \equiv \quad   & \alpha = 3 \pm \sqrt{-16}                                          \\
+                    \equiv \quad   & \alpha = 3 \pm 4i                                                  \\
+                    \implies \quad & y_h = e^{3x} \left( \lambda_1 \cos(4x) + \lambda_2 \sin(4x)\right)
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = ax^2 + bx + c \\
+                    \implies \quad & y'_p = 2ax + b      \\
+                    \implies \quad & y''_p  = 2a
+                \end{aligned}
+            $$
+
+            $$
+                \begin{aligned}
+                                 & y''_p - 6y'_p + 25y_p                                  &  & = 157 - 159x + 175x^2 \\
+                    \equiv \quad & 2a - 6\cdot (2ax + b) + 25\cdot (ax^2 + bx + c)        &  & = 157 - 159x + 175x^2 \\
+                    \equiv \quad & (25a)x^2 + (25b-12a)x + (2a - 6b  +25c)                &  & = 157 - 159x + 175x^2 \\
+                    \equiv \quad & a = 7 \quad \land \quad b = -3 \quad \land \quad c = 5
+                \end{aligned}
+            $$
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = e^{3x} \left( \lambda_1 \cos(4x) + \lambda_2 \sin(4x)\right) + 7x^2 - 3x + 5
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y'' - 8y' + 16y = -14e^{4x}$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' - 8y' + 16y = 0                      \\
+                    \implies \quad & \alpha^2 - 8\alpha + 16 = 0              \\
+                    \implies \quad & \alpha = 4 \pm \sqrt{(-4)^2 - 16}        \\
+                    \equiv \quad   & \alpha = 4                               \\
+                    \implies \quad & y_h = \lambda_1e^{4x} + \lambda_2xe^{4x}
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = cx^2e^{4x}                              \\
+                    \implies \quad & y'_p = 4cx^2e^{4x} + 2cxe^{4x}                \\
+                    \implies \quad & y''_p  = 16cx^2e^{4x} + 16cxe^{4x} + 2ce^{4x}
+                \end{aligned}
+            $$
+
+            $$
+                \begin{aligned}
+                                   & y''_p - 8y'_p + 16y_p                                                                  &  & = -14e^{4x} \\
+                    \equiv \quad   & 16cx^2e^{4x} + 16cxe^{4x} + 2ce^{4x} - 8\cdot (4cx^2e^{4x} + 2cxe^{4x}) + 16cx^2e^{4x} &  & = -14e^{4x} \\
+                    \equiv \quad   & 2ce^{4x} = -14e^{4x}                                                                                    \\
+                    \implies \quad & c = -7                                                                                                  \\
+                \end{aligned}
+            $$
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = \lambda_1e^{4x} + \lambda_2xe^{4x} -7x^2e^{4x}
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $y'' + y' = 6\cos(2x) - 2\sin(2x)$
+        \begin{solution}
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' + y' = 0                                                \\
+                    \implies \quad & \alpha^2 + \alpha = 0                                       \\
+                    \implies \quad & \alpha = -\frac{1}{2} \pm \sqrt{\left(\frac{1}{2}\right)^2} \\
+                    \equiv \quad   & \alpha = -\frac{1}{2} \pm \frac{1}{2}                       \\
+                    \equiv \quad   & \alpha \in \left\{ -1, 0 \right\}                           \\
+                    \implies \quad & y_h = \lambda_1e^{-x} + \lambda_2
+                \end{aligned}
+            $$
+
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = \alpha\sin(2x) + \beta\cos(2x)       \\
+                    \implies \quad & y'_p = 2\alpha\cos(2x) - 2\beta\sin(2x)    \\
+                    \implies \quad & y''_p  = -4\alpha\sin(2x) - 4\beta\cos(2x)
+                \end{aligned}
+            $$
+            $$
+                \begin{aligned}
+                                   & y''_p + y'_p                                                         &  & = 6\cos(2x) - 2\sin(2x) \\
+                    \equiv \quad   & -4\alpha\sin(2x) - 4\beta\cos(2x) + 2\alpha\cos(2x) - 2\beta\sin(2x) &  & = 6\cos(2x) - 2\sin(2x) \\
+                    \equiv \quad   & 2((-2\alpha - \beta)\sin(2x) + (\alpha - 2\beta)\cos(2x))            &  & = 6\cos(2x) - 2\sin(2x) \\
+                    \equiv \quad   & (-2\alpha - \beta)\sin(2x) + (\alpha - 2\beta)\cos(2x)               &  & = 3\cos(2x) - \sin(2x)  \\
+                    \implies \quad & \alpha = 1 \quad \land \quad \beta = -1
+                \end{aligned}
+            $$
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = \lambda_1e^{-x} + \lambda_2 + \sin(2x) - \cos(2x)
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Lösen Sie das folgende Differentialgleichungssystem
+    $$
+        \begin{aligned}
+            y' & = z                \\
+            z' & = -y -5z + \sin(x)
+        \end{aligned}
+    $$
+    \begin{solution}
+        $$
+            \begin{aligned}
+                               & y'            &  & = z                                  \\
+                \implies \quad & y''           &  & = z'                                 \\
+                \equiv \quad   & y''           &  & = \underbrace{-y -5z + \sin(x)}_{z'} \\
+                \equiv \quad   & y''           &  & = -y -5\underbrace{y'}_{z} + \sin(x) \\
+                \equiv \quad   & y'' + 5y' + y &  & =\sin(x)                             \\
+            \end{aligned}
+        $$
+
+        Lösen der homogenen Gleichung:
+        $$
+            \begin{aligned}
+                               & y'' + 5y' + y = 0                                                                     \\
+                \implies \quad & \alpha^2 + 5\alpha + 1 = 0                                                            \\
+                \implies \quad & \alpha = -\frac{5}{2} \pm \sqrt{\left(\frac{5}{2}\right)^2 - 1}                       \\
+                \equiv \quad   & \alpha = \frac{-5\pm \sqrt{21}}{2}                                                    \\
+                \implies \quad & y_h = \lambda_1 e^{-\frac{5 + \sqrt{21}}{2}x} + \lambda_2 e^{\frac{\sqrt{21} -5}{2}x}
+            \end{aligned}
+        $$
+        Berechnen der partikulären Lösung:
+        $$
+            \begin{aligned}
+                               & y_p = \alpha\sin(x) + \beta\cos(x)     \\
+                \implies \quad & y'_p = \alpha\cos(x) - \beta\sin(x)    \\
+                \implies \quad & y''_p  = -\alpha\sin(x) - \beta\cos(x)
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                               & y''_p + 5y'_p + y_p                                                                            &  & =\sin(x) \\
+                \equiv \quad   & -\alpha\sin(x) - \beta\cos(x) + 5(\alpha\cos(x) - \beta\sin(x)) + \alpha\sin(x) + \beta\cos(x) &  & =\sin(x) \\
+                \equiv \quad   & 5\alpha\cos(x) - 5\beta\sin(x)                                                                 &  & =\sin(x) \\
+                \implies \quad & \alpha = 0 \quad \land \quad \beta = -\frac{1}{5}
+            \end{aligned}
+        $$
+
+        Damit gilt insgesamt:
+        $$
+            y = y_h + y_p = \lambda_1 e^{-\frac{5 + \sqrt{21}}{2}x} + \lambda_2 e^{\frac{\sqrt{21} -5}{2}x} - \frac{\cos(x)}{5}
+        $$
+        und
+        $$
+            z = y' = -\frac{5 + \sqrt{21}}{2}\lambda_1e^{-\frac{5 + \sqrt{21}}{2}x} + \frac{\sqrt{21} -5}{2}\lambda_2 e^{\frac{\sqrt{21} -5}{2}x} + \frac{\sin(x)}{5}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben Sei das Differentialgleichungssystem
+    $$
+        \begin{aligned}
+            y' & = y + 4z + x   \\
+            z' & = -4y + 9z + x
+        \end{aligned}
+    $$
+    mit den Anfangswerten $y(0) = z(0) = 1$.
+    \begin{parts}
+        \part
+        Bestimmen Sie die allgemeine Lösung $y(x)$ und $z(x)$.
+        \begin{solution}
+            $$
+                \begin{aligned}
+                                   & y'              &  & = y + 4z + x \qquad \left(\equiv \quad z = \frac{y' - y - x}{4}\right) \\
+                    \implies \quad & y''             &  & = y' + 4z' + 1                                                         \\
+                    \equiv \quad   & y''             &  & = y' + 4(\underbrace{-4y + 9z + x}_{z'}) + 1                           \\
+                    \equiv \quad   & y''             &  & = y' -16y + 36z + 4x + 1                                               \\
+                    \equiv \quad   & y''             &  & = y' -16y + 36\cdot \underbrace{\frac{y' - y - x}{4}}_z + 4x + 1       \\
+                    \equiv \quad   & y''             &  & = 10y' -25y  - 5x+ 1                                                   \\
+                    \equiv \quad   & y'' -10y' + 25y &  & = - 5x+ 1                                                              \\
+                \end{aligned}
+            $$
+            Lösen der homogenen Gleichung:
+            $$
+                \begin{aligned}
+                                   & y'' -10y' + 25y = 0                          \\
+                    \implies \quad & \alpha^2 - 10\alpha + 25 = 0                 \\
+                    \implies \quad & \alpha = 5 \pm \sqrt{\left(-5\right)^2 - 25} \\
+                    \equiv \quad   & \alpha = 5                                   \\
+                    \implies \quad & y_h = \lambda_1 e^{5x} + \lambda_2 xe^{5x}
+                \end{aligned}
+            $$
+            Berechnen der partikulären Lösung:
+            $$
+                \begin{aligned}
+                                   & y_p = ax + b \\
+                    \implies \quad & y'_p = a     \\
+                    \implies \quad & y''_p  = 0
+                \end{aligned}
+            $$
+            $$
+                \begin{aligned}
+                                   & y''_p -10y'_p + 25y_p                                &  & = - 5x+ 1 \\
+                    \equiv \quad   & -10a + 25(ax + b)                                    &  & = - 5x+ 1 \\
+                    \equiv \quad   & 25ax + 25b-10a                                       &  & = - 5x+ 1 \\
+                    \implies \quad & a = -\frac{1}{5} \quad \land \quad b = -\frac{1}{25}
+                \end{aligned}
+            $$
+            Damit gilt insgesamt:
+            $$
+                y = y_h + y_p = \lambda_1 e^{5x} + \lambda_2 xe^{5x} - \frac{x}{5} - \frac{1}{25}
+            $$
+            und
+            $$
+                z = \frac{y' - y - x}{4} = \frac{1}{4}\left( 5\lambda_1e^{5x} + 5\lambda_2xe^{5x} + \lambda_2e^{5x} - \frac{1}{5} - \lambda_1 e^{5x} - \lambda_2 xe^{5x} + \frac{x}{5} + \frac{1}{25} - x \right)
+            $$
+            $$
+                = \frac{1}{4}\left(4\lambda_1e^{5x} + \lambda_2e^{5x} + 4\lambda_2xe^{5x} - \frac{4x}{5} - \frac{4}{25}\right)
+            $$\qed
+        \end{solution}
+
+        \part
+        Berechnen Sie die Lösung des Anfangswertproblems.
+        \begin{solution}
+            Es gilt:
+            $$
+                \begin{aligned}
+                                   & y(0)                     &  & = 1             \\
+                    \equiv \quad   & \lambda_1 - \frac{1}{25} &  & = 1             \\
+                    \implies \quad & \lambda_1                &  & = \frac{26}{25}
+                \end{aligned}
+            $$
+            und
+            $$
+                \begin{aligned}
+                                   & z(0)                                                          &  & = 1              \\
+                    \equiv \quad   & \frac{1}{4}\left(4\lambda_1 + \lambda_2 - \frac{4}{25}\right) &  & = 1              \\
+                    \equiv \quad   & 4\lambda_1 + \lambda_2 - \frac{4}{25}                         &  & = 4              \\
+                    \equiv \quad   & 4\lambda_1 + \lambda_2                                        &  & = \frac{104}{25} \\
+                    \equiv \quad   & \frac{104}{25} + \lambda_2                                    &  & = \frac{104}{25} \\
+                    \implies \quad & \lambda_2                                                     &  & = 0
+                \end{aligned}
+            $$
+
+            Insgesamt gilt also:
+            $$
+                y = \frac{26e^{5x}}{25}  - \frac{x}{5} - \frac{1}{25}
+            $$
+            und
+            $$
+                z = \frac{1}{4}\left(\frac{104e^{5x}}{25} - \frac{4x}{5} - \frac{4}{25}\right) = \frac{26e^{5x}}{25} -\frac{x}{5} - \frac{1}{25}
+            $$\qed
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}

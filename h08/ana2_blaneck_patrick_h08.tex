@@ -69,7 +69,7 @@
 
 \title{Analysis 2 \\ \large{Hausaufgabenblatt 08}}
 \author{Patrick Gustav Blaneck}
-\date{Abgabetermin: 23. Mai 2021}
+\date{Abgabetermin: 24. Mai 2021}
 
 \begin{document}
 \maketitle
@@ -105,7 +105,7 @@
 
             und schließlich:
             $$
-                y = y_h + y_p \implies y = ce^{4x} + 3x^2 - 2x - 1
+                y = y_h + y_p \implies y = ce^{4x} + 3x^2 - 2x - 1.
             $$\qed
         \end{solution}
 
@@ -137,7 +137,7 @@
             $$
             und schließlich:
             $$
-                y = y_h + y_p \implies y = ce^{8x} + 2e^{5x}
+                y = y_h + y_p \implies y = ce^{8x} + 2e^{5x}.
             $$\qed
         \end{solution}
 
@@ -166,7 +166,7 @@
 
             Und schlussendlich:
             $$
-                y = y_h + y_p \implies y = ce^{-2x} + 3\sin(x) - 2\cos(x)
+                y = y_h + y_p \implies y = ce^{-2x} + 3\sin(x) - 2\cos(x).
             $$\qed
         \end{solution}
     \end{parts}
@@ -253,57 +253,57 @@
         Daraus folgt:
         $$
             \begin{aligned}
-                             & y' - \frac{2}{x} \cdot y     &  & = x^2 \cdot \sqrt{y}                                         \\
-                \equiv \quad & 2zz' - \frac{2}{x} \cdot z^2 &  & = x^2 \cdot \sqrt{z^2}                                       \\
-                \equiv \quad & 2z' - \frac{2}{x} \cdot z    &  & = x^2                                                        \\
-                \equiv \quad & z' - \frac{1}{x} \cdot z     &  & = \frac{x^2}{2}                                              \\
+                             & y' - \frac{2}{x} \cdot y     &  & = x^2 \cdot \sqrt{y}   \\
+                \equiv \quad & 2zz' - \frac{2}{x} \cdot z^2 &  & = x^2 \cdot \sqrt{z^2} \\
+                \equiv \quad & 2z' - \frac{2}{x} \cdot z    &  & = x^2                  \\
+                \equiv \quad & z' - \frac{1}{x} \cdot z     &  & = \frac{x^2}{2}        \\
             \end{aligned}
         $$
-        Lösen der homogenen Gleichung: 
+        Lösen der homogenen Gleichung:
         $$
-        \begin{aligned}
-        & z' - \frac{1}{x} \cdot z     &  & = 0 \\
-        \equiv \quad & \frac{z'}{z}      &  & = \frac{1}{x}\\
-        \equiv \quad & \int \frac{1}{z} \d z      &  & = \int \frac{1}{x} \d x\\
-        \equiv \quad & \ln \abs{z} + c_1      &  & = \ln \abs{x} + c_2\\
-        \equiv \quad & \abs{z}      &  & = e^{\abs{x} + c_2 - c_1} \\
-        \equiv \quad & z      &  & = cx
-        \end{aligned}
+            \begin{aligned}
+                             & z' - \frac{1}{x} \cdot z &  & = 0                       \\
+                \equiv \quad & \frac{z'}{z}             &  & = \frac{1}{x}             \\
+                \equiv \quad & \int \frac{1}{z} \d z    &  & = \int \frac{1}{x} \d x   \\
+                \equiv \quad & \ln \abs{z} + c_1        &  & = \ln \abs{x} + c_2       \\
+                \equiv \quad & \abs{z}                  &  & = e^{\abs{x} + c_2 - c_1} \\
+                \equiv \quad & z                        &  & = cx
+            \end{aligned}
         $$
-        Bestimmen der partikulären Lösung: 
+        Bestimmen der partikulären Lösung:
         $$
-        z = c(x) \cdot x \quad \implies \quad z' = c'(x)x + c(x)
+            z = c(x) \cdot x \quad \implies \quad z' = c'(x)x + c(x)
         $$
         $$
-        \begin{aligned}
-            & z' - \frac{1}{x} \cdot z     &  & = \frac{x^2}{2} \\
-            \equiv \quad & c'(x)x + c(x) - \frac{1}{x} \cdot c(x) \cdot x &  & = \frac{x^2}{2} \\
-            \equiv \quad & c'(x)  &  & = \frac{x}{2} \\
-            \equiv \quad & \int 1 \d c  &  & = \frac{1}{2} \int x \d x\\
-            \equiv \quad & c(x) + c_1  &  & = \frac{x^2}{4} + c_2\\
-            \equiv \quad & c(x)  &  & = \frac{x^2}{4} + c_0
-        \end{aligned}
+            \begin{aligned}
+                             & z' - \frac{1}{x} \cdot z                       &  & = \frac{x^2}{2}           \\
+                \equiv \quad & c'(x)x + c(x) - \frac{1}{x} \cdot c(x) \cdot x &  & = \frac{x^2}{2}           \\
+                \equiv \quad & c'(x)                                          &  & = \frac{x}{2}             \\
+                \equiv \quad & \int 1 \d c                                    &  & = \frac{1}{2} \int x \d x \\
+                \equiv \quad & c(x) + c_1                                     &  & = \frac{x^2}{4} + c_2     \\
+                \equiv \quad & c(x)                                           &  & = \frac{x^2}{4} + c_0
+            \end{aligned}
         $$
-        \newpage 
-        Damit gilt insgesamt: 
+        \newpage
+        Damit gilt insgesamt:
         $$
-        z = c(x) \cdot x = \left(\frac{x^2}{4} + c_0\right)x = \frac{x^3}{4} + c_1x \implies y = z^2 = \left(\frac{x^3}{4} + c_1x\right)^2
+            z = c(x) \cdot x = \left(\frac{x^2}{4} + c_0\right)x = \frac{x^3}{4} + c_1x \implies y = z^2 = \left(\frac{x^3}{4} + c_1x\right)^2
         $$
-        Mit dem Anfangswert $y(1) = 1$ folgt: 
+        Mit dem Anfangswert $y(1) = 1$ folgt:
         $$
-        y(1) = \left(\frac{1}{4} + c_1\right)^2 \implies c_1 \in \left\{\frac{3}{4}, -\frac{5}{4}\right\} \iff c_1 = -\frac{1}{4} \pm 1 
+            y(1) = \left(\frac{1}{4} + c_1\right)^2 \implies c_1 \in \left\{\frac{3}{4}, -\frac{5}{4}\right\} \iff c_1 = -\frac{1}{4} \pm 1
         $$
-        und damit schlussendlich 
+        und damit schlussendlich
         $$
-        y = z^2 = \left(\frac{x^3}{4} + \left(-\frac{1}{4} \pm 1\right)x\right)^2 
+            y = z^2 = \left(\frac{x^3}{4} + \left(-\frac{1}{4} \pm 1\right)x\right)^2
         $$
-        bzw. 
+        bzw.
         $$
-        y_1 = \left(\frac{x^3}{4} + \frac{3x}{4}\right)^2 = \frac{x^2\left(x^2 + 3\right)}{16} 
+            y_1 = \left(\frac{x^3}{4} + \frac{3x}{4}\right)^2 = \frac{x^2\left(x^2 + 3\right)^2}{16}
         $$
-        und 
+        und
         $$
-        y_2 = \left(\frac{x^3}{4} - \frac{5x}{4}\right)^2 = \frac{x^2\left(x^2 -5\right)}{16} 
+            y_2 = \left(\frac{x^3}{4} - \frac{5x}{4}\right)^2 = \frac{x^2\left(x^2 -5\right)^2}{16}
         $$\qed
     \end{solution}
 
@@ -314,102 +314,102 @@
         y' - 2y = (2\sin(x) + 5\cos(x)) \cdot e^{-3x}
     $$
     \begin{solution}
-        Lösen der homogenen Gleichung: 
+        Lösen der homogenen Gleichung:
         $$
-        y_h' - 2y_h = 0 \quad \implies \quad y_h = ce^{2x}
+            y_h' - 2y_h = 0 \quad \implies \quad y_h = ce^{2x}
         $$
 
         Mit der partikulären Lösung ($y_p = (c_1\sin(x) + c_2\cos(x))\cdot c_0e^{-3x}$)
         $$
-        y_p = c_0e^{-3x}(c_1\sin(x) + c_2\cos(x)) \quad \implies \quad y_p' = c_0 e^{-3 x} ((c_1 - 3 c_2) \cos(x) + (-3 c_1 - c_2) \sin(x))
+            y_p = c_0e^{-3x}(c_1\sin(x) + c_2\cos(x)) \quad \implies \quad y_p' = c_0 e^{-3 x} ((c_1 - 3 c_2) \cos(x) + (-3 c_1 - c_2) \sin(x))
         $$
-        gilt dann: 
+        gilt dann:
         $$
-        \begin{aligned}
-            & y_p' - 2y_p && = (2\sin(x) + 5\cos(x)) e^{-3x} \\
-            \equiv \quad & \ldots && = (2\sin(x) + 5\cos(x)) e^{-3x} \\
-            \equiv \quad & c_0 e^{-3 x} ((c_1-5c_2)\cos(x) + (-5c_1 -c_2)\sin(x)) && = (2\sin(x) + 5\cos(x)) e^{-3x} \\
-            \equiv \quad & c_0(c_1-5c_2) \cdot \cos(x) + c_0(-5c_1 -c_2) \cdot \sin(x) && = 2\sin(x) + 5\cos(x) \\
-        \end{aligned}
-        $$
-
-        Wir erhalten das LGS: 
-        $$
-        \begin{cases}
-            c_0(c_1 -5c_2) & = 5 \\
-            c_0(-5c_1 - c_2) & = 2
-        \end{cases}
-        \implies
-        \ldots 
-        \implies
-        \begin{cases}
-            c_1 & = -\frac{5}{26c_0} \\
-            c_2 & = -\frac{27}{26c_0}
-        \end{cases}
+            \begin{aligned}
+                             & y_p' - 2y_p                                                 &  & = (2\sin(x) + 5\cos(x)) e^{-3x} \\
+                \equiv \quad & \ldots                                                      &  & = (2\sin(x) + 5\cos(x)) e^{-3x} \\
+                \equiv \quad & c_0 e^{-3 x} ((c_1-5c_2)\cos(x) + (-5c_1 -c_2)\sin(x))      &  & = (2\sin(x) + 5\cos(x)) e^{-3x} \\
+                \equiv \quad & c_0(c_1-5c_2) \cdot \cos(x) + c_0(-5c_1 -c_2) \cdot \sin(x) &  & = 2\sin(x) + 5\cos(x)           \\
+            \end{aligned}
         $$
 
-        Damit erhalten wir unsere partikuläre Lösung: 
+        Wir erhalten das LGS:
         $$
-        y_p = c_0e^{-3x}(c_1\sin(x) + c_2\cos(x)) = -e^{-3x}\left(\frac{5}{26}\sin(x) + \frac{27}{26}\cos(x)\right) 
+            \begin{cases}
+                c_0(c_1 -5c_2)   & = 5 \\
+                c_0(-5c_1 - c_2) & = 2
+            \end{cases}
+            \implies
+            \ldots
+            \implies
+            \begin{cases}
+                c_1 & = -\frac{5}{26c_0}  \\
+                c_2 & = -\frac{27}{26c_0}
+            \end{cases}
         $$
 
-        Damit gilt insgesamt: 
+        Damit erhalten wir unsere partikuläre Lösung:
         $$
-        y = y_h + y_p = ce^{2x} - e^{-3x}\left(\frac{5}{26}\sin(x) + \frac{27}{26}\cos(x)\right) 
+            y_p = c_0e^{-3x}(c_1\sin(x) + c_2\cos(x)) = -e^{-3x}\left(\frac{5}{26}\sin(x) + \frac{27}{26}\cos(x)\right)
+        $$
+
+        Damit gilt insgesamt:
+        $$
+            y = y_h + y_p = ce^{2x} - e^{-3x}\left(\frac{5}{26}\sin(x) + \frac{27}{26}\cos(x)\right)
         $$\qed
     \end{solution}
 
-    \newpage 
-    \question 
-    Bestimmen Sie die allgemeine Lösung der Differentialgleichung 
+    \newpage
+    \question
+    Bestimmen Sie die allgemeine Lösung der Differentialgleichung
     $$
-    y' = -y + x\cdot e^{-x} + 1
+        y' = -y + x\cdot e^{-x} + 1
     $$
     \begin{solution}
         Es gilt ganz offensichtlich:
         $$
-        y' = -y + x\cdot e^{-x} + 1 \quad \equiv \quad y'  + y = x\cdot e^{-x} + 1
+            y' = -y + x\cdot e^{-x} + 1 \quad \equiv \quad y'  + y = x\cdot e^{-x} + 1
         $$
 
-        Lösen der homogenen Gleichung: 
+        Lösen der homogenen Gleichung:
         $$
-        y_h = e^{-x}
-        $$
-
-        Wir müssen zwei partikuläre Lösungen erhalten: 
-        $$
-        y_{p_1} = c_1 \cdot x^2 \cdot e^{-x} \quad \text{und} \quad y_{p_2} = c_2 
-        $$
-        Es gilt: 
-        $$
-        y_{p_1} = c_1 x^2  e^{-x} \quad \implies \quad y'_{p_1} = 2c_12xe^{-x} - c_1x^2e^{-x}
+            y_h = ce^{-x}
         $$
 
+        Wir müssen zwei partikuläre Lösungen erhalten:
         $$
-        \begin{aligned}
-        &y_{p_1} + y'_{p_1} && = xe^{-x} \\
-        \equiv \quad &c_1 x^2 e^{-x} + 2c_12xe^{-x} - c_1x^2e^{-x} && = xe^{-x} \\
-        \equiv \quad &2c_12xe^{-x} && = xe^{-x} \\
-        \implies \quad & c_1 = \frac{1}{2}
-        \end{aligned}
+            y_{p_1} = c_1 \cdot x^2 \cdot e^{-x} \quad \text{und} \quad y_{p_2} = c_2
         $$
-        
+        Es gilt:
+        $$
+            y_{p_1} = c_1 x^2  e^{-x} \quad \implies \quad y'_{p_1} = 2c_1xe^{-x} - c_1x^2e^{-x}
+        $$
+
+        $$
+            \begin{aligned}
+                               & y_{p_1} + y'_{p_1}                          &  & = xe^{-x} \\
+                \equiv \quad   & c_1 x^2 e^{-x} + 2c_1xe^{-x} - c_1x^2e^{-x} &  & = xe^{-x} \\
+                \equiv \quad   & 2c_1xe^{-x}                                 &  & = xe^{-x} \\
+                \implies \quad & c_1 = \frac{1}{2}
+            \end{aligned}
+        $$
+
         und
         $$
-        y_{p_2} = c_2 \quad \implies \quad y'_{p_2} = 0
+            y_{p_2} = c_2 \quad \implies \quad y'_{p_2} = 0
         $$
 
         $$
-        \begin{aligned}
-        &y_{p_2} + y'_{p_2} && = 1 \\
-            \equiv \quad & c_2 + 0 && = 1 \\
-            \implies \quad & c_2 = 1 
-        \end{aligned}
+            \begin{aligned}
+                               & y_{p_2} + y'_{p_2} &  & = 1 \\
+                \equiv \quad   & c_2 + 0            &  & = 1 \\
+                \implies \quad & c_2 = 1
+            \end{aligned}
         $$
 
-        Damit gilt insgesamt: 
+        Damit gilt insgesamt:
         $$
-        y = y_h + y_{p_1} + y_{p_2} = e^{-x} + \frac{x^2e^{-x}}{2} + 1
+            y = y_h + y_{p_1} + y_{p_2} = ce^{-x} + \frac{x^2e^{-x}}{2} + 1
         $$\qed
     \end{solution}
 \end{questions}

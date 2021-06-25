@@ -1,0 +1,342 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\seq}{\overset{!}{=}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 12}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 12}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 20. Juni 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Bestimmen Sie die Konstante $a$ wenn möglich so, dass $f(x,y)$ stetig ist.
+    $$
+        f(x, y) = \begin{cases}
+            \frac{x^2 + 2y^2}{\sqrt{x^2+2y^2+9} - 3} & \text{für} \ (x, y) \neq (0, 0) \\
+            a                                        & \text{für} \ (x, y) = (0, 0)
+        \end{cases}
+    $$
+    \begin{solution}
+        Es gilt:
+        $$
+            \begin{aligned}
+                        & \frac{x^2 + 2y^2}{\sqrt{x^2+2y^2+9} - 3}                                                                                                       \\
+                = \quad & \frac{\left( x^2 + 2y^2 \right)\left( \sqrt{x^2+2y^2+9} + 3 \right)}{\left( \sqrt{x^2+2y^2+9} - 3 \right)\left( \sqrt{x^2+2y^2+9} + 3 \right)} \\
+                = \quad & \frac{\left( x^2 + 2y^2 \right)\left( \sqrt{x^2+2y^2+9} + 3 \right)}{x^2 + 2y^2}                                                               \\
+                = \quad & \sqrt{x^2+2y^2+9} + 3
+            \end{aligned}
+        $$
+
+        Und damit ist auch schon
+        $$
+            \lim_{(x,y) \to (0, 0)} f(x, y) = \lim_{(x,y) \to (0, 0)} \sqrt{x^2+2y^2+9} + 3 = 6
+        $$
+
+        Wenn wir dann $a = 6$ wählen, ist die Funktion stetig.\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben seien die Funktion $f(x, y) = x\cdot y^2 - (2x+3y)^2$, der Punkt $(x_0, y_0) = (2, -2)$ und der Vektor $\vec{a} = \vektor{3\\4}$.
+    Berechnen Sie
+    \begin{parts}
+        \part
+        den Gradienten von $f$ an der Stelle $(x_0, y_0)$.
+        \begin{solution}
+            $$
+                f_x = y^2 - 8x - 12y
+            $$
+            $$
+                f_y = 2xy - 12x -18y
+            $$
+            $$
+                \implies \nabla f(x_0, y_0) = \vektor{y_0^2 - 8x_0 - 12y_0 \\ 2x_0y_0 - 12x_0 -18y_0} = \vektor{12 \\ 4}
+            $$\qed
+        \end{solution}
+
+        \part
+        die Gleichung für die Tangentialebene von $f$ an der Stelle $(x_0, y_0)$.
+        \begin{solution}
+            $$
+                z_0 = f(x_0, y_0) = 4
+            $$
+            Damit ergibt sich dann die Tangentialebene von $f$ am Punkt $(2, -2)$ mit:
+            $$
+                E = \vektor{x_0 \\ y_0 \\ z_0} + \lambda \vektor{1 \\ 0 \\ f_x(x_0, y_0)} + \mu \vektor{0 \\ 1 \\ f_y(x_0, y_0)}
+            $$
+            $$
+                \iff E = \vektor{2 \\ -2 \\ 4} + \lambda \vektor{1 \\ 0 \\ 12} + \mu \vektor{0 \\ 1 \\ 4}
+            $$\qed
+        \end{solution}
+
+        \part
+        die Richtungsableitung von $f$ an der Stelle $(x_0, y_0)$ in Richtung des Vektors $\vec{a}$.
+        \begin{solution}
+            $$
+                v = \frac{a}{\norm{a}} = \frac{1}{5} \vektor{3\\4} = \vektor{\nicefrac{3}{5} \\ \nicefrac{4}{5}}
+            $$
+            $$
+                \frac{\partial f}{\partial v} = D_v(f) = \scalarprod{\nabla f(x_0, y_0), v} = \scalarprod{\vektor{12\\4}, \vektor{\nicefrac{3}{5} \\ \nicefrac{4}{5}}} = \frac{52}{5}
+            $$\qed
+        \end{solution}
+
+        \part
+        die Richtung an der Stelle $(x_0, y_0)$, in der die Richtungsableitung von $f$ maximal wird, und den Wert in diese Richtung.
+        \begin{solution}
+            Die Richtung $v$ mit dem steilsten Anstieg in $(x_0, y_0)$ ist gegeben mit:
+            $$
+                v = \frac{\nabla f(x_0, y_0)}{\norm{\nabla f(x_0, y_0)}} = \frac{1}{4\sqrt{10}}\vektor{12\\4}
+            $$
+            Damit gilt dann
+            $$
+                \frac{\partial f}{\partial v} = D_v(f) = \scalarprod{\nabla f(x_0, y_0), v} = \frac{1}{4\sqrt{10}}\scalarprod{\vektor{12\\4}, \vektor{12\\4}} = 4\sqrt{10}
+            $$
+            \qed
+        \end{solution}
+
+        \part
+        die Richtung an der Stelle $(x_0, y_0)$, für die die Richtungsableitung Null ist.
+        \begin{solution}
+            Für den gesuchten Richtungsvektor $v$ muss gelten:
+            $$
+                \frac{\partial f}{\partial v} = D_v(f) = \scalarprod{\nabla f(x_0, y_0), v} = 0
+            $$
+            $$
+                \begin{aligned}
+                    \iff \quad     & \scalarprod{\vektor{12 \\ 4}, \vektor{v_1 \\ v_2}} = 0    \\
+                    \iff \quad     & 12v_1 + 4v_2 = 0       \\
+                    \implies \quad & v \in \span{\vektor{1  \\ -3}}
+                \end{aligned}
+            $$
+            Wir wählen uns daraus normierte Richtungsvektoren $v_1$ und $v_2 = -v_1$ wie folgt:
+            $$
+                v_1 = \frac{1}{\sqrt{10}}\vektor{1\\-3} \quad \land \quad v_2 = -\frac{1}{\sqrt{10}}\vektor{1\\-3}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Differenzieren Sie die folgende Funktion nach dem Parameter $t$
+    $$
+        f(x, y) = x^2 \cdot y + y^3, \quad x=t^2, \, y = e^t
+    $$
+    \begin{parts}
+        \part
+        unter Verwendung der Kettenregel,
+        \begin{solution}
+            Es gilt:
+            $$
+                \begin{aligned}
+                    \frac{\d f}{\d t} \quad = \quad & \frac{\partial f}{\partial x} \cdot \frac{\d x}{\d t} + \frac{\partial f}{\partial y} \cdot \frac{\d y}{\d t} \\
+                    = \quad                         & 2xy \cdot 2t + \left( x^2 + 3y^2 \right) e^t                                                                  \\
+                    = \quad                         & 4txy + \left( x^2 + 3y^2 \right) e^t                                                                          \\
+                    = \quad                         & 4t^3e^t + \left( t^4 + 3e^{2t} \right) e^t
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        nach Einsetzen der beiden Parametergleichungen in die Funktionsgleichung.
+        \begin{solution}
+            Es gilt:
+            $$
+                f(x, y) = x^2 \cdot y + y^3 \quad \iff \quad f(t) = t^4e^t + e^{3t}
+            $$
+            Und damit:
+            $$
+                \begin{aligned}
+                    \frac{\d f}{\d t} \quad = \quad & 4t^3e^t + t^4e^t + 3e^{3t}                 \\
+                    = \quad                         & 4t^3e^t + \left( t^4 + 3e^{2t} \right) e^t
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Bilden Sie die partiellen Ableitungen 1. Ordnung der jeweiligen Funktion $f = f(x, y)$ nach den Parametern unter der Verwendung der Kettenregel:
+    \begin{parts}
+        \part
+        $f(x, y) = e^x \cdot \sin(y)$ mit $x(s, t) = s\cdot t^2$ und $y(s, t) = s^2\cdot t$
+        \begin{solution}
+            Es gilt:
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial s} \quad = \quad & \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial s} \\
+                    = \quad                                     & e^x\sin(y) \cdot t^2 + e^x\cos(y) \cdot 2st                                                                                           \\
+                    = \quad                                     & \left( t\sin(y) + 2s\cos(y)\right)te^x                                                                                                \\
+                    = \quad                                     & \left( t\sin(s^2t) + 2s\cos(s^2t)\right)te^{st^2}
+                \end{aligned}
+            $$
+            und
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial t} \quad = \quad & \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial t} \\
+                    = \quad                                     & e^x\sin(y) \cdot 2st + e^x\cos(y) \cdot s^2                                                                                           \\
+                    = \quad                                     & (2t\sin(y) + s\cos(y))se^x                                                                                                            \\
+                    = \quad                                     & (2t\sin(s^2t) + s\cos(s^2t))se^{st^2}
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        $f(x, y) = \sin(x^2\cdot y)$ mit $x(s, t) = s\cdot t^2$ und $y(s, t) = s^2 + \frac{1}{t}$
+        \begin{solution}
+
+            Es gilt:
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial s} \quad = \quad & \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial s}                   \\
+                    = \quad                                     & 2xy\cos(x^2y) \cdot t^2 + x^2\cos(x^2y) \cdot 2s                                                                                                        \\
+                    = \quad                                     & \left(s^2 + \frac{1}{t}\right)2st^4\cos\left(s^2t^4\left(s^2 + \frac{1}{t}\right)\right) + 2s^3t^4\cos\left(s^2t^4\left(s^2 + \frac{1}{t}\right)\right) \\
+                    = \quad                                     & 2st^3 \left( 2s^2t + 1 \right)\cos \left( s^2t^3\left( s^2t + 1 \right) \right)
+                \end{aligned}
+            $$
+            und
+            $$
+                \begin{aligned}
+                    \frac{\partial f}{\partial t} \quad = \quad & \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial t}     \\
+                    = \quad                                     & 2xy\cos(x^2y) \cdot 2st -  x^2\cos(x^2y) \cdot \frac{1}{t^2}                                                                              \\
+                    = \quad                                     & 4s^2t^3 \left( 2s^2t + 1 \right) \cos\left(s^2t^4\left( 2s^2t + 1 \right)\right) - s^2t^2 \cos\left(s^2t^4\left( 2s^2t + 1 \right)\right) \\
+                    = \quad                                     & s^2t^2\left( 4s^2t + 3 \right) \cos \left( s^2t^3 \left(s^2t + 1\right) \right)
+                \end{aligned}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Es sei bekannt, dass
+    $$
+        \vec{f}(x, y, z) = \vektor{x \\ f_2(\text{unbekannt}) \\ x\cdot y \cdot z}
+    $$
+    ein quellen- und senkenfreies Strömungsfeld ist.
+    \begin{parts}
+        \part
+        Wie muss denn dann die 2. Komponente des Vektors lauten?
+        \begin{solution}
+            Wir wissen, dass $f$ quellen- und senkenfrei ist, wenn $\operatorname{div} f = 0$.
+
+            Es gilt:
+            $$
+                \operatorname{div} f = \scalarprod{\nabla , f} = \frac{\partial f_1}{\partial x} + \frac{\partial f_2}{\partial y} + \frac{\partial f_3}{\partial z} = 1 + \frac{\partial f_2}{\partial y} + xy = 0
+            $$
+
+            Damit wissen wir:
+            $$
+                \begin{aligned}
+                                   & \frac{\partial f_2}{\partial y} = -xy - 1 \\
+                    \implies \quad & f_2 = - \int \left(xy + 1\right) \d y     \\
+                    \iff \quad     & f_2 = -\frac{xy^2}{2} - y + c(x, z)
+                \end{aligned}
+            $$\qed
+        \end{solution}
+
+        \part
+        Berechnen Sie anschließend von $\vec{f}(x, y, z)$ die
+        \begin{subparts}
+            \subpart Jacobi-Matrix
+            \begin{solution}
+                Es gilt:
+                $$
+                    J_{\vec{f}} = \vektor{
+                        \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} & \frac{\partial f_1}{\partial z} \\
+                        \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} & \frac{\partial f_2}{\partial z} \\
+                        \frac{\partial f_3}{\partial x} & \frac{\partial f_3}{\partial y} & \frac{\partial f_3}{\partial z} \\
+                    }
+                    = \vektor{
+                        1 & 0 & 0 \\
+                        -\frac{y^2}{2} + c_x(x, z) & -xy-1 & c_z(x, z) \\
+                        yz & xz & xy
+                    }
+                $$
+            \end{solution}
+
+            \subpart Gradient
+            \begin{solution}
+                Nach Vorlesung gilt\footnote{Im Kontrast zu gängiger Interpretation, nach der $\nabla(\vec{f}) = (J_{\vec{f}})^T$ gilt. Siehe: \href{https://de.wikipedia.org/wiki/Vektorgradient}{Wikipedia}}:
+                $$
+                    \nabla (\vec{f}) = \vektor{\frac{\partial f_1}{\partial x} \\ \frac{\partial f_2}{\partial y} \\ \frac{\partial f_3}{\partial z}} = \vektor{1 \\ -xy-1 \\ xy}
+                $$
+            \end{solution}
+
+            \subpart
+            Rotation
+            \begin{solution}
+                Es gilt:
+                $$
+                    \operatorname{rot} \vec{f} = \nabla \times \vec{f} = \vektor{\frac{\partial}{\partial x} \\ \frac{\partial}{\partial y} \\ \frac{\partial}{\partial z}} \times \vektor{x \\ -y -\frac{xy^2}{2} + c(x, z) \\ xyz} = \vektor{xz  - c_z(x, z) \\ -yz \\ -\frac{y^2}{2} + c_x(x, z)}
+                $$\qed
+            \end{solution}
+        \end{subparts}
+    \end{parts}
+\end{questions}
+\end{document}

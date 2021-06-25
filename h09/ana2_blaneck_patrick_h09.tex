@@ -1,0 +1,337 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\seq}{\overset{!}{=}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 09}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 09}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 30. Mai 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Lösen Sie die Differentialgleichung
+    $$
+        (3xy + 2y^2) + (x^2 + 2xy) y' = 0
+    $$
+    \begin{solution}
+        Es gilt:
+        $$
+            (3xy + 2y^2) + (x^2 + 2xy) y' = 0 \quad \iff \quad \underbrace{(3xy + 2y^2)}_{p(x, y)}\d x + \underbrace{(x^2 + 2xy)}_{q(x, y)}\d y = 0
+        $$
+        Integrabilitätsbedingung:
+        $$
+            p_y = 3x + 4y \quad \neq \quad 2x + 2y = q_x \quad \lightning
+        $$
+
+        Integrierenden Faktor (Euler-Multiplikator) $\mu(x) = e^{\int m(x) \d x}$ bzw. $\mu(y) = e^{\int m(y) \d y}$ bestimmen:
+        \begin{itemize}
+            \item Untersuchung, ob $\mu$ nur von $y$ abhängt:
+                  $$
+                      m = \frac{q_x - p_y}{p} = \frac{2x + 2y - \left(3x + 4y\right)}{3xy + 2y^2} = \frac{-x - 2y}{3xy + 2y^2} \quad \lightning
+                  $$
+            \item Untersuchung, ob $\mu$ nur von $x$ abhängt:
+                  $$
+                      m = \frac{p_y - q_x}{q} = \frac{3x + 4y - (2x + 2y)}{x^2 + 2xy} = \frac{x + 2y}{x^2 + 2xy} = \frac{x+2y}{x(x+2y)} = \frac{1}{x} \quad \checkmark
+                  $$
+        \end{itemize}
+
+        Damit erhalten wir den integrierenden Faktor mit:
+        $$
+            \mu(x) = e^{\int \frac{1}{x} \d x} = cx \qquad (\text{sei} \ c = 1)
+        $$
+        Einsetzen in die DGL:
+        $$
+            \underbrace{\left(3x^2y + 2xy^2\right)}_{p(x, y)}\d x + \underbrace{\left(x^3 + 2x^2y\right)}_{q(x, y)}\d y = 0
+        $$
+        Integrabilitätsbedingung:
+        $$
+            p_y = 3x^2 + 4xy \quad = \quad 3x^2 + 4xy = q_x \quad \checkmark
+        $$
+        Wir wissen:
+        $$
+            \underbrace{F = \int q \d y = x^3y + x^2y^2 + c(x)}_{F_y = q} \quad \implies \quad \underbrace{3x^2y + 2xy^2 + c'(x) = 3x^2y + 2xy^2}_{F_x = p} \quad \implies \quad c(x) = c
+        $$
+
+        Und insgesamt gilt damit:
+        $$
+            F = x^3y + x^2y^2 + c
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Lösen Sie das Anfangswertproblem
+    $$
+        y' - \sin(x) \cdot y = e^{x-\cos(x)} \quad \text{mit} \quad y(0) = \frac{1}{e}
+    $$
+    \begin{solution}
+        Lösung der homogenen Gleichung:
+        $$
+            y_h = e^{\int \sin(x) \d x} \quad \iff \quad y_h = ce^{-\cos(x)}
+        $$
+        Variation der Konstanten:
+        $$
+            y = c(x) \cdot e^{-\cos(x)} \quad \implies \quad y' = c'(x) \cdot e^{-\cos(x)} + c(x) \cdot \sin(x) \cdot e^{-\cos(x)}
+        $$
+        Dann gilt:
+        $$
+            \begin{aligned}
+                             & y' - \sin(x) \cdot y                                                                                     &  & = e^{x-\cos(x)}   \\
+                \equiv \quad & c'(x) \cdot e^{-\cos(x)} + c(x) \cdot \sin(x) \cdot e^{-\cos(x)} - \sin(x) \cdot c(x) \cdot e^{-\cos(x)} &  & = e^{x-\cos(x)}   \\
+                \equiv \quad & c'(x) \cdot e^{-\cos(x)}                                                                                 &  & = e^{x-\cos(x)}   \\
+                \equiv \quad & c'(x)                                                                                                    &  & = e^{x}           \\
+                \equiv \quad & \int 1 \d c                                                                                              &  & = \int e^{x} \d x \\
+                \equiv \quad & c(x) + c_1                                                                                               &  & = e^x + c_2       \\
+                \equiv \quad & c(x)                                                                                                     &  & = e^x + \tilde{c}
+            \end{aligned}
+        $$
+        Wir erhalten die allgemeine Lösung der DGL mit:
+        $$
+            y = \left(e^x + \tilde{c}\right) \cdot e^{-\cos(x)} = ce^{-\cos(x)} + e^{x-\cos(x)}
+        $$
+        Einsetzen des Anfangswertes:
+        $$
+            \frac{1}{e} = ce^{-\cos(0)} + e^{0-\cos(0)} \quad \iff \quad \frac{1}{e} = \frac{c}{e} + \frac{1}{e} \quad \iff \quad c = 0
+        $$
+        Und insgesamt gilt damit:
+        $$
+            y = e^{x-\cos(x)}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie die Lösung der Differentialgleichung
+    $$
+        y' - y = g(x)
+    $$
+    für die Störfunktionen
+    \begin{parts}
+        \part
+        $g(x) = x+1$
+        \begin{solution}
+            Lösung der homogenen Gleichung:
+            $$
+                y_h = ce^{\int 1 \d x} = ce^x
+            $$
+            Bestimmen der partikulären Lösung ($y_p = c_1 x + c_2$):
+            $$
+                y_p = c_1 x + c_2 \quad \implies \quad y'_p = c_1
+            $$
+
+            Dann gilt:
+            $$
+                \begin{aligned}
+                                   & y'_p - y_p                          &  & = x + 1 \\
+                    \equiv \quad   & c_1 - (c_1 x + c_2)                 &  & = x + 1 \\
+                    \equiv \quad   & (- c_1 )x + (c_1 - c_2)             &  & = x + 1 \\
+                    \implies \quad & c_1 = -1 \quad \land \quad c_2 = -2
+                \end{aligned}
+            $$
+
+            Und insgesamt gilt damit:
+            $$
+                y = y_h + y_p = ce^x - x - 2
+            $$\qed
+        \end{solution}
+
+        \part
+        $g(x) = e^x$
+        \begin{solution}
+            Lösung der homogenen Gleichung:
+            $$
+                y_h = ce^{\int 1 \d x} = ce^x
+            $$
+            Bestimmen der partikulären Lösung ($y_p = c_1 x e^x$):
+            $$
+                y_p = c_1 x e^x \quad \implies \quad y'_p =c_1 e^x + c_1 xe^x
+            $$
+
+            Dann gilt:
+            $$
+                \begin{aligned}
+                                   & y'_p - y_p                     &  & = e^x \\
+                    \equiv \quad   & c_1 e^x + c_1 xe^x - c_1 x e^x &  & = e^x \\
+                    \equiv \quad   & c_1 e^x                        &  & = e^x \\
+                    \implies \quad & c_1 = 1
+                \end{aligned}
+            $$
+
+            Und insgesamt gilt damit:
+            $$
+                y = y_h + y_p = ce^x + x e^x
+            $$\qed
+        \end{solution}
+
+        \newpage
+        \part
+        $g(x) = \cos(x)$
+        \begin{solution}
+            Lösung der homogenen Gleichung:
+            $$
+                y_h = ce^{\int 1 \d x} = ce^x
+            $$
+            Bestimmen der partikulären Lösung ($y_p = c_1 \cos(x) + c_2 \sin(x)$):
+            $$
+                y_p = c_1 \cos(x) + c_2 \sin(x) \quad \implies \quad y'_p =  c_2 \cos(x) -c_1 \sin(x)
+            $$
+
+            Dann gilt:
+            $$
+                \begin{aligned}
+                                   & y'_p - y_p                                             &  & = \cos(x) \\
+                    \equiv \quad   & c_2 \cos(x) -c_1 \sin(x) - (c_1 \cos(x) + c_2 \sin(x)) &  & = \cos(x) \\
+                    \equiv \quad   & (c_2 - c_1) \cos(x) + (c_1 - c_2) \sin(x)              &  & = \cos(x) \\
+                    \implies \quad & c_1 = -\frac{1}{2} \quad \land \quad c_2 = \frac{1}{2}
+                \end{aligned}
+            $$
+
+            Und insgesamt gilt damit:
+            $$
+                y = y_h + y_p = ce^x + \frac{\sin(x) - \cos(x)}{2}
+            $$\qed
+        \end{solution}
+
+        \part
+        $g(x) = x\cdot e^{-x}$
+        \begin{solution}
+            Lösung der homogenen Gleichung:
+            $$
+                y_h = ce^{\int 1 \d x} = ce^x
+            $$
+            Bestimmen der partikulären Lösung ($y_p = c_1xe^{-x} + c_2e^{-x}$):
+            $$
+                y_p = c_1xe^{-x} + c_2e^{-x} \quad \implies \quad y'_p = c_1 e^{-x} - c_1 xe^{-x} - c_2e^{-x}
+            $$
+
+            Dann gilt:
+            $$
+                \begin{aligned}
+                                   & y'_p - y_p                                                                 &  & = xe^{-x} \\
+                    \equiv \quad   & c_1 e^{-x} - c_1 xe^{-x} - c_2e^{-x} - \left(c_1xe^{-x} + c_2e^{-x}\right) &  & = xe^{-x} \\
+                    \equiv \quad   & (-2c_1)xe^{-x} + (c_1-2c_2)e^{-x}                                          &  & = xe^{-x} \\
+                    \implies \quad & c_1 = -\frac{1}{2} \quad \land \quad c_2 = -\frac{1}{4}
+                \end{aligned}
+            $$
+
+            Und insgesamt gilt damit:
+            $$
+                y = y_h + y_p = ce^x - \frac{xe^{-x}}{2} - \frac{e^{-x}}{4}
+            $$\qed
+        \end{solution}
+    \end{parts}
+
+    \newpage
+    \question
+    Bestimmen Sie die Lösung des folgenden Anfangswertproblems
+    $$
+        x\cdot y' - y = x^2 \cdot \cos(x) \quad \text{mit} \quad y(\pi) = 2\pi
+    $$
+    \begin{solution}
+        Wir formen um:
+        $$
+            x\cdot y' - y = x^2 \cdot \cos(x) \quad \iff \quad y' - \frac{1}{x}\cdot y = x \cdot \cos(x)
+        $$
+        Lösung der homogenen Gleichung:
+        $$
+            y_h = e^{\int x^{-1} \d x} = e^{\ln \abs{x} + \tilde{c}} = cx
+        $$
+        Variation der Konstanten:
+        $$
+            y = c(x) \cdot x \quad \implies \quad y' = c'(x) \cdot x + c(x)
+        $$
+        Dann gilt:
+        $$
+            \begin{aligned}
+                                                 & y' - \frac{1}{x}\cdot y                              &  & = x \cdot \cos(x)    \\
+                \equiv \quad                     & c'(x) \cdot x + c(x) - \frac{1}{x}\cdot c(x) \cdot x &  & = x \cdot \cos(x)    \\
+                \equiv \quad                     & c'(x) \cdot x                                        &  & = x \cdot \cos(x)    \\
+                \overset{x \neq 0}{\equiv} \quad & c'(x)                                                &  & =\cos(x)             \\
+                \equiv \quad                     & \int 1 \d c                                          &  & =\int \cos(x) \d x   \\
+                \equiv \quad                     & c(x) + c_1                                           &  & =\sin(x) + c_2       \\
+                \equiv \quad                     & c(x)                                                 &  & =\sin(x) + \tilde{c} \\
+            \end{aligned}
+        $$
+        Wir erhalten die allgemeine Lösung der DGL mit:
+        $$
+            y = (\sin(x) + \tilde{c}) x = cx + x\sin(x)
+        $$
+
+        Einsetzen des Anfangswertes:
+        $$
+            2\pi = c\pi + \pi\sin(\pi) \quad \iff \quad c = 2
+        $$
+        Und insgesamt gilt damit:
+        $$
+            y = x(\sin(x) + 2)
+        $$\qed
+    \end{solution}
+\end{questions}
+\end{document}

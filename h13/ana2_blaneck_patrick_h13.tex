@@ -1,0 +1,341 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\seq}{\overset{!}{=}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 13}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 13}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 27. Juni 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Bestimmen Sie im Punkt $(\frac{2\pi}{3}, \frac{4\pi}{3})$ das Taylorpolynom zweiter Ordnung von der Funktion
+    $$
+        f(x, y) = \sin(y - x) + \sin(x) - \sin(y)
+    $$
+    \begin{solution}
+        Wir berechnen zuerst die Ableitungen:
+        $$
+            \begin{aligned}
+                f_x \quad    & = \quad -\cos(y-x) + \cos(x) \\
+                f_y \quad    & = \quad \cos(y-x) - \cos(y)  \\
+                f_{xx} \quad & = \quad \sin(y-x) - \sin(x)  \\
+                f_{xy} \quad & = \quad -\sin(y-x)           \\
+                f_{yy} \quad & = \quad -\sin(y-x) + \sin(y)
+            \end{aligned}
+        $$
+
+        Dann gilt:
+        $$
+            \begin{aligned}
+                T(x, y) \quad = \quad & f(x_0, y_0) + f_x(x_0, y_0) (x-x_0) + f_y(x_0, y_0) (y-y_0)                                                                                                                                                  \\
+                + \quad               & \frac{f_{xx}(x_0, y_0) (x-x_0)^2}{2} + f_{xy}(x_0, y_0) (x-x_0) (y-y_0) + \frac{f_{yy}(x_0, y_0) (y-y_0)^2}{2}                                                                                               \\
+                = \quad               & \frac{3\sqrt{3}}{2} - \frac{\sqrt{3}}{2}\left(x - \frac{2\pi}{3}\right)^2 - \frac{\sqrt{3}}{2}\left(y-\frac{4\pi}{3}\right)^2 + \frac{\sqrt{3}}{2}\left(x-\frac{2\pi}{3}\right)\left(y-\frac{4\pi}{3}\right)
+            \end{aligned}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie die Extrema der Funktion
+    $$
+        f(x, y) = x^3 + y^2 - 3x -2y + 1
+    $$
+    \begin{solution}
+        Wir berechnen zuerst die Ableitungen:
+        $$
+            \begin{aligned}
+                f_x \quad    & = \quad 3x^2 - 3 \\
+                f_y \quad    & = \quad 2y - 2   \\
+                f_{xx} \quad & = \quad 6x       \\
+                f_{xy} \quad & = \quad 2        \\
+                f_{yy} \quad & = \quad 0
+            \end{aligned}
+        $$
+
+        Für die Kandidaten muss dann gelten:
+        $$
+            \vektor{f_x \\ f_y} = \vektor{3x^2-3 \\ 2y-2} = \vektor{0\\0} \implies x\in \{-1, 1\} \quad \land \quad y = 1
+        $$
+
+        Wir stellen dann die Hesse-Matrix für beide Kandidaten auf:
+        $$
+            H = \vektor{f_{xx}(x_0, y_0) & f_{xy}(x_0, y_0) \\ f_{xy}(x_0, y_0) & f_{yy}(x_0, y_0)} = \vektor{6x & 0 \\ 0 & 2}
+        $$
+
+        Dann sehen wir direkt, dass $H$ für $(1, 1)$ positiv definit und für $(-1, 1)$ indefinit ist.
+
+        Damit liegt bei $(1, 1)$ ein lokales Extremum und bei $(-1, 1)$ ein Sattelpunkt.\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben sind die Punkte $P_1 = (1, 1)$, $P_2 = (3, 10)$, $P_3 = (5, 7)$ und $P_4 = (7, 2)$.
+
+    Bestimmen Sie einen Punkt $(x, y)$, sodass die Summe der Quadrate der Abstände minimal ist.
+    \begin{solution}
+        Die Summe der Quadrate der Abstände ist gegeben mit
+        $$
+            \begin{aligned}
+                d(x, y) & \quad = (x-1)^2 + (y-1)^2 + (x-3)^2 + (y-10)^2 + (x-5)^2 + (y-7)^2 + (x-7)^2 + (y-2)^2 \\
+                        & \quad = \ldots                                                                         \\
+                        & \quad = 4x^2 - 32x + 4y^2 -40y + 238
+            \end{aligned}
+        $$
+
+        Damit gilt dann für die Ableitungen:
+        $$
+            \begin{aligned}
+                d_x \quad    & = \quad 8x - 32 \\
+                d_y \quad    & = \quad 8y - 40 \\
+                d_{xx} \quad & = \quad 8       \\
+                d_{xy} \quad & = \quad 8       \\
+                d_{yy} \quad & = \quad 0
+            \end{aligned}
+        $$
+
+        Für die Kandidaten muss dann gelten:
+        $$
+            \vektor{d_x \\ d_y} = \vektor{8x - 32 \\ 8y - 40} = \vektor{0\\0} \implies x = 4 \quad \land \quad y = 5
+        $$
+
+        Wir stellen dann die Hesse-Matrix für den Kandidaten auf:
+        $$
+            H = \vektor{d_{xx}(x_0, y_0) & d_{xy}(x_0, y_0) \\ d_{xy}(x_0, y_0) & d_{yy}(x_0, y_0)} = \vektor{8 & 0 \\ 0 & 8}
+        $$
+
+        Dann sehen wir direkt, dass $H$ positiv definit ist.
+
+        Damit liegt bei $(4, 5)$ ein lokales Minimum und unser gesuchter Punkt.\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Optimieren Sie die gegebene Funktion
+    $$
+        f(x, y) = x^2 + y^2
+    $$
+    unter der Nebenbedingung
+    $$
+        (x-3)^2 + (y-4)^2 = 2^2 = 4
+    $$
+    mit Hilfe der Lagrange-Multiplikatoren.
+    \begin{solution}
+        Es gilt:
+        $$
+            g(x, y) = (x-3)^2 + (y-4)^2 - 4
+        $$
+        $$
+            L(x, y, \lambda) = x^2 + y^2 + \lambda \left( (x-3)^2 + (y-4)^2 -4 \right)
+        $$
+
+        Damit gilt dann für die Ableitungen:
+        $$
+            \begin{aligned}
+                L_x \quad    & = \quad 2x + 2\lambda(x-3) \\
+                L_y \quad    & = \quad 2y + 2\lambda(y-4) \\
+                L_{xx} \quad & = \quad 2 + 2\lambda       \\
+                L_{xy} \quad & = \quad 0                  \\
+                L_{yy} \quad & = \quad 2 + 2\lambda       \\
+                g_x \quad    & = \quad 2x-6               \\
+                g_y \quad    & = \quad 2y - 8
+            \end{aligned}
+        $$
+
+        Für die Kandidaten muss dann gelten:
+        $$
+            \vektor{L_x \\ L_y \\ g} = \vektor{2x + 2\lambda(x-3) \\ \quad 2y + 2\lambda(y-4) \\ (x-3)^2 + (y-4)^2 - 4} = \vektor{0\\0\\0}
+        $$
+
+        Stellen wir die Gleichungen nach $x$, $y$ bzw. $\lambda$ um, erhalten wir:
+        $$
+            x = \frac{3\lambda}{1+\lambda} \quad \land \quad y = \frac{4\lambda}{1+\lambda} \quad \land \quad \lambda = -1 \pm \frac{5}{2}
+        $$
+
+        Für $\lambda_1 = -\frac{7}{2}$ gilt dann:
+        $$
+            x_1 = \frac{21}{5} \quad \lambda \quad y_1 = \frac{28}{5}
+        $$
+
+        Für $\lambda_2 = \frac{3}{2}$ gilt dann:
+        $$
+            x_2 = \frac{9}{5} \quad \lambda \quad y_2 = \frac{12}{5}
+        $$
+
+        Wir stellen dann die allgemeine Hesse-Matrix auf:
+        $$
+            H = \vektor{L_{xx} & L_{xy} & g_x \\ L_{xy} & L_{yy} & g_y \\ g_x & g_y & 0} = \vektor{2 + 2\lambda & 0 & 2x-6 \\ 0 & 2+2\lambda & 2y-8 \\ 2x-6 & 2y-8 & 0}
+        $$
+
+        mit
+        $$
+            \det(H) = -(2x-6)^2(2+2\lambda) - (2y-8)^2(2+2\lambda)
+        $$
+
+        Für die Kandidaten gilt dann:
+        $$
+            \begin{aligned}
+                \det(H)(x_1, y_1, \lambda_1) & = 80  \\
+                \det(H)(x_2, y_2, \lambda_2) & = -80
+            \end{aligned}
+        $$
+
+        Damit liegt bei $(x_1, y_1, \lambda_1) = \left( \frac{21}{5}, \frac{28}{5}, -\frac{7}{2} \right)$ ein lokales Maximum und bei $(x_2, y_2, \lambda_2) = \left( \frac{9}{5}, \frac{12}{5}, \frac{3}{2} \right)$ ein lokales Minimum.\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben sei das Vektorfeld
+    $$
+        \vec{F}(x, y, z) = \frac{1}{\sqrt{(x^2+y^2+z^2)^3}} \cdot \vektor{x\\y\\z}
+    $$
+    \begin{parts}
+        \part
+        Bestimmen Sie $\int_K \vec{F} \d \vec{X}$ entlang folgender Kurven:
+        \begin{subparts}
+            \subpart
+            $K_1 : \vec{X}(t) = \vektor{\cos(t) \\ \sin(t) \\ t}$ mit $0 \leq t \leq 2\pi$
+            \begin{solution}
+                Es gilt:
+                $$
+                    \begin{aligned}
+                        W & \quad = \int_{K_1} \vec{F} \d \vec{X}                                                                                                                                                                                                                 \\
+                          & \quad = \int_{0}^{2\pi} \scalarprod{\vec{F}(\vec{X}(t)) , \vec{X'}(t)} \d t                                                                                                                                                                           \\
+                          & \quad = \int_{0}^{2\pi} \scalarprod{\frac{1}{\sqrt{(\cos^2(t)+\sin^2(t)+t^2)^3}} \cdot \vektor{\cos(t)                                                                                                                                                \\\sin(t)\\t} , \vektor{-\sin(t) \\ \cos(t) \\ 1}} \d t \\
+                          & \quad = \int_{0}^{2\pi} \scalarprod{\frac{1}{\sqrt{(1+t^2)^3}} \cdot \vektor{\cos(t)                                                                                                                                                                  \\\sin(t)\\t} , \vektor{-\sin(t) \\ \cos(t) \\ 1}} \d t \\
+                          & \quad = \int_{0}^{2\pi} \frac{-\cos(t)\sin(t) + \sin(t)\cos(t) + t}{\sqrt{(1+t^2)^3}}  \d t                                                                                                                                                           \\
+                          & \quad = \int_{0}^{2\pi} \frac{t}{\sqrt{(1+t^2)^3}}  \d t                                                                                                                                                                                              \\
+                          & \quad = \footnote{$u := 1 + t^2 \implies \frac{\d u}{\d t} = 2t \iff \d t = \frac{\d u}{2t}$} \int_{0}^{2\pi} \frac{1}{2\sqrt{u^3}}  \d u = \frac{1}{2} \left[ -\frac{2}{\sqrt{u}} \right]_{0}^{2\pi} = \left[ -\frac{1}{\sqrt{u}} \right]_{0}^{2\pi} \\
+                          & \quad = \left[ -\frac{1}{\sqrt{1+t^2}} \right]^{2\pi}_0 = 1 - \frac{1}{\sqrt{1 + 4\pi^2}}
+                    \end{aligned}
+                $$\qed
+            \end{solution}
+
+            \newpage
+            \subpart
+            $K_2 : $ geradelinige Verbindung von $\vektor{1 & 0 & 0}^T$ nach $\vektor{1 & 0 & 2\pi}^T$
+            \begin{solution}
+                Die Kurve ist hier gegeben mit $K_2 : \vec{X}(t) = \vektor{1\\0\\t}$ mit $0 \leq t \leq 2\pi$
+
+                Es gilt:
+                $$
+                    \begin{aligned}
+                        W & \quad = \int_{K_2} \vec{F} \d \vec{X}                                          \\
+                          & \quad = \int_{0}^{2\pi} \scalarprod{\vec{F}(\vec{X}(t)) , \vec{X'}(t)} \d t    \\
+                          & \quad = \int_{0}^{2\pi} \scalarprod{\frac{1}{\sqrt{(1+t^2)^3}} \cdot \vektor{1 \\0\\t} , \vektor{0 \\ 0 \\ 1}} \d t \\
+                          & \quad = \int_{0}^{2\pi} \frac{t}{\sqrt{(1+t^2)^3}} \d t                        \\
+                          & \quad = \footnote{siehe (i)} \ldots                                            \\
+                          & \quad = 1 - \frac{1}{\sqrt{1 + 4\pi^2}}
+                    \end{aligned}
+                $$\qed
+            \end{solution}
+        \end{subparts}
+
+        \newpage
+        \part
+        Ist das Kurvenintegral wegunabhängig?
+        Bestimmen Sie ggfls. die Potentialfunktion.
+        \begin{solution}
+            Wir berechnen die Rotation von $\vec{F}$:
+            $$
+                \begin{aligned}
+                    \operatorname{rot}(\vec{F}) & \quad = \nabla \times \vec{F}                                                                                                              \\
+                                                & \quad = \vektor{\frac{\partial}{\partial x}                                                                                                \\ \frac{\partial}{\partial y} \\ \frac{\partial}{\partial z}} \times \frac{1}{\sqrt{(x^2+y^2+z^2)^3}} \cdot \vektor{x\\y\\z} \\
+                                                & \quad = \vektor{\frac{\partial}{\partial y} \frac{z}{\sqrt{(x^2+y^2+z^2)^3}} -\frac{\partial}{\partial z} \frac{y}{\sqrt{(x^2+y^2+z^2)^3}} \\ \frac{\partial}{\partial z} \frac{x}{\sqrt{(x^2+y^2+z^2)^3}} - \frac{\partial}{\partial x} \frac{z}{\sqrt{(x^2+y^2+z^2)^3}} \\ \frac{\partial}{\partial x} \frac{y}{\sqrt{(x^2+y^2+z^2)^3}} - \frac{\partial}{\partial y} \frac{x}{\sqrt{(x^2+y^2+z^2)^3}}} \\
+                                                & \quad = \vektor{\frac{-3yz}{\sqrt{(x^2+y^2+z^2)^5}} - \frac{-3yz}{\sqrt{(x^2+y^2+z^2)^5}}                                                  \\ \frac{-3xz}{\sqrt{(x^2+y^2+z^2)^5}} - \frac{-3xz}{\sqrt{(x^2+y^2+z^2)^5}} \\ \frac{-3xy}{\sqrt{(x^2+y^2+z^2)^5}} - \frac{-3xy}{\sqrt{(x^2+y^2+z^2)^5}}} = \vektor{0                                                                                                                          \\0\\0}
+                \end{aligned}
+            $$
+
+            Damit ist das Kurvenintegral wegunabhängig.
+
+            Für die Potentialfunktion $V(x, y, z)$ gilt dann:
+            $$
+                \begin{aligned}
+                    V(x, y, z) & \quad = \int \frac{x}{\sqrt{(x^2+y^2+z^2)^3}} \d x                                                                                                                \\
+                               & \quad = \footnote{$u := x^2+y^2+z^2 \implies \frac{\d u}{\d x} = 2x \iff \d x = \frac{\d u}{2x}$} \int \frac{1}{2\sqrt{u^3}} \d x = -\frac{1}{\sqrt{u}} + c(y, z) \\
+                               & \quad = -\frac{1}{\sqrt{x^2+y^2+z^2}} + c(y, z)
+                \end{aligned}
+            $$
+            $$
+                \frac{\partial V}{\partial y} = \frac{y}{\sqrt{(x^2+y^2+z^2)^3}} + \frac{\partial c(y, z)}{\partial y} \implies c(y, z) = c(z)
+            $$
+            $$
+                \frac{\partial V}{\partial z} = \frac{z}{\sqrt{(x^2+y^2+z^2)^3}} + \frac{\partial c(z)}{\partial z} \implies c(z) = c
+            $$
+
+            Und insgesamt ist die Potentialunktion dann gegeben mit
+            $$
+                V(x, y, z) = \frac{1}{\sqrt{x^2+y^2+z^2}} + c
+            $$\qed
+        \end{solution}
+    \end{parts}
+\end{questions}
+\end{document}

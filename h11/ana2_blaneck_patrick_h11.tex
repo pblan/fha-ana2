@@ -1,0 +1,395 @@
+\documentclass[answers]{exam}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsthm,amsfonts,stmaryrd,amssymb,mathtools}
+\usepackage{xcolor,soul}
+\usepackage{polynom}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{footnote}
+\usepackage{siunitx}
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
+\newcolumntype{P}{>{$}p<{$}} % math-mode version of "l" column type
+
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\Rnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\seq}{\overset{!}{=}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\cis}[1]{\left( \cos\left( #1 \right) + i \sin\left( #1 \right) \right)}
+\newcommand{\sgn}{\text{sgn}} % Signum-Funktion
+\newcommand{\diff}{\mathrm{d}} % Differentialquotienten d
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dudx}{\,\frac{\mathrm{d}u}{\mathrm{d}x}} % du/dx
+\newcommand{\dudn}{\,\frac{\mathrm{d}u}{\mathrm{d}n}} % du/dn
+\newcommand{\dvdx}{\,\frac{\mathrm{d}v}{\mathrm{d}x}} % dv/dx
+\newcommand{\dwdx}{\,\frac{\mathrm{d}w}{\mathrm{d}x}} % dw/dx
+\newcommand{\dtdx}{\,\frac{\mathrm{d}t}{\mathrm{d}x}} % dt/dx
+\newcommand{\ddx}{\,\frac{\mathrm{d}}{\mathrm{d}x}} % d/dx
+\newcommand{\dFdx}{\,\frac{\mathrm{d}F}{\mathrm{d}x}} % dF/dx
+\newcommand{\dfdx}{\,\frac{\mathrm{d}f}{\mathrm{d}x}}  % df/dx
+\newcommand{\interval}[1]{\left[ #1 \right]}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\scalarprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\vektor}[1]{\begin{pmatrix*}[c] #1 \end{pmatrix*}}
+%\newcommand{\vektor}[1]{\begin{pmatrix}[r] #1 \end{pmatrix}}
+\renewcommand{\span}[1]{\operatorname{span}\left(#1\right)}
+
+\newcommand{\Nplus}{\mathbb{N}^+}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rnonneg}{\mathbb{R}^+_0}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigo}{\mathcal{O}}
+\newcommand{\Pot}{\mathcal{P}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\defect}{def}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\curl}{curl}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\par}
+
+
+\makesavenoteenv{solution}
+\lhead{Hausaufgabenblatt 11}
+\rhead{Analysis 2}
+\runningheadrule
+
+\title{Analysis 2 \\ \large{Hausaufgabenblatt 11}}
+\author{Patrick Gustav Blaneck}
+\date{Abgabetermin: 13. Juni 2021}
+
+\begin{document}
+\maketitle
+\begin{questions}
+    \question
+    Berechnen Sie die allgemeine Lösung der Differentialgleichung
+    $$
+        y' = 2x \cdot y + x
+    $$
+    \begin{solution}
+        Es gilt:
+        $$
+            y' = 2x \cdot y + x \quad \iff \quad \frac{1}{2y+1} \cdot y' = x
+        $$
+        Dann gilt:
+        $$
+            \begin{aligned}
+                                                         & \frac{1}{2y+1} \cdot y'          &  & = x                      \\
+                \equiv \quad                             & \frac{1}{2y+1} \d y              &  & = x \d x                 \\
+                \equiv \quad                             & \int \frac{1}{2y+1} \d y         &  & = \int x \d x            \\
+                \overset{\footnotemark[1]}{\equiv} \quad & \frac{1}{2}\int \frac{1}{u} \d u &  & = \int x \d x            \\
+                \equiv \quad                             & \frac{1}{2} \ln \abs{u} + c_1    &  & = \frac{x^2}{2} + c_2    \\
+                \equiv \quad                             & \ln \abs{u}                      &  & = x^2 + c_3              \\
+                \equiv \quad                             & u                                &  & = e^{x^2 + c_3}          \\
+                \equiv \quad                             & u                                &  & = c_4e^{x^2}             \\
+                \equiv \quad                             & 2y + 1                           &  & = c_4e^{x^2}             \\
+                \equiv \quad                             & y                                &  & = ce^{x^2} - \frac{1}{2} \\
+            \end{aligned}
+        $$\qed
+
+        \footnotetext[1]{$u:= 2y+1 \implies \frac{\d u}{\d y} = 2 \iff \d y = \frac{1}{2} \d u$}
+    \end{solution}
+
+    \newpage
+    \question
+    Wie lautet die Lösung der Differentialgleichung
+    $$
+        3y' + y = \frac{1}{y^2} \quad ?
+    $$
+    \begin{solution}
+        Es gilt:
+        $$
+            3y' + y = \frac{1}{y^2} \quad \iff \quad y' + \frac{1}{3} \cdot y - \frac{1}{3} \cdot y^{-2} = 0
+        $$
+        Wir sehen, dass es sich um eine Bernoulli-Differentialgleichung handelt.
+
+        Wir substituieren:
+        $$
+            \begin{aligned}
+                          & z = y^{1-\alpha} = y^{3} \quad &  & \implies z' = 3y^2                      \\
+                \iff\quad & y = \sqrt[3]{z} \quad          &  & \implies y' = \frac{z'}{3\sqrt[3]{z^2}}
+            \end{aligned}
+        $$
+        und erhalten:
+        $$
+            \begin{aligned}
+                             & y' + \frac{1}{3} \cdot y - \frac{1}{3} \cdot y^{-2}                                  &  & = 0 \\
+                \equiv \quad & \frac{z'}{3\sqrt[3]{z^2}} + \frac{1}{3} \cdot \sqrt[3]{z} - \frac{1}{3\sqrt[3]{z^2}} &  & = 0 \\
+                \equiv \quad & \frac{z' + z - 1}{3\sqrt[3]{z^2}}                                                    &  & = 0 \\
+                \equiv \quad & z' + z                                                                               &  & = 1 \\
+            \end{aligned}
+        $$
+
+        Lösung der homogenen Gleichung:
+        $$
+            z_h = ce^{-x}
+        $$
+
+        Berechnen der partikulären Lösung:
+        $$
+            \begin{aligned}
+                z_p = \lambda \quad \implies \quad z'_p = 0
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                             & z'_p + z_p = 1 \\
+                \equiv \quad & \lambda = 1
+            \end{aligned}
+        $$
+
+        Damit gilt:
+        $$
+            z = z_h + z_p = ce^{-x} + 1
+        $$
+
+        Rücksubstituieren ergibt dann:
+        $$
+            y = \sqrt[3]{z} = \sqrt[3]{ce^{-x} + 1}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Berechnen Sie die allgemeine Lösung der folgenden Differentialgleichung
+    $$
+        y' + 5y = 8x - 5e^{-5x} - \cos(2x) + 12\sin(2x) - 21\sin(3x) + 20x^2 + 35\cos(3x)
+    $$
+    \begin{solution}
+        $$
+            y' + 5y = \underbrace{20x^2 + 8x}_{y_{p_1}} \underbrace{- \cos(2x) + 12\sin(2x)}_{y_{p_2}} \underbrace{- 21\sin(3x) + 35\cos(3x)}_{y_{p_3}}  \underbrace{- 5e^{-5x}}_{y_{p_4}}
+        $$
+
+        Lösung der homogenen Gleichung:
+        $$
+            y_h = ce^{-5x}
+        $$
+
+        Berechnen der partikulären Lösungen:
+        $$
+            \boxed{
+            y_{p_1} = \alpha x^2 + \beta x + \gamma \quad \implies \quad y'_{p_1} = 2\alpha x + \beta
+            }
+        $$
+        $$
+            \begin{aligned}
+                               & y'_{p_1} + 5y_{p_1}                                                 &  & = 20x^2 + 8x \\
+                \equiv \quad   & 2\alpha x + \beta + 5 \left( \alpha x^2 + \beta x + \gamma \right)  &  & = 20x^2 + 8x \\
+                \equiv \quad   & (5\alpha) x^2 + (2\alpha + 5\beta) x + (\beta + 5\gamma)            &  & = 20x^2 + 8x \\
+                \implies \quad & \alpha = 4 \quad \land \quad \beta = 0 \quad \land \quad \gamma = 0                   \\
+            \end{aligned}
+        $$
+
+        $$
+            \boxed{
+            y_{p_2} = \delta \cos(2x) + \epsilon \sin(2x) \quad \implies \quad y'_{p_2} = -2\delta \sin(2x) + 2\epsilon \cos(2x)
+            }
+        $$
+        $$
+            \begin{aligned}
+                               & y'_{p_2} + 5y_{p_2}                                                                         &  & = - \cos(2x) + 12\sin(2x) \\
+                \equiv \quad   & -2\delta \sin(2x) + 2\epsilon \cos(2x) + 5 \left(\delta \cos(2x) + \epsilon \sin(2x)\right) &  & = - \cos(2x) + 12\sin(2x) \\
+                \equiv \quad   & (5 \delta + 2\epsilon) \cos(2x) + (5\epsilon - 2\delta) \sin(2x)                            &  & = - \cos(2x) + 12\sin(2x) \\
+                \implies \quad & \delta = -1 \quad \land \quad \epsilon = 2                                                                                 \\
+            \end{aligned}
+        $$
+
+        $$
+            \boxed{
+            y_{p_3} = \zeta \cos(3x) + \eta \sin(3x) \quad \implies \quad y'_{p_3} = -3\zeta \sin(3x) + 3\eta \cos(3x)
+            }
+        $$
+        $$
+            \begin{aligned}
+                               & y'_{p_3} + 5y_{p_3}                                                               &  & = - 21\sin(3x) + 35\cos(3x) \\
+                \equiv \quad   & -3\zeta \sin(3x) + 3\eta \cos(3x) + 5 \left(\zeta \cos(3x) + \eta \sin(3x)\right) &  & = - 21\sin(3x) + 35\cos(3x) \\
+                \equiv \quad   & (5\eta - 3\zeta) \sin(3x) + (5 \zeta + 3\eta) \cos(3x)                            &  & = - 21\sin(3x) + 35\cos(3x) \\
+                \implies \quad & \zeta = 7 \quad \land \quad \eta = 0                                                                               \\
+            \end{aligned}
+        $$
+
+        $$
+            \boxed{
+            y_{p_4} = \theta xe^{-5x} \quad \implies \quad y'_{p_4} = \theta e^{-5x} -5\theta xe^{-5x}
+            }
+        $$
+        $$
+            \begin{aligned}
+                               & y'_{p_4} + 5y_{p_4}                                &  & = - 5e^{-5x} \\
+                \equiv \quad   & \theta e^{-5x} -5\theta xe^{-5x} +5\theta xe^{-5x} &  & = - 5e^{-5x} \\
+                \equiv \quad   & \theta e^{-5x}                                     &  & = - 5e^{-5x} \\
+                \implies \quad & \theta = -5                                                          \\
+            \end{aligned}
+        $$
+
+        Insgesamt gilt also:
+        $$
+            y = y_h + \sum y_{p_i} = ce^{-5x} + 4x^2 + 2\sin(2x) - \cos(2x) + 7\cos(3x) - 5xe^{-5x}
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Lösen Sie die Differentialgleichung
+    $$
+        (x \cdot y^2 - y^3) + (1-x \cdot y^2) \cdot y' = 0
+    $$
+    \begin{solution}
+        Es gilt:
+        $$
+            (x \cdot y^2 - y^3) + (1-x \cdot y^2) \cdot y' = 0 \quad \iff \quad (x \cdot y^2 - y^3) \d x + (1-x \cdot y^2) \d y = 0
+        $$
+        Wir haben also offensichtlich eine exakte Differentialgleichung gegeben.
+
+        Prüfen der Integratibilitätsbedingung:
+        $$
+            p(x, y) = x \cdot y^2 - y^3 \implies p_y = 2xy -3y^2 \quad \seq \quad -y^2 = q_x \impliedby 1-x \cdot y^2 = q(x, y) \quad \lightning
+        $$
+
+        Integrierenden Faktor (Euler-Multiplikator) $\mu(x) = e^{\int m(x) \d x}$ bzw. $\mu(y) = e^{\int m(y) \d y}$ bestimmen:
+        \begin{itemize}
+            \item Untersuchung, ob $\mu$ nur von $x$ abhängt:
+                  $$
+                      m = \frac{p_y - q_x}{q} = \frac{2xy -3y^2 + y^2}{1-x \cdot y^2} = \frac{2xy -2y^2}{1-x \cdot y^2} \quad \lightning
+                  $$
+            \item Untersuchung, ob $\mu$ nur von $y$ abhängt:
+                  $$
+                      m = \frac{q_x - p_y}{p} = \frac{-y^2 - \left( 2xy -3y^2\right)}{x \cdot y^2 - y^3} = -\frac{2}{y} \quad \checkmark
+                  $$
+        \end{itemize}
+
+        Damit erhalten wir den integrierenden Faktor mit:
+        $$
+            \mu(y) = e^{-2\int \frac{1}{y} \d y} = cy^{-2} \qquad (\text{sei} \ c = 1)
+        $$
+
+        Einsetzen in die DGL:
+        $$
+            (x - y) \d x + (y^{-2}-x ) \d y = 0
+        $$
+        Prüfen der Integratibilitätsbedingung:
+        $$
+            p(x, y) = x - y \implies p_y = -1 \quad \seq \quad -1 = q_x \impliedby y^{-2}-x = q(x, y) \quad \checkmark
+        $$
+
+        Wir wissen:
+        $$
+            \underbrace{F = \int p \d x = \frac{x^2}{2} - xy + c(y)}_{F_x = p} \quad \implies \quad \underbrace{-x + c'(y) = y^{-2}-x}_{F_y = q} \quad \implies \quad c(y) = -\frac{1}{y} + c
+        $$
+
+        Und insgesamt gilt damit:
+        $$
+            F(x, y) = \frac{x^2}{2} - xy - \frac{1}{y} + c
+        $$\qed
+    \end{solution}
+
+    \newpage
+    \question
+    Gegeben sei das Differentialgleichungssystem
+    $$
+        \begin{aligned}
+            y' & = y + 2z          \\
+            z' & = 2y + z - 2e^{x}
+        \end{aligned}
+    $$
+    mit den Anfangswerten $y(0) = -3$ und $z(0) = 4$.
+
+    Bestimmen Sie die Lösung des Anfangswertproblems.
+    \begin{solution}
+        Wir leiten $y'$ ab:
+        $$
+            \begin{aligned}
+                               & y' = y + 2z \quad \iff \quad z = \frac{y'- y}{2} \\
+                \implies \quad & y'' = y' + 2z'                                   \\
+                \iff \quad     & y'' - y'  - 2z' = 0
+            \end{aligned}
+        $$
+        Einsetzen von $z'$:
+        $$
+            \begin{aligned}
+                           & y'' - y'  - 2z' = 0             \\
+                \iff \quad & y'' - y'  - 4y -2z + 4e^{x} = 0
+            \end{aligned}
+        $$
+        Einsetzen von $z$:
+        $$
+            \begin{aligned}
+                           & y'' - y'  - 4y -2z + 4e^{x} = 0                     \\
+                \iff \quad & y'' - y'  - 4y -2\cdot \frac{y'- y}{2} + 4e^{x} = 0 \\
+                \iff \quad & y'' - y'  - 4y -y'+y + 4e^{x} = 0                   \\
+                \iff \quad & y'' - 2y'  - 3y  = -4e^{x}
+            \end{aligned}
+        $$
+
+        Lösung der homogenen Gleichung:
+        $$
+            \begin{aligned}
+                               & y'' - 2y'  - 3y  = 0                          \\
+                \implies \quad & \alpha^2 - 2\alpha - 3 = 0                    \\
+                \implies \quad & \alpha = 1 \pm \sqrt{\left( -1 \right)^2 + 3} \\
+                \equiv \quad   & \alpha = 1 \pm 2                              \\
+                \equiv \quad   & \alpha \in \{-1, 3\}                          \\
+                \implies \quad & y_h = \lambda_1e^{-x} + \lambda_2e^{3x}
+            \end{aligned}
+        $$
+
+        Berechnen der partikulären Lösung:
+        $$
+            y_p = ce^x \quad \implies \quad y'_p = ce^x \quad \implies \quad y''_p = ce^x
+        $$
+        $$
+            \begin{aligned}
+                               & y''_p - 2y'_p  - 3y_p &  & = -4e^{x} \\
+                \equiv \quad   & ce^x - 2ce^x  - 3ce^x &  & = -4e^{x} \\
+                \equiv \quad   & -4ce^x                &  & = -4e^{x} \\
+                \implies \quad & c = 1
+            \end{aligned}
+        $$
+        Dann gilt insgesamt:
+        $$
+            y = y_h + y_p = \lambda_1e^{-x} + \lambda_2e^{3x} + e^x
+        $$
+        und
+        $$
+            z = \frac{y'- y}{2} = \frac{\left( -\lambda_1e^{-x} + 3\lambda_2e^{3x} + e^x \right) - \left( \lambda_1e^{-x} + \lambda_2e^{3x} + e^x \right)}{2} = \lambda_2e^{3x} - \lambda_1e^{-x}
+        $$
+
+        Mit den Anfangswerten gilt dann:
+        $$
+            \begin{aligned}
+                             & y(0)                      &  & = -3 \\
+                \equiv \quad & \lambda_1 + \lambda_2 + 1 &  & = -3 \\
+                \equiv \quad & \lambda_1 + \lambda_2     &  & = -4
+            \end{aligned}
+        $$
+        $$
+            \begin{aligned}
+                             & z(0)                  &  & = 4 \\
+                \equiv \quad & \lambda_2 - \lambda_1 &  & = 4 \\
+            \end{aligned}
+        $$
+        $$
+            \implies \lambda_1 = -4 \quad \land \quad \lambda_2 = 0
+        $$
+
+        Insgesamt gilt also:
+        $$
+            y = e^x - 4e^{-x} \quad \land \quad z = 4e^{-x}
+        $$\qed
+    \end{solution}
+\end{questions}
+\end{document}
